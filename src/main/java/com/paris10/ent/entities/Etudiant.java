@@ -5,81 +5,86 @@ import javax.persistence.*;
 /**
  * Created by qlassalle on 27/04/2017.
  */
-@Entity(name = "etudiant")
+@Entity
+@Table(name= "etudiant")
 public class Etudiant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    long idEtudiant;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_etudiant")
+    long id;
 
-    // @todo remove mdpEtudiant
-    private String nomEtudiant, prenomEtudiant, emailEtudiant, mdpEtudiant;
+    // @todo remove mdp_etudiant
+    private String nom_etudiant;
+    private String prenom_etudiant, email_etudiant, mdp_etudiant;
 
     //@todo manage enum here
-    private String roleEtudiant;
+    private String role_etudiant;
 
     // @todo create ManyToOne association
-    private int credit, idPromo, numEtudiant;
+    private int credit, id_promo, num_etudiant;
 
     public Etudiant() { }
 
-    public Etudiant(String nomEtudiant, String prenomEtudiant, String emailEtudiant, String mdpEtudiant, String roleEtudiant, int credit, int idPromo, int numEtudiant) {
-        this.nomEtudiant = nomEtudiant;
-        this.prenomEtudiant = prenomEtudiant;
-        this.emailEtudiant = emailEtudiant;
-        this.mdpEtudiant = mdpEtudiant;
-        this.roleEtudiant = roleEtudiant;
+    /** @todo  test to init the int to 0. The app doesn't crash for String which takes null but crashes for int fields
+        getting a 0 **/
+    public Etudiant(String nom_etudiant, String prenom_etudiant, String email_etudiant, String mdp_etudiant, String role_etudiant, int credit, int id_promo, int num_etudiant) {
+        this.nom_etudiant = nom_etudiant;
+        this.prenom_etudiant = prenom_etudiant;
+        this.email_etudiant = email_etudiant;
+        this.mdp_etudiant = mdp_etudiant;
+        this.role_etudiant = role_etudiant;
         this.credit = credit;
-        this.idPromo = idPromo;
-        this.numEtudiant = numEtudiant;
+        this.id_promo = id_promo;
+        this.num_etudiant = num_etudiant;
     }
 
-    public long getIdEtudiant() {
-        return idEtudiant;
+    public long getId() {
+        return id;
     }
 
-    public void setIdEtudiant(long idEtudiant) {
-        this.idEtudiant = idEtudiant;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getNomEtudiant() {
-        return nomEtudiant;
+    public String getNom_etudiant() {
+        return nom_etudiant;
     }
 
-    public void setNomEtudiant(String nomEtudiant) {
-        this.nomEtudiant = nomEtudiant;
+    public void setNom_etudiant(String nom_etudiant) {
+        this.nom_etudiant = nom_etudiant;
     }
 
-    public String getPrenomEtudiant() {
-        return prenomEtudiant;
+    public String getPrenom_etudiant() {
+        return prenom_etudiant;
     }
 
-    public void setPrenomEtudiant(String prenomEtudiant) {
-        this.prenomEtudiant = prenomEtudiant;
+    public void setPrenom_etudiant(String prenom_etudiant) {
+        this.prenom_etudiant = prenom_etudiant;
     }
 
-    public String getEmailEtudiant() {
-        return emailEtudiant;
+    public String getEmail_etudiant() {
+        return email_etudiant;
     }
 
-    public void setEmailEtudiant(String emailEtudiant) {
-        this.emailEtudiant = emailEtudiant;
+    public void setEmail_etudiant(String email_etudiant) {
+        this.email_etudiant = email_etudiant;
     }
 
-    public String getMdpEtudiant() {
-        return mdpEtudiant;
+    public String getMdp_etudiant() {
+        return mdp_etudiant;
     }
 
-    public void setMdpEtudiant(String mdpEtudiant) {
-        this.mdpEtudiant = mdpEtudiant;
+    public void setMdp_etudiant(String mdp_etudiant) {
+        this.mdp_etudiant = mdp_etudiant;
     }
 
-    public String getRoleEtudiant() {
-        return roleEtudiant;
+    public String getRole_etudiant() {
+        return role_etudiant;
     }
 
-    public void setRoleEtudiant(String roleEtudiant) {
-        this.roleEtudiant = roleEtudiant;
+    public void setRole_etudiant(String role_etudiant) {
+        this.role_etudiant = role_etudiant;
     }
 
     public int getCredit() {
@@ -90,19 +95,19 @@ public class Etudiant {
         this.credit = credit;
     }
 
-    public int getIdPromo() {
-        return idPromo;
+    public int getId_promo() {
+        return id_promo;
     }
 
-    public void setIdPromo(int idPromo) {
-        this.idPromo = idPromo;
+    public void setId_promo(int id_promo) {
+        this.id_promo = id_promo;
     }
 
-    public int getNumEtudiant() {
-        return numEtudiant;
+    public int getNum_etudiant() {
+        return num_etudiant;
     }
 
-    public void setNumEtudiant(int numEtudiant) {
-        this.numEtudiant = numEtudiant;
+    public void setNum_etudiant(int num_etudiant) {
+        this.num_etudiant = num_etudiant;
     }
 }
