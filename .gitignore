@@ -115,6 +115,7 @@ local.properties
 
 # STS (Spring Tool Suite)
 .springBeans
+src/main/resources/application.properties
 
 # Code Recommenders
 .recommenders/
