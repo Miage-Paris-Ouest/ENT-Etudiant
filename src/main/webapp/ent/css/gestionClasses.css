@@ -1,0 +1,94 @@
+*
+{
+	font-weight: 300;
+}
+
+
+body
+{
+	overflow-y: hidden !important;
+}
+
+nav
+{
+	background-color: #90a9bf !important;
+}
+
+nav a:hover 
+{
+    color: white !important;
+}
+
+#topRow
+{
+	padding: 0;
+	margin:0;
+	height:340px;
+	background-color: blue;
+}
+
+#tableContent
+{
+	padding: 20px;
+	margin:20px 0px 0px 20px;
+	height:300px;
+	background-color: red;
+}
+
+#selectedClassInfo
+{
+	padding: 0;
+	margin:0;
+	height:300px;
+}
+
+#topContainerList .list-group-item:not(.active):hover
+{
+	background-color: aliceblue;
+}
+
+#topContainerList li
+{
+	cursor: pointer;
+}
+
+#botContainer
+{
+	padding:20px;
+}
+
+#tableContainer
+{
+	padding-left: 20px;
+	width: 90%;
+}
+
+#actionButtons, #classForm, #studentForm
+{
+	display: none;
+}
+
+.selectedStudent
+{
+	background-color: lightgray;
+}
+
+.btn-small {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 0.5rem;
+}
+
+#topLeftContainer
+{
+	background-color: rgba(66, 133, 244, 0.12);
+	height: 800px;
+	padding: 15px;
+	border-right: .8px solid #efefef;
+}
+
+#topContainer
+{
+	height: 800px;
+}
+
