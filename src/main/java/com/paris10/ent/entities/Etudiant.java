@@ -2,9 +2,6 @@ package com.paris10.ent.entities;
 
 import javax.persistence.*;
 
-/**
- * Created by qlassalle on 27/04/2017.
- */
 @Entity
 @Table(name= "etudiant")
 public class Etudiant {
