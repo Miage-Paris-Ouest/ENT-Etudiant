@@ -3,5 +3,7 @@ sudo: false # faster builds
 
 script: "mvn cobertura:cobertura"
 
+
 after_success:
+  - export CODECOV_TOKEN="e453fdf9-0850-46e9-be79-cc56c4806910"
   - bash <(curl -s https://codecov.io/bash)
