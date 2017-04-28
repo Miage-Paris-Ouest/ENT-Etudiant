@@ -1,4 +1,3 @@
-/*
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
@@ -8,7 +7,7 @@ import java.util.Date;
 @Table(name = "commentaire")
 public class Commentaire {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_commentaire")
     private long id;
 
@@ -68,4 +67,3 @@ public class Commentaire {
         this.id_fichier = id_fichier;
     }
 }
-*/

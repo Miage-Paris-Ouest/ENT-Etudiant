@@ -1,4 +1,3 @@
-/*
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
@@ -36,4 +35,3 @@ public class Promotion {
         this.nom_promo = nom_promo;
     }
 }
-*/

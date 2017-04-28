@@ -1,4 +1,3 @@
-/*
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
@@ -7,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_user")
     private long id;
 
@@ -36,4 +35,3 @@ public class User {
         this.mdp = mdp;
     }
 }
-*/
