@@ -1,3 +1,4 @@
+/*
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.persistence.*;
 public class UE {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_ue")
     private long id;
 
     private String nom_ue;
@@ -55,3 +57,4 @@ public class UE {
         this.id_promo = id_promo;
     }
 }
+*/

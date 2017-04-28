@@ -1,3 +1,4 @@
+/*
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.persistence.*;
 public class Salle {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_salle")
     private long id;
 
     private String nom_salle;
@@ -44,3 +46,4 @@ public class Salle {
         this.type_salle = type_salle;
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.persistence.*;
 public class Fichier {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_fichier")
     private long id;
 
     private String nom_fichier, chemin;
@@ -73,3 +75,4 @@ public class Fichier {
         this.id_matiere = id_matiere;
     }
 }
+*/

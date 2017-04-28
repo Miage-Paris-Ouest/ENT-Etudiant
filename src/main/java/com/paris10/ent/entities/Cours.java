@@ -1,3 +1,4 @@
+/*
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
@@ -7,3 +8,4 @@ import javax.persistence.*;
 public class Cours {
     //TODO A completer
 }
+*/

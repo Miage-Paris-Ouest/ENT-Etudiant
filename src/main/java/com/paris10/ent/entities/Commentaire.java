@@ -1,3 +1,4 @@
+/*
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.Date;
 public class Commentaire {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_commentaire")
     private long id;
 
     private String commentaire;
@@ -66,3 +68,4 @@ public class Commentaire {
         this.id_fichier = id_fichier;
     }
 }
+*/

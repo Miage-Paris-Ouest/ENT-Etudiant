@@ -1,3 +1,4 @@
+/*
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
@@ -92,3 +93,4 @@ public class Matiere {
         this.nb_heures = nb_heures;
     }
 }
+*/

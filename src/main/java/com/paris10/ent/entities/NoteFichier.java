@@ -1,3 +1,4 @@
+/*
 package com.paris10.ent.entities;
 
 import javax.persistence.Entity;
@@ -10,7 +11,6 @@ public class NoteFichier {
     private float evaluation_fichier;
 
     public NoteFichier() {
-
     }
 
     public NoteFichier(int id_etudiant, int id_fichier, float evaluation_fichier) {
@@ -43,3 +43,4 @@ public class NoteFichier {
         this.evaluation_fichier = evaluation_fichier;
     }
 }
+*/
