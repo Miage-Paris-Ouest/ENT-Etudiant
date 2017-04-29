@@ -1,0 +1,57 @@
+*
+{
+	font-weight: 300;
+}
+
+body
+{
+	overflow-y: hidden !important;
+}
+
+nav
+{
+	background-color: #90a9bf !important;
+}
+
+nav a:hover 
+{
+    color: white !important;
+}
+
+
+.btn-small {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 0.5rem;
+}
+
+#allCourses, #currentCourses
+{
+	height: 400px;
+	/*background-color: red;*/
+}
+
+#dragNdropContainer
+{
+	padding:10px 0px 0px 50px;
+	height:60%;
+	/*background-color: blue;*/
+}
+
+#topContainerListAdminCourses li
+{
+	cursor: pointer;
+}
+
+#topLeftContainer
+{
+	background-color: rgba(66, 133, 244, 0.12);
+	height: 800px;
+	padding: 15px;
+	border-right: .8px solid #efefef;
+}
+
+/*#topRightContainer
+{
+	background-color: rgba(66, 133, 244, 0.06);
+}*/
