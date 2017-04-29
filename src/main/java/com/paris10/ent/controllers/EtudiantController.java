@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping(value = "/etudiant")
 public class EtudiantController {
 
-    EtudiantRepository etudiantRepository;
+    private EtudiantRepository etudiantRepository;
 
     @Autowired
     public EtudiantController(EtudiantRepository etudiantRepository) {
@@ -24,6 +24,11 @@ public class EtudiantController {
 
     @RequestMapping(value = "/index")
     public List<Etudiant> index() {
+        // Insert student in bdd
+//        User u = new User("Rabeony", "Quentin", "arabeony@gmail.com", "mdp", TypeUser.Etudiant);
+//        Promotion promo = new Promotion("L3 MIAGE CLA");
+//        Etudiant etudiant = new Etudiant(RoleEtudiant.Etudiant, 1000, promo, 35000001, u);
+//        etudiantRepository.save(etudiant);
         return etudiantRepository.findByCreditLessThan(1000000);
     }
 }

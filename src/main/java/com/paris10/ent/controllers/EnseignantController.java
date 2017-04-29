@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping(value = "/enseignant")
 public class EnseignantController {
 
-    EnseignantRepository enseignantRepository;
+    private EnseignantRepository enseignantRepository;
 
     @Autowired
     public EnseignantController(EnseignantRepository enseignantRepository) {

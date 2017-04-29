@@ -1,23 +1,18 @@
-*
-{
-	font-weight: 300;
+* {
+    font-weight: 300;
 }
 
-body
-{
-	overflow-y: hidden !important;
+body {
+    overflow-y: hidden !important;
 }
 
-nav
-{
-	background-color: #90a9bf !important;
+nav {
+    background-color: #90a9bf !important;
 }
 
-nav a:hover 
-{
+nav a:hover {
     color: white !important;
 }
-
 
 .btn-small {
     height: 24px;
@@ -25,30 +20,26 @@ nav a:hover
     padding: 0 0.5rem;
 }
 
-#allCourses, #currentCourses
-{
-	height: 400px;
-	/*background-color: red;*/
+#allCourses, #currentCourses {
+    height: 400px;
+    /*background-color: red;*/
 }
 
-#dragNdropContainer
-{
-	padding:10px 0px 0px 50px;
-	height:60%;
-	/*background-color: blue;*/
+#dragNdropContainer {
+    padding: 10px 0px 0px 50px;
+    height: 60%;
+    /*background-color: blue;*/
 }
 
-#topContainerListAdminCourses li
-{
-	cursor: pointer;
+#topContainerListAdminCourses li {
+    cursor: pointer;
 }
 
-#topLeftContainer
-{
-	background-color: rgba(66, 133, 244, 0.12);
-	height: 800px;
-	padding: 15px;
-	border-right: .8px solid #efefef;
+#topLeftContainer {
+    background-color: rgba(66, 133, 244, 0.12);
+    height: 800px;
+    padding: 15px;
+    border-right: .8px solid #efefef;
 }
 
 /*#topRightContainer

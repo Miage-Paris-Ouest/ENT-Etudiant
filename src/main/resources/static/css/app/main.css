@@ -1,82 +1,67 @@
-*
-{
-	font-weight: 300;
+* {
+    font-weight: 300;
 }
 
-
-body
-{
-	overflow-y: hidden !important;
+body {
+    overflow-y: hidden !important;
 }
 
-nav
-{
-	background-color: #90a9bf !important;
+nav {
+    background-color: #90a9bf !important;
 }
 
-nav a:hover 
-{
+nav a:hover {
     color: white !important;
 }
 
-#calendar 
-{
-	width: 900px;
-	margin: 0 auto;
+#calendar {
+    width: 900px;
+    margin: 0 auto;
 }
 
-#newsContainer
-{
-	height: 800px;
-	background-color: rgba(66, 133, 244, 0.06);
-	margin:0;
-	padding: 10px 20px 0px 20px;
+#newsContainer {
+    height: 800px;
+    background-color: rgba(66, 133, 244, 0.06);
+    margin: 0;
+    padding: 10px 20px 0px 20px;
 }
 
-#classMembers
-{
-	height: 600px;
-	margin:0;
-	padding:10px;
+#classMembers {
+    height: 600px;
+    margin: 0;
+    padding: 10px;
 }
 
-#classInfo
-{
-	height: 150px;
-	padding:10px;
+#classInfo {
+    height: 150px;
+    padding: 10px;
 }
 
-#classContainer
-{
-	height: 800px;
+#classContainer {
+    height: 800px;
 }
 
-#rightPanel
-{
-	background-color: rgba(66, 133, 244, 0.12);
-	height: 800px;
-	margin:0;
-	padding:0;
+#rightPanel {
+    background-color: rgba(66, 133, 244, 0.12);
+    height: 800px;
+    margin: 0;
+    padding: 0;
 }
 
-.tabs a
-{
-	color: #8e8e8e !important;
+.tabs a {
+    color: #8e8e8e !important;
 }
 
-.tabs .indicator
-{
-	background-color: #b2c4f6;
+.tabs .indicator {
+    background-color: #b2c4f6;
 }
 
-.tabContent
-{
-	padding:50px !important;
+.tabContent {
+    padding: 50px !important;
 }
 
-.listContainer	
-{
-	height: 350px;
-	overflow-y:auto;
-	border:0px;
+.listContainer {
+    height: 350px;
+    overflow-y: auto;
+    border: 0px;
 }
