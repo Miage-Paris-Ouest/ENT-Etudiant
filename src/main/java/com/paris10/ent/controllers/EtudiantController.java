@@ -3,6 +3,7 @@ package com.paris10.ent.controllers;
 import com.paris10.ent.entities.Etudiant;
 import com.paris10.ent.repositories.EtudiantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,7 @@ public class EtudiantController {
     }
 
     @RequestMapping(value = "/index")
+    @CrossOrigin // autorise les appels http depuis Angular
     public List<Etudiant> index() {
         // Insert student in bdd
 //        User u = new User("Rabeony", "Quentin", "arabeony@gmail.com", "mdp", TypeUser.Etudiant);

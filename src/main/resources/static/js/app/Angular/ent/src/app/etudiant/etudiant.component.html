@@ -1,0 +1,28 @@
+<h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Numéro étudiant</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+      <th>Crédit</th>
+      <th>Promotion</th>
+      <th>Année</th>
+      <th>Type étudiant</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etudiant of etudiants">
+      <td> {{ etudiant.num_etudiant }}</td>
+      <td> {{ etudiant.user.nom }}</td>
+      <td> {{ etudiant.user.prenom }}</td>
+      <td> {{ etudiant.user.email }}</td>
+      <td> {{ etudiant.credit }}</td>
+      <td> {{ etudiant.promotion.nom_promo}}</td>
+      <td> {{ etudiant.promotion.annee}}</td>
+      <td> {{ etudiant.role_etudiant }}</td>
+    </tr>
+    </tbody>
+  </table>
+</h1>
