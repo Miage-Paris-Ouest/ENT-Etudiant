@@ -9,7 +9,7 @@ public class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_promotion")
-    private long id;
+    private Long id;
 
     private String nom_promo, annee;
 
@@ -21,11 +21,11 @@ public class Promotion {
         this.annee = annee;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

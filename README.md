@@ -1,7 +1,7 @@
 # ENT-Etudiant
 Projet ENT Etudiant M1A 2016-2017
 
-#Angular 2
+# Angular 2
 
 * Avant tout, vous devez installer node.js et npm https://wsvincent.com/install-node-js-npm-windows/
 

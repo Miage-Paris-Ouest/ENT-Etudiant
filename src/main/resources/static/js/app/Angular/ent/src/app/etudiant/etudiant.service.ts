@@ -7,7 +7,7 @@ import "rxjs/add/operator/toPromise";
 export class EtudiantService {
 
   private etudiantUrl = 'http://localhost:8080/etudiant';
-  private headers = new Headers({'Content-Type': 'application.json'});
+  // private headers = new Headers({'Content-Type': 'application.json'});
 
   constructor(private http: Http) {
   }
@@ -24,4 +24,10 @@ export class EtudiantService {
     return Promise.reject(error.message || error);
   }
 
+  getEtudiantsByPromotionId(id: number) {
+    return this.http.get(this.etudiantUrl + '/byPromoId/' + id)
+      .toPromise()
+      .then(response => response.json() as Etudiant[])
+      .catch(this.errorHandler);
+  }
 }

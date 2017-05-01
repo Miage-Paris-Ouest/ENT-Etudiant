@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>ENT</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet">
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
+
+  <!--<link rel="stylesheet" href="./../css/gestionClasses.css">-->
+
+
+</head>
+
+<body>
+
+<nav class="blue-gradient">
+  <div class="nav-wrapper row">
+    <a href="#" class="brand-logo">Logo</a>
+
+    <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
+      <li><a href="#">Gestion des classes</a></li>
+      <li><a href="#">Gestion des Cours</a></li>
+      <li><a href="#">Gestion calendriers</a></li>
+      <li><a href="#">Gestion des fichiers</a></li>
+    </ul>
+
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+      <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+    </ul>
+  </div>
+
+</nav>
+
+<div id="topContainer">
+  <div class="row">
+    <div id="topLeftContainer" class="col s3 z-depth-2">
+      <h5>
+        <small>Liste des classes</small>
+      </h5>
+      <hr>
+      <ul id="topContainerList" class="list-group">
+        <li class="list-group-item" data-code="Tous les étudiants" (click)="getEtudiants()">Tous les étudiants</li>
+        <li class="list-group-item" data-code="M1 MIAGE APP" *ngFor="let promotion of promotions"
+            (click)="choosePromotion(promotion.id)">
+          {{ promotion.nom_promo }}
+          <span class="date" style="float:right"><i>{{ etudiants.length }} étudiants</i></span>
+        </li>
+      </ul>
+      <a id="createClass" class="btn-floating" href="#modal1"
+         style="float: right;background-color:#64b5f6 !important"><i class="material-icons">add</i></a>
+
+    </div>
+    <div id="topRightContainer" class="col s9" style="height: 800px;padding:10px;">
+      <h5>
+        <small id="selectedClassLabel">Liste des étudiants</small>
+      </h5>
+      <hr>
+      <button type="button" class="btn btn-default btn-small" style="font-size: .8em;float:right">Importer CSV
+      </button>
+      <div id="tableContainer" class="table-responsive">
+        <table id="studentsTable" class="table table-condensed table-hover">
+          <thead>
+          <tr>
+            <th>Classe</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>N° étudiant</th>
+            <th>Crédit</th>
+            <th>Nb Contributions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="student" *ngFor="let etudiant of etudiants">
+            <td class="class"> {{ etudiant.promotion.nom_promo }}</td>
+            <td class="nom"> {{ etudiant.user.nom }}</td>
+            <td class="prenom">{{ etudiant.user.prenom }}</td>
+            <td>{{ etudiant.num_etudiant }}</td>
+            <td>{{ etudiant.credit }}</td>
+            <td>2</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="actionButtons" class="fixed-action-btn horizontal click-to-toggle">
+        <a class="btn-floating btn-large grey-gradient" style="">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul>
+          <li><a id="deleteStudent" class="btn-floating red"><i class="material-icons">delete</i></a></li>
+          <li><a id="editStudent" href="#modal1" class="btn-floating blue"><i class="material-icons">edit</i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal modal-fixed-footer">
+  <div class="modal-content" style="text-align: center">
+    <h4>
+      <small id="modalActionLabel"></small>
+    </h4>
+    <hr>
+
+    <div id="classForm">
+      <div class="row">
+        <div class="input-field offset-s3 col s6">
+          <input id="label" type="text" class="validate">
+          <label for="label">Libellé de la classe</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="file-field input-field offset-s3 col s6">
+          <div class="btn btn-small">
+            <span style="font-size: .8em">Fichier csv</span>
+            <input type="file">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="studentForm">
+      <div class="row">
+        <div class="input-field offset-s3 col s6">
+          <input id="nom" type="text" class="validate">
+          <label for="nom">Nom</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field offset-s3 col s6">
+          <input id="prenom" type="text" class="validate">
+          <label for="prenom">Prenom</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field offset-s3 col s6">
+          <select id="classe">
+            <option value="" disabled>Choisir une classe</option>
+            <option value="1">L3 MIAGE APP</option>
+            <option value="2">L3 MIAGE CLA</option>
+            <option value="3">M1 MIAGE APP</option>
+            <option value="3">M1 MIAGE CLA</option>
+          </select>
+          <label>Classe</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Annuler</a>
+    <a href="#!" id="validateActionButtonLabel"
+       class="modal-action modal-close waves-effect waves-green btn-flat"></a>
+  </div>
+</div>
+
+</body>
+
+<!-- SCRIPTS -->
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.js"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/js/mdb.min.js"></script>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<script type="text/javascript" src="main.js"></script>
+
+</html>
