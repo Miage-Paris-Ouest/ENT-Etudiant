@@ -18,8 +18,14 @@ export class EtudiantComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getEtudiants();
-    this.pService.getPromotions().then(promotions => this.promotions = promotions);
+    this.pService.getPromotions().then(promotions => {
+      for (let promotion of promotions) {
+        this.eService.getEtudiantsByPromotionId(promotion.id).then(etudiants => {
+          promotion.etudiants = etudiants;
+          this.promotions.push(promotion);
+        });
+      }
+    });
   }
 
   getEtudiants() {

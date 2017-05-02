@@ -68,7 +68,7 @@
         <li class="list-group-item" data-code="M1 MIAGE APP" *ngFor="let promotion of promotions"
             (click)="choosePromotion(promotion.id)">
           {{ promotion.nom_promo }}
-          <span class="date" style="float:right"><i>{{ etudiants.length }} étudiants</i></span>
+          <span class="date" style="float:right"><i>{{ promotion.etudiants.length }} étudiants</i></span>
         </li>
       </ul>
       <a id="createClass" class="btn-floating" href="#modal1"
