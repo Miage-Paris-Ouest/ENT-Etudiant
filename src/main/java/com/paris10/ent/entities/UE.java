@@ -12,16 +12,25 @@ public class UE {
 
     private String nom_ue;
 
-    //TODO Relation ManyToOne à creer
-    private int id_semestre, id_promo;
+    @ManyToOne
+    @JoinColumn(name = "id_semestre")
+    private Semestre semestre;
+
+    @ManyToOne
+    @JoinColumn(name = "id_promotion")
+    private Promotion promotion;
 
     public UE() {
     }
 
-    public UE(String nom_ue, int id_semestre, int id_promo) {
+    public UE(String nom_ue, Semestre semestre, Promotion promotion) {
         this.nom_ue = nom_ue;
-        this.id_semestre = id_semestre;
-        this.id_promo = id_promo;
+        this.semestre = semestre;
+        this.promotion = promotion;
+    }
+
+    public UE(String nom_ue) {
+        this.nom_ue = nom_ue;
     }
 
     public long getId() {
@@ -40,19 +49,27 @@ public class UE {
         this.nom_ue = nom_ue;
     }
 
-    public int getId_semestre() {
-        return id_semestre;
+    public Semestre getSemestre() {
+        return semestre;
     }
 
-    public void setId_semestre(int id_semestre) {
-        this.id_semestre = id_semestre;
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
     }
 
-    public int getId_promo() {
-        return id_promo;
+    public Promotion getPromotion() {
+        return promotion;
     }
 
-    public void setId_promo(int id_promo) {
-        this.id_promo = id_promo;
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
+    }
+
+    public Long getPromotionId() {
+        return promotion.getId();
+    }
+
+    public Long getSemestreId() {
+        return semestre.getId();
     }
 }
