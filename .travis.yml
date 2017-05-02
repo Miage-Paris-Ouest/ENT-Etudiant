@@ -1,8 +1,11 @@
 language: java
 sudo: false # faster builds
 
+before_script :
+  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
 script:
-  - mvn clean verify
+  - ./mvnw test -B
   - mvn cobertura:cobertura
 
 

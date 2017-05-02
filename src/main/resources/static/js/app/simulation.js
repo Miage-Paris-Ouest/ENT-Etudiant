@@ -15,9 +15,8 @@ $(function()
 		var isEditable = $(this).find("editable").length == 0;
 		if(isEditable)
 		{
-		
 			updateCell();
-			var note = parseInt($(this).find(".noteMatiere").text());
+			var note = parseFloat($(this).find(".noteMatiere").text());
 
 			var input = "<input style='width=3%' type='text' value='"+note+"'>";
 			$(this).find(".noteMatiere").text("").addClass("editable").append(input);
@@ -33,7 +32,9 @@ function updateCell()
 	console.log("updateCell");
 	if($(".editable").length == 1)
 	{
-		var editedMark = $(".editable input").val();
+		var value = $(".editable input").val();
+		var validInput = value<=20 && value>=0;
+		var editedMark = validInput ? value : 0;
 		$(".editable").find("input").remove();
 		$(".editable").closest(".noteMatiere").text(editedMark);
 		$(".editable").removeClass("editable");
@@ -51,7 +52,7 @@ function setCoefficientsUe()
 
 		$(".matiere[data-ue="+ueId+"]").each(function()
 		{
-			var coef = parseInt($(this).find(".coefficientMatiere").text());
+			var coef = parseFloat($(this).find(".coefficientMatiere").text());
 			totalCoef += coef;
 		});
 
@@ -74,14 +75,14 @@ function calculerMoyenneUe()
 
 			var ue = $(this);
 			var ueId = ue.attr("data-ue");
-			var totalCoef = parseInt(ue.find(".coefficientUE b").text());
+			var totalCoef = parseFloat(ue.find(".coefficientUE b").text());
 
 			// alert("totalCoef : "+totalCoef);
 
 			$(".matiere[data-ue="+ueId+"]").each(function()
 			{
-				var note = parseInt($(this).find(".noteMatiere").text());
-				var coef = parseInt($(this).find(".coefficientMatiere").text())
+				var note = parseFloat($(this).find(".noteMatiere").text());
+				var coef = parseFloat($(this).find(".coefficientMatiere").text())
 
 				moyenneUE += note*coef;
 				totalNotes += note;
@@ -124,12 +125,12 @@ function calculerMoyenneSemestre()
 		var ue = $(this);
 		var ueId = ue.attr("data-ue");
 		
-		totalCoef += parseInt(ue.find(".coefficientUE").text());
+		totalCoef += parseFloat(ue.find(".coefficientUE").text());
 
 		// alert("totalCoef : "+totalCoef);
 
-		var moyenneUE = parseInt($(this).find(".moyenneUE").text());
-		var coefUE = parseInt($(this).find(".coefficientUE").text());
+		var moyenneUE = parseFloat($(this).find(".moyenneUE").text());
+		var coefUE = parseFloat($(this).find(".coefficientUE").text());
 
 		moyenneSemestre += moyenneUE*coefUE;
 		
