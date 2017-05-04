@@ -6,12 +6,15 @@ import javax.persistence.*;
 @Table(name = "etudiant")
 public class Etudiant {
 
-    @OneToOne
-    @JoinColumn(name = "id_user")
-    User user;
     @Id
-    @Column(name = "id_user")
+    @Column(name = "etudiant_id_user")
     private long id;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "etudiant_id_user", referencedColumnName = "id_user")
+    private User user;
+
     @ManyToOne
     @JoinColumn(name = "id_promotion")
     private Promotion promotion;
@@ -22,13 +25,14 @@ public class Etudiant {
     private int credit, num_etudiant;
 
 
+
     public Etudiant() { }
 
     /**
      * @todo test to init the int to 0. The app doesn't crash for String which takes null but crashes for int fields
      * getting a 0
      **/
-    public Etudiant(RoleEtudiant role_etudiant, int credit, Promotion promo, int num_etudiant, User user) {
+    public Etudiant(int credit, int num_etudiant, Promotion promo, RoleEtudiant role_etudiant, User user) {
         this.role_etudiant = role_etudiant;
         this.credit = credit;
         this.promotion = promo;
