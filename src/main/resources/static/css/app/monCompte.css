@@ -1,0 +1,54 @@
+*
+{
+	font-weight: 300;
+}
+
+body
+{
+	overflow-y: hidden !important;
+}
+
+nav
+{
+	background-color: #90a9bf !important;
+}
+
+nav a:hover 
+{
+    color: white !important;
+}
+
+#topLeftContainer
+{
+	background-color: rgba(66, 133, 244, 0.12);
+	height: 800px;
+	padding: 15px;
+	border-right: .8px solid #efefef;
+}
+
+.btn-small {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 0.5rem;
+}
+
+#monCompteActionButton
+{
+	float: right;
+}
+
+#leftFormContainer, #rightFormContainer
+{
+	padding:2%;
+}
+
+#passwordSpan
+{
+	font-size: .8em;
+	float: right;
+}
+
+#formContainer
+{
+	margin-bottom: 0px !important;
+}

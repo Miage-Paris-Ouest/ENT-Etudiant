@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>ENT</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css">
+
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css" />
+
+	<link rel="stylesheet" href="../static/css.app/monCompte.css">
+
+</head>
+
+<body>  
+<nav class="blue-gradient">
+    <div class="nav-wrapper row">
+      <a href="#" class="brand-logo">Logo</a>
+		  <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
+	        <li><a href="#">Gestion des classes</a></li>
+	        <li><a href="#">Gestion des Cours</a></li>
+	        <li><a href="#">Gestion calendriers</a></li>
+	        <li><a href="#">Gestion des fichiers</a></li>
+	      </ul>
+
+	      <ul id="nav-mobile" class="right hide-on-med-and-down">
+	        <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+        	<li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+	      </ul>
+	</div>
+
+</nav>
+
+<!-- Gestion des cours -->
+<div id="topContainer">
+	<div class="row">
+		<div id="topLeftContainer" class="col s3 z-depth-2">
+		<h5><small>Mes informations</small></h5>
+		<hr>
+			
+			<div id="imgContainer" class="row">
+				<img src="http://placehold.it/250x150" class="img-responsive img-circle col s8 offset-s2" alt="Cinque Terre">
+			</div>
+
+			<hr>
+			<table id="userInfo" class="table table-sm">
+				<tbody>
+					<tr>
+						<td id="myName">John Doe</td>
+					</tr>
+					<tr>
+						<td id="myClass">M1 MIAGE APP</td>
+					</tr>
+					<tr>
+						<td id="myClass">2016</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="topRightContainer" class="col s9" style="height: 800px;padding:10px;">
+			<div class="card" style="height:70%; padding: 6%;">
+				<div id="formContainer" class="row">
+					<div id="leftFormContainer" class="row col s6" style="border-right: .8px solid #cecece;">
+				 		<span>
+							<h5><small id="rightFormContainerLabel">Informations générales</small></h5>
+						</span>
+				 		<div class="row">
+					        <div class="input-field col s6">
+					          <input disabled id="first_name" type="text" value="John">
+					          <label for="first_name">Prénom</label>
+					        </div>
+					        <div class="input-field col s6">
+					          	<input disabled id="last_name" type="text" value="Doe">
+					          	<label for="last_name">Nom</label>
+					        </div>
+				      	</div>
+				      	<div class="row">
+					        <div class="input-field col s12">
+					          	<input id="email" type="email" value="john.doe@test.fr">
+					          	<label for="email">Email</label>
+					        </div>
+			      		</div>
+				      	<div class="file-field input-field col s12">
+					      	<div class="btn">
+					        	<span>Fichier</span>
+					        	<input type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*">
+					      	</div>
+					      	<div class="file-path-wrapper">
+					        	<input class="file-path" type="text">
+					      	</div>
+					    </div>
+					</div>
+					<div id="rightFormContainer" class="row col s6">
+						<span>
+							<h5><small id="rightFormContainerLabel">Changement du mot de passe</small></h5>
+						</span>
+						<br>
+						<div class="row">
+					        <div class="input-field col s12">
+					          <input id="password" type="password">
+					          <label for="password">Mot de passe</label>
+					        </div>
+			      		</div>
+				      	<div class="row">
+					        <div class="input-field col s12">
+					          <input id="confirmPassword" type="password">
+					          <label for="confirmPassword">Nouveau mot de passe</label>
+					        </div>
+					    </div>
+					    <span id="passwordSpan"></span><br>
+					    <button id="changerMdp" class="btn btn-pin waves-effect waves-light danger-color-dark">Changer</button>
+					</div>
+				</div>
+				<div id="monCompteActionButton" class="row col 12">
+						<button id="saveChangesMonComtpe" class="btn btn-small">Enregistrer</button>
+				</div>
+			</div>
+				
+
+		</div>
+	</div>
+</div>
+<!-- Gestion des cours -->
+
+</body>
+
+    <!-- SCRIPTS -->
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+   
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/js/mdb.min.js"></script>
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<script type="text/javascript" src="../static/js.app/main.js"></script>
+	<script type="text/javascript" src="../static/js.app/monCompte.js"></script>
+
+</body>
+
+</html>
