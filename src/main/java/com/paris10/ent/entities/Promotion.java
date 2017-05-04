@@ -11,13 +11,14 @@ public class Promotion {
     @Column(name = "id_promotion")
     private long id;
 
-    private String nom_promo;
+    private String nom_promo, annee;
 
     public Promotion() {
     }
 
-    public Promotion(String nom_promo) {
+    public Promotion(String nom_promo, String annee) {
         this.nom_promo = nom_promo;
+        this.annee = annee;
     }
 
     public long getId() {
@@ -34,5 +35,13 @@ public class Promotion {
 
     public void setNom_promo(String nom_promo) {
         this.nom_promo = nom_promo;
+    }
+
+    public String getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(String annee) {
+        this.annee = annee;
     }
 }
