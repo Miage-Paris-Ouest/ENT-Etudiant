@@ -13,7 +13,10 @@ function validerMdp()
 	if(password.length>0 && confirmPassword.length>0)
 	{
 		if(password === confirmPassword)
-			alert("MAJ mdp");
+		{
+            alert("MAJ mdp");
+            // $.get()
+        }
 		else
 			text = "Les champs saisis sont différents";
 	}
