@@ -65,11 +65,11 @@ public class UE {
         this.promotion = promotion;
     }
 
-    public Long getPromotionId() {
+    public long getPromotionId() {
         return promotion.getId();
     }
 
-    public Long getSemestreId() {
+    public long getSemestreId() {
         return semestre.getId();
     }
 }

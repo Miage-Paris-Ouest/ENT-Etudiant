@@ -9,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by qlassalle on 27/04/2017.
- */
-@RestController
+
+@Controller
 @RequestMapping(value = "/etudiant")
 public class EtudiantController {
 
@@ -46,6 +45,31 @@ public class EtudiantController {
         System.out.println(promo.getId());
         Etudiant etudiant = new Etudiant(1000, 3500000, promo, RoleEtudiant.Etudiant, u);
         etudiantRepository.save(etudiant);
+    }
+    public List<UE> getUes() {
+        Long idPromotion = new Long(3);
+        List<UE> ues = ueRepository.findByPromotionId(idPromotion);
+
+        return ues;
+    }
+
+    public List<Matiere> getMatieres() {
+        List<UE> ues = this.getUes();
+        List<Matiere> matieres = new ArrayList<Matiere>();
+
+        for (UE ue:ues) {
+            if(matiereRepository.findByUeId(ue.getId()) != null)
+                matieres.addAll(matiereRepository.findByUeId(ue.getId()));
+        }
+
+        return matieres;
+    }
+
+    @RequestMapping(value = "/mescours")
+    public String mesCours(ModelMap model) {
+        model.put("cours", this.getMatieres());
+
+        return "mesCours";
     }
 
     @RequestMapping(value = "/mescours")

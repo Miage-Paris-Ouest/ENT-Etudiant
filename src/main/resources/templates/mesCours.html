@@ -30,7 +30,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
 
-    <!--<link rel="stylesheet" href="gestionCours.css"/>-->
+    <link rel="stylesheet" href="gestionCours.css"/>
 
 
 </head>
@@ -52,33 +52,23 @@
     </div>
 
 </nav>
-<div id="topContainer">
+<div id="topContainer" class="container-fluid">
     <div class="row">
-        <div id="topRightContainer" class="col s9" style="height: 800px;padding:10px;">
-            <h5><small id="selectedClassCoursesLabel">Liste des cours</small></h5>
-            <hr/>
-
-            <div id="dragNdropContainer">
-                <div class="row">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Role</th>
-                            <th>Credit</th>
-                            <th>Numero etudiant</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="cour : ${cours}">
-                            <td th:text="${cour.nom_matiere}"></td>
-                            <td th:text="${cour.nb_etcs}"></td>
-                            <td th:text="${cour.coefficient}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <button id="saveChanges" class="btn btn-small" style="float:right">Ajouter un cours</button>
-                </div>
-            </div>
+        <div id="topLeftContainer" class="col s3 z-depth-2">
+            <h5>
+                <small>Liste des cours</small>
+            </h5>
+            <ul id="topContainerList" class="list-group" th:each="cour : ${cours}">
+                <li class="list-group-item justify-content-between" th:text="${cour.nom_matiere}"></li>
+            </ul>
+            <a id="createClass" class="btn-floating" href="#modal1"
+               style="float: right;background-color:#64b5f6 !important"><i class="material-icons">add</i></a>
+        </div>
+        <div id="centerContainer" class="col s5 z-depth-2">
+            <h4>Derniers cours ajoutés</h4>
+        </div>
+        <div id="topRightContainer" class="col s4 z-depth-2">
+            <h4>Calendrier</h4>
         </div>
     </div>
 </div>

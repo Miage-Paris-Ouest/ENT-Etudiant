@@ -77,4 +77,8 @@ public class Matiere {
     public void setUe(UE ue) {
         this.ue = ue;
     }
+
+    public Long getUeId() {
+        return ue.getId();
+    }
 }
