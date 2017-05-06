@@ -4,15 +4,19 @@ sudo: false # faster builds
 branches:
   only:
   - master
+  - dev
   - simulateur
 
-before_script :
-  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
+#before_script :
+#  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+#
 script:
-  - ./mvnw test -B
+#  - ./mvnw test -B
   - mvn cobertura:cobertura
 
 after_success:
   - export CODECOV_TOKEN="e453fdf9-0850-46e9-be79-cc56c4806910"
   - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+   slack: projet-ent:DLpZQSwF8AfDHAOzhF5x7bzB

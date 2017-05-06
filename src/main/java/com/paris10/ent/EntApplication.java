@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EntApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(EntApplication.class, args);
+
 	}
 }

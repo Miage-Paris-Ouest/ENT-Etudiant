@@ -12,17 +12,20 @@ public class Matiere {
 
     private String nom_matiere, description;
     //TODO Relation ManyToOne et OneToOne
-    private int nb_ects, id_ue, id_enseignant;
+    private int nb_ects,id_enseignant;
+
+    @Column(name="id_ue")
+    private int ue;
     private float coefficient, nb_heures;
 
     public Matiere() {
     }
 
-    public Matiere(String nom_matiere, String description, int nb_ects, int id_ue, int id_enseignant, float coefficient, float nb_heures) {
+    public Matiere(String nom_matiere, String description, int nb_ects, int ue, int id_enseignant, float coefficient, float nb_heures) {
         this.nom_matiere = nom_matiere;
         this.description = description;
         this.nb_ects = nb_ects;
-        this.id_ue = id_ue;
+        this.ue = ue;
         this.id_enseignant = id_enseignant;
         this.coefficient = coefficient;
         this.nb_heures = nb_heures;
@@ -60,12 +63,12 @@ public class Matiere {
         this.nb_ects = nb_ects;
     }
 
-    public int getId_ue() {
-        return id_ue;
+    public int getUe() {
+        return ue;
     }
 
-    public void setId_ue(int id_ue) {
-        this.id_ue = id_ue;
+    public void setUe(int id_ue) {
+        this.ue = id_ue;
     }
 
     public int getId_enseignant() {

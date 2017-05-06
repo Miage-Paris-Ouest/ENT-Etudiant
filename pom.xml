@@ -108,6 +108,13 @@
 		</dependency>
 		<!--End of logging-->
 
+		<!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring3 -->
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring3</artifactId>
+			<version>3.0.5.RELEASE</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -128,6 +135,11 @@
                     <check/>
                 </configuration>
             </plugin>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 
