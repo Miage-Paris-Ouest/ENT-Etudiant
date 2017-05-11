@@ -14,8 +14,27 @@ function validerMdp()
 	{
 		if(password === confirmPassword)
 		{
-            alert("MAJ mdp");
-            // $.get()
+			var id = $("#userInfo").attr("data-iduser");
+			var newPassword = $("#newPassword").val();
+
+            $.get("/users/"+id+"/password",
+				{
+                    password : password
+                },function(res)
+				{
+                    if(newPassword.length>4)
+                    {
+                        $.post("/users/"+id+"/password",
+                            {
+                                password : password,
+                                newPassword : newPassword
+                            },function (res) {
+                                text = res ? "Le changement a été enregistré" : "Echec lors de la mise à jour"
+                            })
+                    }
+                    else
+                        text = "Le nouveau mot de passe saisi est trop court (5 caractères min.)";
+                });
         }
 		else
 			text = "Les champs saisis sont différents";

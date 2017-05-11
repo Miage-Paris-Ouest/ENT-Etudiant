@@ -24,7 +24,8 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css" />
 
-	<link rel="stylesheet" href="../static/css/simulateur.css" th:href="@{../css/simulateur.css}"/>
+	<link rel="stylesheet" href="../static/css/main.css" th:href="@{../css/main.css}"/>
+	<link rel="stylesheet" href="../static/css/monCompte.css" th:href="@{../css/simulateur.css}"/>
 
 </head>
 
@@ -69,21 +70,23 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr class="ue" th:each="ue : ${ueContent.ue}" th:attr="data-ue=${ue.id}">
-					<td><b th:text="|${ue.nom_ue}|"></b></td>
-					<td class="coefficientUE"><b></b></td>
-					<td class="moyenneUE"><b></b></td>
-				</tr>
-				<tr class="matiere" th:each="matiere : ${ueContent.matieres}" th:attr="data-matiere=${matiere.id}, data-ue=${ueContent.ue.id}">
-					<td><b th:text="|${matiere.nom_matiere}|"></b></td>
-					<td class="coefficientMatiere" th:text="|${matiere.coefficient}|"></td>
-					<td class="noteMatiere input-field">0</td>
-				</tr>
-				<tr class="total">
-					<td></td>
-					<td></td>
-					<td class="moyenneSemestre"><b></b></td>
-				</tr>
+				<div th:each="ueContent : ${ues}" th:remove="tag">
+					<tr class="ue" th:attr="data-ue=${ueContent.ue.id}">
+						<td><b th:text="|${ueContent.ue.nom_ue}|"></b></td>
+						<td class="coefficientUE"><b></b></td>
+						<td class="moyenneUE"><b></b></td>
+					</tr>
+					<tr class="matiere" th:each="matiere : ${ueContent.matieres}" th:attr="data-matiere=${matiere.id}, data-ue=${ueContent.ue.id}">
+						<td><b th:text="|${matiere.nom_matiere}|"></b></td>
+						<td class="coefficientMatiere" th:text="|${matiere.coefficient}|"></td>
+						<td class="noteMatiere input-field">0</td>
+					</tr>
+					<tr class="total">
+						<td></td>
+						<td></td>
+						<td class="moyenneSemestre"><b></b></td>
+					</tr>
+				</div>
 				</tbody>
 			</table>
 			<div id="actions">
@@ -94,8 +97,6 @@
 	</div>
 </div>
 <!-- Gestion des cours -->
-
-</body>
 
 <!-- SCRIPTS -->
 
@@ -119,6 +120,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
 <script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
-<script type="text/javascript" src="../static/js/simulateur.js" th:src="@{/js/simulateur.js}"></script>
+<script type="text/javascript" src="../static/js/simulateur.js" th:src="@{/js/simulation.js}"></script>
+
+</body>
 
 </html>

@@ -5,12 +5,12 @@ import java.util.List;
 /**
  * Created by ranox on 04/05/17.
  */
-public class UeAsMatieresContainer
+public class UeContent
 {
     UE ue;
     List<Matiere> matieres;
 
-    public UeAsMatieresContainer(UE ue, List<Matiere> matieres) {
+    public UeContent(UE ue, List<Matiere> matieres) {
         this.ue = ue;
         this.matieres = matieres;
     }

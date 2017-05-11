@@ -14,14 +14,16 @@ public class UE {
     private String nom_ue;
 
     //TODO Relation ManyToOne à creer
-    private int id_semestre, id_promo;
+    @Column(name = "id_semestre")
+    private int semestre;
+    private int id_promo;
 
     public UE() {
     }
 
     public UE(String nom_ue, int id_semestre, int id_promo) {
         this.nom_ue = nom_ue;
-        this.id_semestre = id_semestre;
+        this.semestre = id_semestre;
         this.id_promo = id_promo;
     }
 
@@ -42,11 +44,11 @@ public class UE {
     }
 
     public int getId_semestre() {
-        return id_semestre;
+        return semestre;
     }
 
     public void setId_semestre(int id_semestre) {
-        this.id_semestre = id_semestre;
+        this.semestre = id_semestre;
     }
 
     public int getId_promo() {

@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     
     <title>ENT</title>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
 
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
    
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
 
     <!-- Compiled and minified CSS -->
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
 
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css">
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css"/>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css"/>
 
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css" />
 
-	<link rel="stylesheet" href="../static/css.app/monCompte.css">
+	<link rel="stylesheet" href="../static/css/main.css" th:href="@{../css/main.css}"/>
+	<link rel="stylesheet" href="../static/css/monCompte.css" th:href="@{../css/monCompte.css}"/>
 
 </head>
 
@@ -57,23 +58,23 @@
 	<div class="row">
 		<div id="topLeftContainer" class="col s3 z-depth-2">
 		<h5><small>Mes informations</small></h5>
-		<hr>
+		<hr/>
 			
 			<div id="imgContainer" class="row">
-				<img src="http://placehold.it/250x150" class="img-responsive img-circle col s8 offset-s2" alt="Cinque Terre">
+				<img src="http://placehold.it/250x150" class="img-responsive img-circle col s8 offset-s2" alt="Cinque Terre"/>
 			</div>
 
-			<hr>
-			<table id="userInfo" class="table table-sm">
+			<hr/>
+			<table id="userInfo" th:attr="data-iduser=${user.id}" class="table table-sm">
 				<tbody>
 					<tr>
-						<td id="myName">John Doe</td>
+						<td id="myName" th:text="${user.prenom} +' '+ ${user.nom}"></td>
 					</tr>
 					<tr>
 						<td id="myClass">M1 MIAGE APP</td>
 					</tr>
 					<tr>
-						<td id="myClass">2016</td>
+						<td id="year">2016</td>
 					</tr>
 				</tbody>
 			</table>
@@ -87,27 +88,27 @@
 						</span>
 				 		<div class="row">
 					        <div class="input-field col s6">
-					          <input disabled id="first_name" type="text" value="John">
+					          <input disabled="true" id="first_name" type="text" th:value="${user.prenom}"/>
 					          <label for="first_name">Prénom</label>
 					        </div>
 					        <div class="input-field col s6">
-					          	<input disabled id="last_name" type="text" value="Doe">
+					          	<input disabled="true" id="last_name" type="text" th:value="${user.nom}"/>
 					          	<label for="last_name">Nom</label>
 					        </div>
 				      	</div>
 				      	<div class="row">
 					        <div class="input-field col s12">
-					          	<input id="email" type="email" value="john.doe@test.fr">
+					          	<input id="email" type="email" th:value="${user.email}"/>
 					          	<label for="email">Email</label>
 					        </div>
 			      		</div>
 				      	<div class="file-field input-field col s12">
 					      	<div class="btn">
 					        	<span>Fichier</span>
-					        	<input type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*">
+					        	<input type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*"/>
 					      	</div>
 					      	<div class="file-path-wrapper">
-					        	<input class="file-path" type="text">
+					        	<input class="file-path" type="text"/>
 					      	</div>
 					    </div>
 					</div>
@@ -115,20 +116,24 @@
 						<span>
 							<h5><small id="rightFormContainerLabel">Changement du mot de passe</small></h5>
 						</span>
-						<br>
+						<br/>
 						<div class="row">
-					        <div class="input-field col s12">
-					          <input id="password" type="password">
+					        <div class="input-field col s6">
+					          <input id="password" type="password"/>
 					          <label for="password">Mot de passe</label>
 					        </div>
+							<div class="input-field col s6">
+								<input id="confirmPassword" type="password"/>
+								<label for="confirmPassword">Confirmation</label>
+							</div>
 			      		</div>
 				      	<div class="row">
 					        <div class="input-field col s12">
-					          <input id="confirmPassword" type="password">
-					          <label for="confirmPassword">Nouveau mot de passe</label>
+					          <input id="newPassword" type="password"/>
+					          <label for="newPassword">Nouveau mot de passe</label>
 					        </div>
 					    </div>
-					    <span id="passwordSpan"></span><br>
+					    <span id="passwordSpan"></span><br/>
 					    <button id="changerMdp" class="btn btn-pin waves-effect waves-light danger-color-dark">Changer</button>
 					</div>
 				</div>
@@ -136,14 +141,10 @@
 						<button id="saveChangesMonComtpe" class="btn btn-small">Enregistrer</button>
 				</div>
 			</div>
-				
-
 		</div>
 	</div>
 </div>
 <!-- Gestion des cours -->
-
-</body>
 
     <!-- SCRIPTS -->
 
@@ -166,9 +167,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-	<script type="text/javascript" src="../static/js.app/main.js"></script>
-	<script type="text/javascript" src="../static/js.app/monCompte.js"></script>
-
+<script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" src="../static/js/monCompte.js" th:src="@{/js/monCompte.js}"></script>
 </body>
 
 </html>

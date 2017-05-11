@@ -16,4 +16,5 @@ public interface UeRepository extends JpaRepository<UE, Long>
 {
     UE findById(long id);
     List<UE> findAll();
+    List<UE> findBySemestre(int id);
 }
