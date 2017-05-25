@@ -9,12 +9,15 @@ import com.paris10.ent.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping(value = "/etudiant")
 public class EtudiantController {
 
@@ -29,10 +32,23 @@ public class EtudiantController {
         this.promotionRepository = promotionRepository;
     }
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/all")
     public List<Etudiant> index() {
-        saveStudent();
+//        saveStudent();
         return etudiantRepository.findAll();
+    }
+
+    @RequestMapping(value = "/maClasse")
+    public String maClasse(Model model) {
+        model.addAttribute("etudiants", etudiantRepository.findAll());
+        model.addAttribute("promotions", promotionRepository.findAll());
+        return "html/gestionClasses";
+    }
+
+    @RequestMapping(value = "byPromo/{idPromotion}")
+    @ResponseBody
+    public List<Etudiant> byPromo(@PathVariable long idPromotion) {
+        return etudiantRepository.findByPromotionId(idPromotion);
     }
 
     private void saveStudent() {

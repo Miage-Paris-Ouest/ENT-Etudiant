@@ -76,3 +76,6 @@ nav a:hover {
     height: 800px;
 }
 
+.nomPromotion {
+    cursor: pointer;
+}

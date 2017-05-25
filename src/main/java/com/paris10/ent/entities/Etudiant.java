@@ -1,5 +1,7 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +19,7 @@ public class Etudiant {
 
     @ManyToOne
     @JoinColumn(name = "id_promotion")
+    @JsonBackReference
     private Promotion promotion;
 
     @Enumerated(EnumType.STRING)

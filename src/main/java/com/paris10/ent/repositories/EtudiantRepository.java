@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
 
-    List<Etudiant> findByCreditLessThan(int credit);
+    List<Etudiant> findByPromotionId(Long id);
 }
