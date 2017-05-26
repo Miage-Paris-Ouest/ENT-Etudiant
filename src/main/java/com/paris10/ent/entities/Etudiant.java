@@ -82,4 +82,12 @@ public class Etudiant {
     public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
     }
+
+    public Long getPromotionId() {
+        return promotion.getId();
+    }
+
+    public Long getUserId() {
+        return user.getId();
+    }
 }

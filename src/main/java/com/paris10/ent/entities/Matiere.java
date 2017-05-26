@@ -11,29 +11,23 @@ public class Matiere {
     private long id;
 
     private String nom_matiere, description;
-    //TODO Relation ManyToOne et OneToOne
-    private int nb_ects, id_ue, id_enseignant;
+    private int nb_etcs;
     private float coefficient, nb_heures;
+
+    @ManyToOne
+    @JoinColumn(name = "id_ue")
+    private UE ue;
 
     public Matiere() {
     }
 
-    public Matiere(String nom_matiere, String description, int nb_ects, int id_ue, int id_enseignant, float coefficient, float nb_heures) {
+    public Matiere(String nom_matiere, String description, int nb_etcs, float coefficient, float nb_heures, UE ue) {
         this.nom_matiere = nom_matiere;
         this.description = description;
-        this.nb_ects = nb_ects;
-        this.id_ue = id_ue;
-        this.id_enseignant = id_enseignant;
+        this.nb_etcs = nb_etcs;
         this.coefficient = coefficient;
         this.nb_heures = nb_heures;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.ue = ue;
     }
 
     public String getNom_matiere() {
@@ -52,28 +46,12 @@ public class Matiere {
         this.description = description;
     }
 
-    public int getNb_ects() {
-        return nb_ects;
+    public int getNb_etcs() {
+        return nb_etcs;
     }
 
-    public void setNb_ects(int nb_ects) {
-        this.nb_ects = nb_ects;
-    }
-
-    public int getId_ue() {
-        return id_ue;
-    }
-
-    public void setId_ue(int id_ue) {
-        this.id_ue = id_ue;
-    }
-
-    public int getId_enseignant() {
-        return id_enseignant;
-    }
-
-    public void setId_enseignant(int id_enseignant) {
-        this.id_enseignant = id_enseignant;
+    public void setNb_etcs(int nb_ects) {
+        this.nb_etcs = nb_ects;
     }
 
     public float getCoefficient() {
@@ -90,5 +68,17 @@ public class Matiere {
 
     public void setNb_heures(float nb_heures) {
         this.nb_heures = nb_heures;
+    }
+
+    public UE getUe() {
+        return ue;
+    }
+
+    public void setUe(UE ue) {
+        this.ue = ue;
+    }
+
+    public Long getUeId() {
+        return ue.getId();
     }
 }

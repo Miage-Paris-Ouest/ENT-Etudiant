@@ -8,7 +8,7 @@ myApp.config(function ($routeProvider) {
             })
         .when('/maClasse',
             {
-                templateUrl: 'ent/MaClasse.html',
+                templateUrl: 'ent/mmaClasse.html',
                 controller: 'maClasseController'
             });
 });
