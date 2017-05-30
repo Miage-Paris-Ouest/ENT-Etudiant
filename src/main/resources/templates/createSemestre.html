@@ -1,0 +1,17 @@
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Ajouter un semestre</title>
+</head>
+<body>
+<h1>Ajouter un semestre</h1>
+<form action="/" th:object="${semestre}" method="post">
+    <input type="text" th:field="*{nom_semestre}" />
+    <input type="submit" />
+</form>
+</body>
+</html>
+
+
+

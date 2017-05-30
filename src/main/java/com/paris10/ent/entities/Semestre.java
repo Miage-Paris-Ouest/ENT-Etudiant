@@ -1,6 +1,9 @@
 package com.paris10.ent.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "semestre")
@@ -10,6 +13,7 @@ public class Semestre {
     @Column(name = "id_semestre")
     private long id;
 
+    @NotBlank
     private String nom_semestre;
 
     public Semestre() {
