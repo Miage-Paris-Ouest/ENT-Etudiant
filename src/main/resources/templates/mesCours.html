@@ -30,46 +30,113 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
 
-    <link rel="stylesheet" href="gestionCours.css"/>
-
+    <link th:href="@{/css/app/gestionCours.css}" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="/static/js/lib/materialize.min.js" th:src="@{/js/lib/materialize.min.js}" />
+    <script type="text/javascript" src="/static/js/app/main.js" th:src="@{/js/app/main.js}" />
+    <script type="text/javascript" src="/static/js/lib/angular.min.js" th:src="@{/js/lib/angular.min.js}" />
+    <script type="text/javascript" src="/static/js/app/app.module.js" th:src="@{/js/app/app.module.js}" />
+    <script type="text/javascript" src="/static/js/app/cours.controller.js" th:src="@{/js/app/cours.controller.js}" />
+    <script type="text/javascript" src="/static/js/lib/bootstrap.min.js" th:src="@{/js/lib/bootstrap.min.js}"/>
 
 </head>
-<nav class="blue-gradient">
-    <div class="nav-wrapper row">
-        <a href="#" class="brand-logo">Logo</a>
+<body>
+    <nav class="blue-gradient">
+        <div class="nav-wrapper row">
+            <a href="#" class="brand-logo">Logo</a>
 
-        <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
-            <li><a href="#">Gestion des classes</a></li>
-            <li><a href="#">Gestion des Cours</a></li>
-            <li><a href="#">Gestion calendriers</a></li>
-            <li><a href="#">Gestion des fichiers</a></li>
-        </ul>
-
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
-            <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
-        </ul>
-    </div>
-
-</nav>
-<div id="topContainer" class="container-fluid">
-    <div class="row">
-        <div id="topLeftContainer" class="col s3 z-depth-2">
-            <h5>
-                <small>Liste des cours</small>
-            </h5>
-            <ul id="topContainerList" class="list-group" th:each="cour : ${cours}">
-                <li class="list-group-item justify-content-between" th:text="${cour.nom_matiere}"></li>
+            <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
+                <li><a href="#">Gestion des classes</a></li>
+                <li><a href="#">Gestion des Cours</a></li>
+                <li><a href="#">Gestion calendriers</a></li>
+                <li><a href="#">Gestion des fichiers</a></li>
             </ul>
-            <a id="createClass" class="btn-floating" href="#modal1"
-               style="float: right;background-color:#64b5f6 !important"><i class="material-icons">add</i></a>
+
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+                <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+            </ul>
         </div>
-        <div id="centerContainer" class="col s5 z-depth-2">
-            <h4>Derniers cours ajoutés</h4>
-        </div>
-        <div id="topRightContainer" class="col s4 z-depth-2">
-            <h4>Calendrier</h4>
+
+    </nav>
+    <div id="topContainer" class="container-fluid" ng-app="app" ng-controller="CoursController as vm">
+        <div class="row">
+            <div id="topLeftContainer" class="col s3 z-depth-2">
+                <h5>
+                    <small>Liste des cours</small>
+                </h5>
+                <ul id="topContainerList" class="list-group">
+                    <li class="list-group-item justify-content-between" ng-repeat="cour in vm.cours">{{cour.nom_matiere}}</li>
+                </ul>
+                <button id="addCoursFile" class="btn-floating"
+                   style="float: right;background-color:#64b5f6 !important" data-toggle="modal" data-target="#myModal">
+                    <i class="material-icons">add</i></button>
+
+                <div id="myModal" class="modal modal-fixed-footer">
+                    <div class="modal-content" style="text-align: center">
+                        <h4>
+                            <small id="modalActionLabel"></small>
+                            Ajouter un cours
+                        </h4>
+                        <hr/>
+
+                        <form id="addCoursForm" method="POST" enctype="multipart/form-data" action="/etudiant/mescours">
+                            <div class="row">
+                                <div class="input-field offset-s3 col s6">
+                                    <input id="nom_fichier" class="validate" placeholder="Nom fichier" ng-model="file.nom"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field offset-s3 col s6">
+                                    <select>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                    </select>
+                                    <label>Choix matiere</label>
+                                </div>
+                                    <!--<select ng-options="cour.nom_matiere for cour in vm.cours" ng-model="matiere_fichier"/>-->
+                            </div>
+
+                            <div class="row">
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>File</span>
+                                        <input type="file" name="file"/>
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" data-dismiss="modal" class="modal-action modal-close waves-effect waves-red btn-flat">Annuler</a>
+                        <!--<input id="validateActionButtonLabel" type="submit"-->
+                           <!--class="modal-action modal-close waves-effect waves-green btn-flat"-->
+                           <!--ng-click="vm.addFileCours(user.nom, user.prenom, user.email, etudiant.role_etudiant, etudiant.num_etudiant,-->
+           <!--pc.promotion.id)">Valider</a>-->
+                    </div>
+                </div>
+            </div>
+            <div id="centerContainer" class="col s5 z-depth-2">
+                <h4>Derniers cours ajoutés</h4>
+            </div>
+            <div id="topRightContainer" class="col s4 z-depth-2">
+                <h4>Calendrier</h4>
+            </div>
         </div>
     </div>
-</div>
+    <div class="input-field offset-s3 col s6">
+        <select>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+        <label>Choix matiere</label>
+    </div>
+</body>
 </html>

@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,8 @@ public class EtudiantController {
         return ues;
     }
 
+    @RequestMapping(value = "/getmatieres")
+    @ResponseBody
     public List<Matiere> getMatieres() {
         List<UE> ues = this.getUes();
         List<Matiere> matieres = new ArrayList<Matiere>();
@@ -57,8 +61,7 @@ public class EtudiantController {
     }
 
     @RequestMapping(value = "/mescours")
-    public String mesCours(ModelMap model) {
-        model.put("cours", this.getMatieres());
+    public String mesCours() {
         return "mesCours";
     }
 

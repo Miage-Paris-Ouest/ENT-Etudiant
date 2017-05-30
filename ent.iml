@@ -120,5 +120,7 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.41" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-configuration-processor:1.5.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
+    <orderEntry type="library" name="jquery-1.12.4" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
   </component>
 </module>
