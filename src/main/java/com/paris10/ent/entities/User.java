@@ -11,7 +11,10 @@ public class User {
     @Column(name = "id_user")
     private long id;
 
-    private String nom, prenom, email, mdp;
+    @Column(name = "mdp")
+    private String mdp;
+
+    private String nom, prenom, email;
 
     @Enumerated(EnumType.STRING)
     private TypeUser type;

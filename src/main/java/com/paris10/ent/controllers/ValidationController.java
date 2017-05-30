@@ -6,6 +6,8 @@ import com.paris10.ent.repositories.EnseignantRepository;
 import com.paris10.ent.repositories.EtudiantRepository;
 import com.paris10.ent.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,30 +20,35 @@ import java.util.List;
  * Created by ranox on 04/05/17.
  */
 
-@RestController
+@Controller
 @RequestMapping(value = "/validation")
 public class ValidationController {
 
+    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    public ValidationController(UserRepository etudiantRepository) {
-        this.userRepository = userRepository;
+    @RequestMapping("/")
+    public String authPage()
+    {
+        return "login";
     }
 
-    @RequestMapping(value = "/toto")
-    public void test()
+    @RequestMapping(value = "/authentication")
+    public String authentication(@RequestParam String password, @RequestParam String id, Model model)
     {
-        System.out.println("ok");
-    }
-
-    @RequestMapping(value = "/password/{id}")
-    public boolean validatePassword(@PathVariable int id, @RequestParam String password)
-    {
-        User user = userRepository.findById(id);
+        User user = userRepository.findById(Long.valueOf(id));
         String passwordFromDb = user.getMdp();
 
+        //TODO : Changer page de redirection
+        String page = "index";
         //TODO : comparer mdp cryptés
-        return password.equals(passwordFromDb);
+
+        if(!password.equals(passwordFromDb))
+        {
+            model.addAttribute("message", "L'authentification a échoué !");
+            page = "login";
+        }
+
+        return page;
     }
 }

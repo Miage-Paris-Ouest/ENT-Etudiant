@@ -39,7 +39,7 @@
     <div class="nav-wrapper row">
       <a href="#" class="brand-logo">Logo</a>
 		  <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
-	        <li><a href="#">Gestion des classes</a></li>
+	        <li><a href="/maClasse">Gestion des classes</a></li>
 	        <li><a href="#">Gestion des Cours</a></li>
 	        <li><a href="#">Gestion calendriers</a></li>
 	        <li><a href="#">Gestion des fichiers</a></li>
@@ -105,7 +105,7 @@
 				      	<div class="file-field input-field col s12">
 					      	<div class="btn">
 					        	<span>Fichier</span>
-					        	<input type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*"/>
+					        	<input type="file" id="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*"/>
 					      	</div>
 					      	<div class="file-path-wrapper">
 					        	<input class="file-path" type="text"/>
@@ -138,7 +138,8 @@
 					</div>
 				</div>
 				<div id="monCompteActionButton" class="row col 12">
-						<button id="saveChangesMonComtpe" class="btn btn-small">Enregistrer</button>
+					<span id="saveSpan"></span><br/>
+					<button id="saveChangesMonComtpe" class="btn btn-small">Enregistrer</button>
 				</div>
 			</div>
 		</div>
@@ -167,6 +168,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js"></script>
+
+<script type="text/javascript" src="../static/js/routing.js" th:src="@{/js/routing.js}"></script>
 <script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
 <script type="text/javascript" src="../static/js/monCompte.js" th:src="@{/js/monCompte.js}"></script>
 </body>

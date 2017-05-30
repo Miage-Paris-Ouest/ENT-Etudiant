@@ -4,15 +4,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Created by ranox on 27/04/17.
+ * Created by ranox on 31/05/17.
  */
-
 @Controller
-@RequestMapping("/error")
-public class AppErrorController {
+@RequestMapping(value = "/index")
+public class IndexController
+{
 
-    public String errorRedirect()
+    @RequestMapping("/")
+    public String welcomePage()
     {
-        return "error";
+        return "login";
     }
 }
