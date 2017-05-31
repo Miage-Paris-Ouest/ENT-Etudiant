@@ -1,0 +1,22 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Ajouter une matiere</title>
+</head>
+<body>
+<h1>Ajouter une matiere</h1>
+<form action="/matiere/createMatiere" th:object="${matiere}" method="post">
+    Nom matiere:    <input type="text" th:field="*{nom_matiere}" /><br/>
+    Description:    <input type="text" th:field="*{description}" /><br/>
+    Nb ECTS:        <input type="number" th:field="*{nb_ects}" /><br/>
+    Id UE:          <input type="number" th:field="*{ue}" /><br/>
+    Id Enseignant:  <input type="number" th:field="*{enseignant}" /><br/>
+    Coefficient:    <input type="number" step="1.00" th:field="*{coefficient}" /><br/>
+    Nb Heures:      <input type="number" th:field="*{nb_heures}" />
+    <input type="submit" />
+</form>
+</body>
+</html>
+
+
+
