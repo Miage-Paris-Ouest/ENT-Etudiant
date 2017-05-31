@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -32,6 +34,14 @@ public class PromotionController {
     @RequestMapping(value = "/{id}")
     @ResponseBody
     public Promotion getPromotion(@PathVariable long id) {
-        return promotionRepository.findOne(id);
+        Promotion p = promotionRepository.findOne(id);
+        // sort the students by their name
+        p.setLesEtudiants(p.getLes_etudiants()
+                           .stream()
+                           .sorted(Comparator.comparing(etudiant -> etudiant.getUser()
+                                                                            .getNom()
+                                                                            .toUpperCase()))
+                           .collect(Collectors.toList()));
+        return p;
     }
 }

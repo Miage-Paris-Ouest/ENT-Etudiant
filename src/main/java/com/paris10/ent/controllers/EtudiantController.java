@@ -1,13 +1,12 @@
 package com.paris10.ent.controllers;
+
 import com.paris10.ent.entities.*;
 import com.paris10.ent.repositories.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,7 +34,6 @@ public class EtudiantController {
 
     @RequestMapping(value = "/all")
     public List<Etudiant> index() {
-//        saveStudent();
         return etudiantRepository.findAll();
     }
 
@@ -64,33 +62,37 @@ public class EtudiantController {
         return "mesCours";
     }
 
-    @RequestMapping(value = "/maClasse")
+    @RequestMapping(value = "/maclasse")
     public String maClasse(Model model) {
         model.addAttribute("etudiants", etudiantRepository.findAll());
         model.addAttribute("promotions", promotionRepository.findAll());
-        return "html/gestionClasses";
+        return "gestionClasses";
     }
 
-    @RequestMapping(value = "byPromo/{idPromotion}")
+//    private void saveStudent() {
+//
+//        // Log les requêtes sql et affiche les valeur "bindées"
+//        //Logger logger = LoggerFactory.getLogger(this.getClass());
+//
+//        // Insert student in bdd
+//        User u = userRepository.findById(Long.valueOf(7));
+//        userRepository.flush();
+//        System.out.println(u.getId());
+//        Promotion promo = new Promotion("L3 MIAGE APP", "2016-2017");
+//        promotionRepository.save(promo);
+//        promotionRepository.flush();
+//        System.out.println(promo.getId());
+//        Etudiant etudiant = new Etudiant(1000, 3500000, promo, RoleEtudiant.Etudiant, u);
+//        etudiantRepository.save(etudiant);
+//    }
+
+    @RequestMapping(value = "/create")
     @ResponseBody
-    public List<Etudiant> byPromo(@PathVariable long idPromotion) {
-        return etudiantRepository.findByPromotionId(idPromotion);
-    }
-
-    private void saveStudent() {
-
-        // Log les requêtes sql et affiche les valeur "bindées"
-        //Logger logger = LoggerFactory.getLogger(this.getClass());
-
-        // Insert student in bdd
-        User u = userRepository.findById(Long.valueOf(7));
-        userRepository.flush();
-        System.out.println(u.getId());
-        Promotion promo = new Promotion("L3 MIAGE APP", "2016-2017");
-        promotionRepository.save(promo);
-        promotionRepository.flush();
-        System.out.println(promo.getId());
-        Etudiant etudiant = new Etudiant(1000, 3500000, promo, RoleEtudiant.Etudiant, u);
-        etudiantRepository.save(etudiant);
+    public List<Etudiant> create(@RequestBody Etudiant etudiant) {
+        User user = userRepository.findOne(etudiant.getUser().getId());
+        Promotion promotion = promotionRepository.findOne(etudiant.getPromotion().getId());
+        Etudiant etudiant1 = new Etudiant(etudiant.getNum_etudiant(), etudiant.getRole_etudiant(), user, promotion);
+        etudiantRepository.save(etudiant1);
+        return etudiantRepository.findAll();
     }
 }

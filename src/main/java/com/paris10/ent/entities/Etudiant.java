@@ -25,21 +25,16 @@ public class Etudiant {
     @Enumerated(EnumType.STRING)
     private RoleEtudiant role_etudiant;
 
-    private int credit, num_etudiant;
-
+    private int credit = 10;
+    private String num_etudiant;
 
 
     public Etudiant() { }
 
-    /**
-     * @todo test to init the int to 0. The app doesn't crash for String which takes null but crashes for int fields
-     * getting a 0
-     **/
-    public Etudiant(int credit, int num_etudiant, Promotion promo, RoleEtudiant role_etudiant, User user) {
-        this.role_etudiant = role_etudiant;
-        this.credit = credit;
-        this.promotion = promo;
+    public Etudiant(String num_etudiant, RoleEtudiant role_etudiant, User user, Promotion promo) {
+        this.role_etudiant = role_etudiant != null ? role_etudiant : RoleEtudiant.Etudiant;
         this.num_etudiant = num_etudiant;
+        this.promotion = promo;
         this.user = user;
     }
 
@@ -59,11 +54,11 @@ public class Etudiant {
         this.credit = credit;
     }
 
-    public int getNum_etudiant() {
+    public String getNum_etudiant() {
         return num_etudiant;
     }
 
-    public void setNum_etudiant(int num_etudiant) {
+    public void setNum_etudiant(String num_etudiant) {
         this.num_etudiant = num_etudiant;
     }
 
