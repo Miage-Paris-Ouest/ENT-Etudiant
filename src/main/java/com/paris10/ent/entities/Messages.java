@@ -13,7 +13,7 @@ public class Messages {
 
     private String message,titre;
     private Date date_message;
-    
+
     private int id_user1, id_user2, lu1,lu2;
 
     public Messages() {
