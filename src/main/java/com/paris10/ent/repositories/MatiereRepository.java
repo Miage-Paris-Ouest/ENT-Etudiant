@@ -11,5 +11,5 @@ public interface MatiereRepository extends JpaRepository<Matiere, Long>{
 //    List<Matiere> findByUeId(Long ueId);
 
     @Query("SELECT m FROM Matiere  m, UE u WHERE m.ue.id = u.id AND u.id = ?1")
-    List<Matiere> findByUeId(Long id);
+    List<Matiere> findByUeId(long id);
 }

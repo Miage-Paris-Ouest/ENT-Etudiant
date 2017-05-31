@@ -76,3 +76,13 @@ nav a:hover {
 {
     display: none;
 }
+
+.activeTab
+{
+    display: block !important;
+}
+
+#mainContainer>div
+{
+    display: none;
+}

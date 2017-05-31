@@ -18,7 +18,7 @@ myApp.controller('maClasseController', ['$scope', '$log', function ($scope, $log
 
     $('ul.tabs').tabs('select_tab', 'allNews');
 
-    $(".listContainer").mCustomScrollbar({
-        theme: "dark"
-    });
+    // $(".listContainer").mCustomScrollbar({
+    //     theme: "dark"
+    // });
 }]);

@@ -9,7 +9,8 @@ import java.util.List;
 
 @Repository
 public interface UeRepository extends JpaRepository<UE, Long>{
-    UE findById(Long id);
+
+    UE findById(int id);
 
     @Query("SELECT u FROM UE u, Promotion p WHERE u.promotion.id = p.id AND p.id = ?1")
     List<UE> findByPromotionId(Long id);

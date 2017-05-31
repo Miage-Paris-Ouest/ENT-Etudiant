@@ -22,7 +22,7 @@ public class Matiere {
     private UE ue;
 
     @ManyToOne
-    @JoinColumn(name = "id_enseignant")
+    @JoinColumn(name = "id_user")
     private Enseignant enseignant;
 
     public Matiere() {

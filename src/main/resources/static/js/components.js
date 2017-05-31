@@ -3,60 +3,44 @@
  */
 $(function()
 {
-    $(".tabs li").click(function()
+    // $(".listContainer").mCustomScrollbar({
+    //     theme: "dark"
+    // });
+
+    $("#maClasseTab").click(function()
     {
-        if($(this).is(".mainMenuItem"))
-        {
-            $("#mainMenuContainer").show();
-            $("#rightMenuContainer").hide();
-        }
-        else
-        {
-            $("#mainMenuContainer").hide();
-            $("#rightMenuContainer").show();
-        }
+        $(".activeTab").removeClass("activeTab");
+        $("#maClasseContainer").addClass("activeTab");
     });
 
-    $("#maClasseMenuTab").click(loadMaClasseContainer());
-    $("#mesCoursMenuTab").click(loadMesCoursContainer());
-    $("#mesFichiersMenuTab").click(loadMesFichiersContainer());
+    $("#mesCoursTab").click(function()
+    {
+        $(".activeTab").removeClass("activeTab");
+        $("#mesCoursContainer").addClass("activeTab");
+    });
 
-    $("#monCompteMenuTab").click(loadMonCompteContainer());
-    $("#messagerieMenuTab").click(loadMessagerieContainer());
+    $("#mesFichiersTab").click(function()
+    {
+        $(".activeTab").removeClass("activeTab");
+        $("#mesFichiersContainer").addClass("activeTab");
+    });
+
+    $("#messagerieTab").click(function()
+    {
+        $(".activeTab").removeClass("activeTab");
+        $("#messagerieContainer").addClass("activeTab");
+    });
+
+    $("#monCompteTab").click(function()
+    {
+        $(".activeTab").removeClass("activeTab");
+        $("#monCompteContainer").addClass("activeTab");
+    });
+
+    $("#simulateurTab").click(function()
+    {
+        $(".activeTab").removeClass("activeTab");
+        $("#simulateurContainer").addClass("activeTab");
+    });
 });
 
-function loadMaClasseContainer()
-{
-    $("#mainMenuContainer").show();
-    $("#rightMenuContainer").hide();
-}
-
-function loadMesCoursContainer()
-{
-    $("#mainMenuContainer").show();
-    $("#rightMenuContainer").hide();
-}
-
-function loadMesFichiersContainer()
-{
-    $("#mainMenuContainer").show();
-    $("#rightMenuContainer").hide();
-}
-
-function loadSimulateurContainer()
-{
-    $("#mainMenuContainer").show();
-    $("#rightMenuContainer").hide();
-}
-
-function loadMessagerieContainer()
-{
-    $("#mainMenuContainer").hide();
-    $("#rightMenuContainer").show();
-}
-
-function loadMonCompteContainer()
-{
-    $("#mainMenuContainer").hide();
-    $("#rightMenuContainer").show();
-}

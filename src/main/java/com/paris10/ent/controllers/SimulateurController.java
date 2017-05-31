@@ -54,7 +54,7 @@ public class SimulateurController
     public String getUeById(@PathVariable int ue, Model model)
     {
         UE ueById = ueRepository.findById(ue);
-        List<Matiere> matieres = matiereRepository.findByUe(ue);
+        List<Matiere> matieres = matiereRepository.findByUeId(ue);
         UeContent ueContainer = new UeContent(ueById, matieres);
 
         List<Semestre> semestres = semestreRepository.findAll();
@@ -68,12 +68,12 @@ public class SimulateurController
     public List<Matiere> getMatieresById(@PathVariable int ue, Model model)
     {
         UE ueById = ueRepository.findById(ue);
-        List<Matiere> matieres = matiereRepository.findByUe(ue);
+        List<Matiere> matieres = matiereRepository.findByUeId(ue);
         UeContent ueContainer = new UeContent(ueById, matieres);
 
         model.addAttribute("ueContent",ueContainer);
 //        return "simulation";
-        return matiereRepository.findByUe(ue);
+        return matiereRepository.findByUeId(ue);
     }
 
     @RequestMapping(value = "/semestres/{id}")
@@ -89,7 +89,7 @@ public class SimulateurController
         List<UeContent> ueContents = new ArrayList<UeContent>();
 
         for(UE ue : ues)
-            ueContents.add(new UeContent(ue, matiereRepository.findByUe((int) ue.getId())));
+            ueContents.add(new UeContent(ue, matiereRepository.findByUeId((int) ue.getId())));
 
         List<Semestre> semestres = semestreRepository.findAll();
         model.addAttribute("terms", semestres);

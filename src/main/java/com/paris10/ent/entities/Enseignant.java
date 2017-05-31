@@ -8,14 +8,12 @@ import java.util.List;
 public class Enseignant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_enseignant")
+    @Column(name = "enseignant_id_user")
     private long id;
 
     private String nom_enseignant;
 
-    @OneToMany
-    @MapsId
-    @JoinColumn(name = "id_enseignant", referencedColumnName = "id_enseignant")
+    @OneToMany(mappedBy = "enseignant")
     private List<Matiere> matiere;
 
     public Enseignant() {
