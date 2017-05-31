@@ -1,20 +1,15 @@
 package com.paris10.ent.repositories;
 
 import com.paris10.ent.entities.Matiere;
+import com.paris10.ent.entities.UE;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-/**
- * Created by ranox on 04/05/17.
- */
-public interface MatiereRepository extends JpaRepository<Matiere, Long>
-{
-//    @Query("SELECT m FROM Matiere m where m.ue = :id")
-//    List<Matiere> findByUe(@Param("id") int id);
-    List<Matiere> findByUe(@Param("id") int id);
+public interface MatiereRepository extends JpaRepository<Matiere, Long>{
+//    List<Matiere> findByUeId(Long ueId);
 
-    List<Matiere> findAll();
+    @Query("SELECT m FROM Matiere  m, UE u WHERE m.ue.id = u.id AND u.id = ?1")
+    List<Matiere> findByUeId(Long id);
 }

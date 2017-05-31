@@ -85,5 +85,13 @@ $(function () {
 
     $("#saveChanges").click(function () {
         alert("Enregistrer les changements");
-    })
+    });
+
+    /** page maclasse */
+
+    $('#addStudentButton').click(function () {
+        $('#addStudentForm').show();
+    });
+
+    /** fin page maclasse */
 });

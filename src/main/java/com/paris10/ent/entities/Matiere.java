@@ -11,32 +11,23 @@ public class Matiere {
     private long id;
 
     private String nom_matiere, description;
-    //TODO Relation ManyToOne et OneToOne
-    private int nb_ects,id_enseignant;
-
-    @Column(name="id_ue")
-    private int ue;
+    private int nb_ects;
     private float coefficient, nb_heures;
+
+    @ManyToOne
+    @JoinColumn(name = "id_ue")
+    private UE ue;
 
     public Matiere() {
     }
 
-    public Matiere(String nom_matiere, String description, int nb_ects, int ue, int id_enseignant, float coefficient, float nb_heures) {
+    public Matiere(String nom_matiere, String description, int nb_etcs, float coefficient, float nb_heures, UE ue) {
         this.nom_matiere = nom_matiere;
         this.description = description;
         this.nb_ects = nb_ects;
-        this.ue = ue;
-        this.id_enseignant = id_enseignant;
         this.coefficient = coefficient;
         this.nb_heures = nb_heures;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.ue = ue;
     }
 
     public String getNom_matiere() {
@@ -59,24 +50,8 @@ public class Matiere {
         return nb_ects;
     }
 
-    public void setNb_ects(int nb_ects) {
-        this.nb_ects = nb_ects;
-    }
-
-    public int getUe() {
-        return ue;
-    }
-
-    public void setUe(int id_ue) {
-        this.ue = id_ue;
-    }
-
-    public int getId_enseignant() {
-        return id_enseignant;
-    }
-
-    public void setId_enseignant(int id_enseignant) {
-        this.id_enseignant = id_enseignant;
+    public void setNb_etcs(int nb_ects) {
+        this.nb_etcs = nb_ects;
     }
 
     public float getCoefficient() {
@@ -93,5 +68,17 @@ public class Matiere {
 
     public void setNb_heures(float nb_heures) {
         this.nb_heures = nb_heures;
+    }
+
+    public UE getUe() {
+        return ue;
+    }
+
+    public void setUe(UE ue) {
+        this.ue = ue;
+    }
+
+    public Long getUeId() {
+        return ue.getId();
     }
 }

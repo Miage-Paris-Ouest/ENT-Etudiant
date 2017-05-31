@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr">
 
 <head>
 
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"></meta>
 
     <title>ENT</title>
 
@@ -26,10 +26,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css"/>
-
-    <link rel="stylesheet" href="../static/css/main.css" th:href="@{../css/main.css}"/>
-    <link rel="stylesheet" href="../static/css/monCompte.css" th:href="@{../css/monCompte.css}"/>
-    <link rel="stylesheet" href="../static/css/simulateur.css" th:href="@{../css/simulateur.css}"/>
+    <link rel="stylesheet" href="ent/css/main.css"/>
 
 </head>
 
@@ -39,43 +36,23 @@
     <div class="nav-wrapper row">
         <a href="#" class="brand-logo">Logo</a>
 
-        <ul class="tabs col s9 offset-s1 left hide-on-med-and-down transparent">
-            <li class="tab col s2 mainMenuItem"><a id="maClasseMenuTab" href="#maClasseContainer" class="active">Ma classe</a></li>
-            <li class="tab col s2 mainMenuItem"><a id="mesCoursMenuTab" href="#mesCoursContainer">Mes cours</a></li>
-            <li class="tab col s2 mainMenuItem"><a id="mesFichiersMenuTab" href="#mesFichiersContainer">Mes fichiers</a></li>
+        <ul id="nav-mobile" class="col s4 offset-s1 left hide-on-med-and-down">
+            <li><a href="#maClasse">Ma Classe</a></li>
+            <li><a href="#">Mes Cours</a></li>
+            <li><a href="#">Mes Fichiers</a></li>
+        </ul>
 
-            <li class="tab col offset-s4 s1 rigthMenuItem"><a id="messagerieMenuTab" href="#messagerieContainer"><i class="material-icons left">mail</i></a></li>
-            <li class="tab col s1 rigthMenuItem"><a id="monCompteMenuTab" href="#monCompteContainer"><i class="material-icons left">account_circle</i></a></li>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
         </ul>
     </div>
+
 </nav>
 
-<div class="ng-view"></div>
-<!-- Tab panels -->
+<!--<div ng-view></div>-->
 
-<div id="mainMenuContainer" class="tab-content">
-    <div id="maClasseContainer" class="col s12">
-        classes
-    </div>
-    <div id="mesCoursContainer" class="col s12">
-        cours
-    </div>
-    <div id="mesFichiersContainer" class="col s12">
-        fichiers
-    </div>
-    <div id="simulateur" class="col s12 hide">
-        simulateur
-    </div>
-</div>
-
-<div id="rightMenuContainer" class="tab-content hide">
-    <div id="monCompteContainer" class="col s12">
-        monCompte
-    </div>
-    <div id="messagerieContainer" class="col s12">
-        messagerie
-    </div>
-</div>
+</body>
 <!-- SCRIPTS -->
 
 <!-- JQuery -->
@@ -97,17 +74,12 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 
-<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>-->
-<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
+<script type="text/javascript" src="ent/js/routing.js"></script>
 
-<script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
-<script type="text/javascript" src="../static/js/components.js" th:src="@{/js/components.js}"></script>
-<script type="text/javascript" src="../static/js/monCompte.js" th:src="@{/js/monCompte.js}"></script>
-<script type="text/javascript" src="../static/js/simulateur.js" th:src="@{/js/simulation.js}"></script>
-
-<!--<script type="text/javascript" src="../static/js/routing.js" th:src="@{/js/routing.js}"></script>-->
-
-</body>
+<script type="text/javascript" src="ent/js/main.js"></script>
 
 </html>

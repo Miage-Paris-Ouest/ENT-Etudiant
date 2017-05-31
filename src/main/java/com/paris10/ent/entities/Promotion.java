@@ -1,6 +1,9 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "promotion")
@@ -12,6 +15,10 @@ public class Promotion {
     private long id;
 
     private String nom_promo, annee;
+
+    @OneToMany(mappedBy = "promotion")
+    @JsonManagedReference
+    private List<Etudiant> les_etudiants;
 
     public Promotion() {
     }
@@ -43,5 +50,13 @@ public class Promotion {
 
     public void setAnnee(String annee) {
         this.annee = annee;
+    }
+
+    public List<Etudiant> getLes_etudiants() {
+        return les_etudiants;
+    }
+
+    public void setLesEtudiants(List<Etudiant> les_etudiants) {
+        this.les_etudiants = les_etudiants;
     }
 }

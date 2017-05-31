@@ -52,7 +52,7 @@ nav a:hover {
 }
 
 #actionButtons, #classForm, #studentForm {
-    display: none;
+    /*display: none;*/
 }
 
 .selectedStudent {
@@ -76,3 +76,14 @@ nav a:hover {
     height: 800px;
 }
 
+.nomPromotion {
+    cursor: pointer;
+}
+
+#addStudentForm {
+    display: none;
+}
+
+.caret {
+    border-color: transparent !important;
+}

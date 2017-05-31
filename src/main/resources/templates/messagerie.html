@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+
+    <title>Ma Classe</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css"/>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
+
+    <link rel="stylesheet" href="gestionCours.css"/>
+
+
+</head>
+<nav class="blue-gradient">
+    <div class="nav-wrapper row">
+        <a href="#" class="brand-logo">Logo</a>
+
+        <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
+            <li><a href="etudiant/gestionClasses">Gestion des classes</a></li>
+            <li><a href="etudiant/gestionCours">Gestion des Cours</a></li>
+            <li><a href="#">Gestion calendriers</a></li>
+            <li><a href="#">Gestion des fichiers</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+        </ul>
+    </div>
+
+</nav>
+<div id="topContainer" class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <h4>
+                <small>Contacts</small>
+            </h4>
+            <div class="card">
+                <ul id="topContainerList" class="list-group" th:each="usr : ${users}">
+                <div class="card-block">
+                    <!--Title-->
+                    <h5 class="card-text"> <b th:utext="${usr.prenom}+${' '}+${usr.nom}"></b></h5>
+                    <!--Text-->
+                </div>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <h4>
+                <b><small>Ma messagerie - Conversations</small></b>
+            </h4>
+            <ul id="topContainerList" class="list-group" th:each="msg : ${message}">
+                <!--Card-->
+                <div class="card">
+                    <!--Card image-->
+                    <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap" style="margin-left:1%;border-radius: 4%" width="100"></img>
+                    <!--/.Card image-->
+                    <!--Card content-->
+                    <div class="card-block">
+                        <!--Title-->
+                        <h5 class="card-title">Conversation :  <b th:utext="${msg.m.titre}"></b></h5>
+                        <!--Text-->
+                        <p class="card-text" >Dernier message reçu le :  <b th:utext="${msg.m.date_message}"></b></p>
+                        <p class="card-text" th:utext="${'Utilisateurs : '}+${msg.u1.prenom}+${' '}+${msg.u1.nom}+${' '}+${msg.u2.prenom}+${' '}+${msg.u2.nom}">
+                        </p>
+                    </div>
+                    <!--/.Card content-->
+                </div>
+            </ul>
+            </div>
+            <a id="createClass" class="btn-floating" href="#modal1"
+               style="float: right;background-color:#64b5f6 !important"><i class="material-icons">add</i></a>
+        </div>
+    </div>
+</html>

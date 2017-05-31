@@ -61,4 +61,13 @@ public class UserController
         return userRepository.updateUser(id, email);
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
+    public User create(@RequestBody User user) {
+        // @todo see how we want to manage password on user's creation
+        user.setMdp("mdptemporaire");
+        userRepository.save(user);
+        // return user because it now has an id
+        return user;
+    }
 }
