@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Entity
 @Table(name = "semestre")
@@ -12,6 +13,11 @@ public class Semestre {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_semestre")
     private long id;
+
+    @OneToMany
+    @MapsId
+    @JoinColumn(name = "id_semestre", referencedColumnName = "id_semestre")
+    private List<UE> ue;
 
     @NotBlank
     private String nom_semestre;

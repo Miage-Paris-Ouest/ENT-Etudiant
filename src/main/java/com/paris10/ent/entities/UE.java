@@ -3,6 +3,7 @@ package com.paris10.ent.entities;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ue")
@@ -15,16 +16,30 @@ public class UE {
     @NotBlank
     private String nom_ue;
 
-    //TODO Relation ManyToOne à creer
-    private int id_semestre, id_promotion;
+    @ManyToOne
+    @JoinColumn(name = "id_semestre")
+    private Semestre semestre;
+
+    @ManyToOne
+    @JoinColumn(name = "id_promotion")
+    private Promotion promotion;
+
+    @OneToMany
+    @MapsId
+    @JoinColumn(name = "id_ue", referencedColumnName = "id_ue")
+    private List<Matiere> matiere;
 
     public UE() {
     }
 
-    public UE(String nom_ue, int id_semestre, int id_promotion) {
+    public UE(String nom_ue, Semestre semestre, Promotion promotion) {
         this.nom_ue = nom_ue;
-        this.id_semestre = id_semestre;
-        this.id_promotion = id_promotion;
+        this.semestre = semestre;
+        this.promotion = promotion;
+    }
+
+    public UE(String nom_ue) {
+        this.nom_ue = nom_ue;
     }
 
     public long getId() {
@@ -43,19 +58,19 @@ public class UE {
         this.nom_ue = nom_ue;
     }
 
-    public int getId_semestre() {
-        return id_semestre;
+    public Semestre getSemestre() {
+        return semestre;
     }
 
-    public void setId_semestre(int id_semestre) {
-        this.id_semestre = id_semestre;
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
     }
 
-    public int getid_promotion() {
-        return id_promotion;
+    public Promotion getPromotion() {
+        return promotion;
     }
 
-    public void setid_promotion(int id_promotion) {
-        this.id_promotion = id_promotion;
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
     }
 }

@@ -14,29 +14,28 @@ public class Matiere {
 
     @NotBlank
     private String nom_matiere, description;
-    //TODO Relation ManyToOne et OneToOne
-    private int nb_ects, id_ue, id_enseignant;
+    private int nb_ects;
     private float coefficient, nb_heures;
+
+    @ManyToOne
+    @JoinColumn(name = "id_ue")
+    private UE ue;
+
+    @ManyToOne
+    @JoinColumn(name = "id_enseignant")
+    private Enseignant enseignant;
 
     public Matiere() {
     }
 
-    public Matiere(String nom_matiere, String description, int nb_ects, int id_ue, int id_enseignant, float coefficient, float nb_heures) {
+    public Matiere(String nom_matiere, String description, int nb_ects, float coefficient, float nb_heures, UE ue, Enseignant enseignant) {
         this.nom_matiere = nom_matiere;
         this.description = description;
         this.nb_ects = nb_ects;
-        this.id_ue = id_ue;
-        this.id_enseignant = id_enseignant;
         this.coefficient = coefficient;
         this.nb_heures = nb_heures;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.ue = ue;
+        this.enseignant = enseignant;
     }
 
     public String getNom_matiere() {
@@ -63,22 +62,6 @@ public class Matiere {
         this.nb_ects = nb_ects;
     }
 
-    public int getId_ue() {
-        return id_ue;
-    }
-
-    public void setId_ue(int id_ue) {
-        this.id_ue = id_ue;
-    }
-
-    public int getId_enseignant() {
-        return id_enseignant;
-    }
-
-    public void setId_enseignant(int id_enseignant) {
-        this.id_enseignant = id_enseignant;
-    }
-
     public float getCoefficient() {
         return coefficient;
     }
@@ -93,5 +76,29 @@ public class Matiere {
 
     public void setNb_heures(float nb_heures) {
         this.nb_heures = nb_heures;
+    }
+
+    public UE getUe() {
+        return ue;
+    }
+
+    public void setUe(UE ue) {
+        this.ue = ue;
+    }
+
+    public Long getUeId() {
+        return ue.getId();
+    }
+
+    public Enseignant getEnseignant() {
+        return enseignant;
+    }
+
+    public void setEnseignant(Enseignant enseignant) {
+        this.enseignant = enseignant;
+    }
+
+    public Long getEnseignantId() {
+        return enseignant.getId();
     }
 }
