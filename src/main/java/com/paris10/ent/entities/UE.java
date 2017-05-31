@@ -1,5 +1,7 @@
 package com.paris10.ent.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,18 +12,19 @@ public class UE {
     @Column(name = "id_ue")
     private long id;
 
+    @NotBlank
     private String nom_ue;
 
     //TODO Relation ManyToOne à creer
-    private int id_semestre, id_promo;
+    private int id_semestre, id_promotion;
 
     public UE() {
     }
 
-    public UE(String nom_ue, int id_semestre, int id_promo) {
+    public UE(String nom_ue, int id_semestre, int id_promotion) {
         this.nom_ue = nom_ue;
         this.id_semestre = id_semestre;
-        this.id_promo = id_promo;
+        this.id_promotion = id_promotion;
     }
 
     public long getId() {
@@ -48,11 +51,11 @@ public class UE {
         this.id_semestre = id_semestre;
     }
 
-    public int getId_promo() {
-        return id_promo;
+    public int getid_promotion() {
+        return id_promotion;
     }
 
-    public void setId_promo(int id_promo) {
-        this.id_promo = id_promo;
+    public void setid_promotion(int id_promotion) {
+        this.id_promotion = id_promotion;
     }
 }

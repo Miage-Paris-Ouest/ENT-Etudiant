@@ -1,5 +1,7 @@
 package com.paris10.ent.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class Matiere {
     @Column(name = "id_matiere")
     private long id;
 
+    @NotBlank
     private String nom_matiere, description;
     //TODO Relation ManyToOne et OneToOne
     private int nb_ects, id_ue, id_enseignant;

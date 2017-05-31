@@ -16,6 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
  * Created by Youssef on 04/05/2017.
  */
 @Controller
+@RequestMapping("/semestre")
 public class SemestreController {
 
     private SemestreRepository semestreRepository;
@@ -26,17 +27,17 @@ public class SemestreController {
         this.semestreRepository=semestreRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/creer")
     public String createSemestre(@ModelAttribute Semestre semestre){
         return "createSemestre";
     }
 
-    @PostMapping("/")
+    @PostMapping("/createSemestre")
     public String processFormSemestre(@Validated Semestre semestre, BindingResult bindingResult){
         if(bindingResult.hasErrors()) {
             return "accueil";
         }
         semestreRepository.save(semestre);
-        return "redirect:/";
+        return "redirect:/creer";
     }
 }
