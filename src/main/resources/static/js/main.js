@@ -2,6 +2,8 @@ $(function () {
 
 //TODO : admin>gestion des classes ajouter un étudiant
 
+    $('ul.tabs').tabs();
+
     $('select').material_select();
 
     $(".modal").modal();

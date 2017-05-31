@@ -39,41 +39,49 @@
     <div class="nav-wrapper row">
         <a href="#" class="brand-logo">Logo</a>
 
-        <ul class="tabs col s9 offset-s1 left hide-on-med-and-down transparent">
-            <li class="tab col s2 mainMenuItem"><a id="maClasseMenuTab" href="#maClasseContainer" class="active">Ma classe</a></li>
-            <li class="tab col s2 mainMenuItem"><a id="mesCoursMenuTab" href="#mesCoursContainer">Mes cours</a></li>
-            <li class="tab col s2 mainMenuItem"><a id="mesFichiersMenuTab" href="#mesFichiersContainer">Mes fichiers</a></li>
+        <ul class="nav nav-tabs tabs-4 indigo col s4 offset-s1 left hide-on-med-and-down" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="gestionClassesMenuTab" data-toggle="tab" href="#classesContainer" role="tab">Classes</a>
+            </li>
 
-            <li class="tab col offset-s4 s1 rigthMenuItem"><a id="messagerieMenuTab" href="#messagerieContainer"><i class="material-icons left">mail</i></a></li>
-            <li class="tab col s1 rigthMenuItem"><a id="monCompteMenuTab" href="#monCompteContainer"><i class="material-icons left">account_circle</i></a></li>
+            <li class="nav-item">
+                <a class="nav-link active" id="gestionCoursMenuTab" data-toggle="tab" href="#coursContainer" role="tab">Cours</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" id="gestionFichiersMenuTab" data-toggle="tab" href="#fichiersContainer" role="tab">Fichiers</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" id="gestionCalendriersMenuTab" data-toggle="tab" href="#calendriersContainer" role="tab">Calendriers</a>
+            </li>
+        </ul>
+
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="#" id="messagerieButton"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li><a href="#" id="monCompteButton"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
         </ul>
     </div>
+
 </nav>
+
 
 <div class="ng-view"></div>
 <!-- Tab panels -->
 
-<div id="mainMenuContainer" class="tab-content">
-    <div id="maClasseContainer" class="col s12">
+<div class="tab-content">
+
+    <div id="classesContainer" class="tab-pane fade in show active" role="tabpanel">
         classes
     </div>
-    <div id="mesCoursContainer" class="col s12">
+    <div id="coursContainer" class="tab-pane fade" role="tabpanel">
         cours
     </div>
-    <div id="mesFichiersContainer" class="col s12">
+    <div id="fichiersContainer" class="tab-pane fade" role="tabpanel">
         fichiers
     </div>
-    <div id="simulateur" class="col s12 hide">
-        simulateur
-    </div>
-</div>
-
-<div id="rightMenuContainer" class="tab-content hide">
-    <div id="monCompteContainer" class="col s12">
-        monCompte
-    </div>
-    <div id="messagerieContainer" class="col s12">
-        messagerie
+    <div id="calendriersContainer" class="tab-pane fade" role="tabpanel">
+        calendriers
     </div>
 </div>
 <!-- SCRIPTS -->
@@ -102,9 +110,7 @@
 
 
 <script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
-<script type="text/javascript" src="../static/js/components.js" th:src="@{/js/components.js}"></script>
-<script type="text/javascript" src="../static/js/monCompte.js" th:src="@{/js/monCompte.js}"></script>
-<script type="text/javascript" src="../static/js/simulateur.js" th:src="@{/js/simulation.js}"></script>
+<script type="text/javascript" src="../static/js/admin.js" th:src="@{/js/admin.js}"></script>
 
 <!--<script type="text/javascript" src="../static/js/routing.js" th:src="@{/js/routing.js}"></script>-->
 

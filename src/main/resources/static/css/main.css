@@ -65,3 +65,14 @@ nav a:hover {
     overflow-y: auto;
     border: 0px;
 }
+
+.transparent
+{
+    background-color: transparent !important;
+    overflow: hidden !important;
+}
+
+.hide
+{
+    display: none;
+}
