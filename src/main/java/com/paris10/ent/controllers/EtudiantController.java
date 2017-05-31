@@ -61,7 +61,6 @@ public class EtudiantController {
     @RequestMapping(value = "/mescours")
     public String mesCours(ModelMap model) {
         model.put("cours", this.getMatieres());
-
         return "mesCours";
     }
 
