@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
 
 <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"></meta>
 
     <title>ENT</title>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css"/>
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
 
-    <link rel="stylesheet" href="../static/css.app/gestionClasses.css">
+    <link rel="stylesheet" href="/css/app/gestionClasses.css"/>
 
 
 </head>
 
-<body>
+<body ng-app="app" ng-controller="PromotionsController as pc">
 
 <nav class="blue-gradient">
     <div class="nav-wrapper row">
@@ -62,22 +62,16 @@
             <h5>
                 <small>Liste des classes</small>
             </h5>
-            <hr>
+            <hr/>
             <ul id="topContainerList" class="list-group">
                 <li class="list-group-item" data-code="Tous les étudiants">Tous les étudiants <span class="date"
-                                                                                                    style="float:right"><i>80 étudiants</i></span>
+                                                                                                    style="float:right">
+                    <i>{{ pc.nbEtudiants }}</i></span>
                 </li>
-                <li class="list-group-item" data-code="L3 MIAGE APP">L3 MIAGE APP <span class="date"
-                                                                                        style="float:right"><i>20 étudiants</i></span>
-                </li>
-                <li class="list-group-item" data-code="L3 MIAGE CLA">L3 MIAGE CLA <span class="date"
-                                                                                        style="float:right"><i>20 étudiants</i></span>
-                </li>
-                <li class="list-group-item" data-code="M1 MIAGE APP">M1 MIAGE APP <span class="date"
-                                                                                        style="float:right"><i>20 étudiants</i></span>
-                </li>
-                <li class="list-group-item" data-code="M1 MIAGE CLA">M1 MIAGE CLA <span class="date"
-                                                                                        style="float:right"><i>20 étudiants</i></span>
+                <li ng-repeat="promotion in pc.promotions" ng-click="pc.getPromotion(promotion.id)"
+                    class="list-group-item nomPromotion" data-code="{{promotion.nom_promo}}">
+                    {{promotion.nom_promo}}<span class="date" style="float:right"><i>
+                        {{promotion.les_etudiants.length}}</i></span>
                 </li>
             </ul>
             <a id="createClass" class="btn-floating" href="#modal1"
@@ -88,9 +82,12 @@
             <h5>
                 <small id="selectedClassLabel">Liste des étudiants</small>
             </h5>
-            <hr>
+            <hr/>
             <button type="button" class="btn btn-default btn-small" style="font-size: .8em;float:right">Importer CSV
             </button>
+            <a type="button" class="btn btn-default btn-small" style="font-size: .8em;float:right"
+               data-ng-disabled="pc.promotion == null" id="addStudentButton" href="#modal1">Ajouter un élève
+            </a>
             <div id="tableContainer" class="table-responsive">
                 <table id="studentsTable" class="table table-condensed table-hover">
                     <thead>
@@ -101,121 +98,46 @@
                         <th>N° étudiant</th>
                         <th>Crédit</th>
                         <th>Nb Contributions</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">A</td>
-                        <td class="prenom">A</td>
-                        <td>1</td>
-                        <td>10</td>
-                        <td>2</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">B</td>
-                        <td class="prenom">B</td>
-                        <td>2</td>
-                        <td>8</td>
-                        <td>5</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">C</td>
-                        <td class="prenom">C</td>
-                        <td>3</td>
-                        <td>10</td>
-                        <td>8</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">A</td>
-                        <td class="prenom">A</td>
-                        <td>1</td>
-                        <td>10</td>
-                        <td>2</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">B</td>
-                        <td class="prenom">B</td>
-                        <td>2</td>
-                        <td>8</td>
-                        <td>5</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">C</td>
-                        <td class="prenom">C</td>
-                        <td>3</td>
-                        <td>10</td>
-                        <td>8</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">A</td>
-                        <td class="prenom">A</td>
-                        <td>1</td>
-                        <td>10</td>
-                        <td>2</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">B</td>
-                        <td class="prenom">B</td>
-                        <td>2</td>
-                        <td>8</td>
-                        <td>5</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">C</td>
-                        <td class="prenom">C</td>
-                        <td>3</td>
-                        <td>10</td>
-                        <td>8</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">A</td>
-                        <td class="prenom">A</td>
-                        <td>1</td>
-                        <td>10</td>
-                        <td>2</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">B</td>
-                        <td class="prenom">B</td>
-                        <td>2</td>
-                        <td>8</td>
-                        <td>5</td>
-                    </tr>
-                    <tr class="student">
-                        <td class="class">L3 MIAGE APP</td>
-                        <td class="nom">C</td>
-                        <td class="prenom">C</td>
-                        <td>3</td>
-                        <td>10</td>
-                        <td>8</td>
+                    <tr ng-repeat="etudiant in pc.promotion.les_etudiants" class="student">
+                        <td class="class">{{ pc.promotion.nom_promo }}</td>
+                        <td class="nom">{{ etudiant.user.nom }}</td>
+                        <td class="prenom">{{ etudiant.user.prenom }}</td>
+                        <td>{{ etudiant.num_etudiant }}</td>
+                        <td>{{ etudiant.credit }}</td>
+                        <td>X</td>
+                        <td>
+                            <a id="editStudent" href="#" class="btn-floating blue"
+                               ng-click="pc.deleteEtudiant(etudiant.user.id)">
+                                <i class="material-icons">edit</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a id="deleteStudent" href="#" class="btn-floating red"
+                               ng-click="pc.deleteEtudiant(etudiant.user.id)">
+                                <i class="material-icons">remove</i>
+                            </a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <div id="actionButtons" class="fixed-action-btn horizontal click-to-toggle">
-                <a class="btn-floating btn-large grey-gradient" style="">
-                    <i class="material-icons">menu</i>
-                </a>
-                <ul>
-                    <li><a id="deleteStudent" class="btn-floating red"><i class="material-icons">delete</i></a></li>
-                    <li><a id="editStudent" href="#modal1" class="btn-floating blue"><i class="material-icons">edit</i></a>
-                    </li>
-                </ul>
-            </div>
+            <!--<div id="actionButtons" class="fixed-action-btn horizontal click-to-toggle">-->
+            <!--<a class="btn-floating btn-large grey-gradient" style="">-->
+            <!--<i class="material-icons">menu</i>-->
+            <!--</a>-->
+            <!--<ul>-->
+            <!--&lt;!&ndash;<li><a id="deleteStudent" class="btn-floating red"><i class="material-icons">delete</i></a></li>&ndash;&gt;-->
+            <!--<li><a id="editStudent" href="#modal1" class="btn-floating blue"><i class="material-icons">edit</i></a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
         </div>
     </div>
-</div>
 </div>
 
 
@@ -224,61 +146,75 @@
     <div class="modal-content" style="text-align: center">
         <h4>
             <small id="modalActionLabel"></small>
+            Ajouter un élève
         </h4>
-        <hr>
+        <hr/>
 
-        <div id="classForm">
-            <div class="row">
-                <div class="input-field offset-s3 col s6">
-                    <input id="label" type="text" class="validate">
-                    <label for="label">Libellé de la classe</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="file-field input-field offset-s3 col s6">
-                    <div class="btn btn-small">
-                        <span style="font-size: .8em">Fichier csv</span>
-                        <input type="file">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--<div id="classForm">-->
+        <!--<div class="row">-->
+        <!--<div class="input-field offset-s3 col s6">-->
+        <!--<input id="label" type="text" class="validate"/>-->
+        <!--<label for="label">Libellé de la classe</label>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+        <!--<div class="file-field input-field offset-s3 col s6">-->
+        <!--<div class="btn btn-small">-->
+        <!--<span style="font-size: .8em">Fichier csv</span>-->
+        <!--<input type="file"/>-->
+        <!--</div>-->
+        <!--<div class="file-path-wrapper">-->
+        <!--<input class="file-path validate" type="text"/>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
-        <div id="studentForm">
+        <form id="addStudentForm">
             <div class="row">
                 <div class="input-field offset-s3 col s6">
-                    <input id="nom" type="text" class="validate">
-                    <label for="nom">Nom</label>
+                    <input id="nom" class="validate" placeholder="Nom" ng-model="user.nom"/>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field offset-s3 col s6">
-                    <input id="prenom" type="text" class="validate">
-                    <label for="prenom">Prenom</label>
+                    <input id="prenom" class="validate" placeholder="Prénom" ng-model="user.prenom"/>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field offset-s3 col s6">
-                    <select id="classe">
-                        <option value="" disabled>Choisir une classe</option>
-                        <option value="1">L3 MIAGE APP</option>
-                        <option value="2">L3 MIAGE CLA</option>
-                        <option value="3">M1 MIAGE APP</option>
-                        <option value="3">M1 MIAGE CLA</option>
+                    <input id="email" class="validate" placeholder="Email" ng-model="user.email"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-s3 col s6">
+                    <select name="role_etudiant" id="role_etudiant" ng-model="etudiant.role_etudiant">
+                        <option value="Etudiant">Etudiant</option>
+                        <option value="Délégué">Délégué</option>
                     </select>
-                    <label>Classe</label>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="input-field offset-s3 col s6">
+                    <input id="num_etudiant" class="validate" placeholder="Numéro d'étudiant"
+                           ng-model="etudiant.num_etudiant" maxlength="8"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field offset-s3 col s6">
+                    {{ pc.promotion.nom_promo }}
+                </div>
+            </div>
+        </form>
 
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Annuler</a>
         <a href="#!" id="validateActionButtonLabel"
-           class="modal-action modal-close waves-effect waves-green btn-flat"></a>
+           class="modal-action modal-close waves-effect waves-green btn-flat"
+           ng-click="pc.saveStudent(user.nom, user.prenom, user.email, etudiant.role_etudiant, etudiant.num_etudiant)">
+            Valider
+        </a>
     </div>
 </div>
 
@@ -306,6 +242,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-<script type="text/javascript" src="../static/js.app/main.js"></script>
+<!--Angular-->
+
+<script type="text/javascript" src="/static/js/lib/angular.min.js" th:src="@{/js/lib/angular.min.js}"></script>
+<script type="text/javascript" src="/static/js/app/app.module.js" th:src="@{/js/app/app.module.js}"></script>
+<script type="text/javascript" src="/static/js/app/promotion.controller.js"
+        th:src="@{/js/app/promotion.controller.js}"></script>
+
+<!-- Our scripts -->
+
+<script type="text/javascript" src="/static/js/app/main.js" th:src="@{/js/app/main.js}"></script>
 
 </html>

@@ -14,9 +14,12 @@
         // the chosen promotion by the user
         vm.promotion;
         vm.nbEtudiants;
+        // the etudiant to edit
+        vm.etudiant;
         vm.getAll = getAll;
         vm.getPromotion = getPromotion;
-        vm.createEtudiant = createEtudiant;
+        vm.saveStudent = saveStudent;
+        vm.deleteStudent = deleteStudent;
         // vm.getAffordable = getAffordable;
         // vm.deleteBooking = deleteBooking;
         // vm.createHotel = createHotel;
@@ -44,7 +47,7 @@
             })
         }
 
-        function createEtudiant(nom, prenom, email, role, num_etudiant) {
+        function saveStudent(nom, prenom, email, role, num_etudiant) {
             var user = {
                 "id": '',
                 "mdp": '',
@@ -67,8 +70,7 @@
                 $http.post(url, etudiant).then(function (response) {
                     vm.etudiants = response.data;
                     // mise à jour avec le nouvel étudiant
-                    vm.promotion = getPromotion(vm.promotion.id);
-                    getAll();
+                    updatePromotion(vm.promotion.id);
                 });
             });
         }
@@ -81,6 +83,19 @@
             return somme;
         }
 
+        function deleteStudent(id) {
+            var url = "/user/delete/" + id;
+            $http.post(url).then(function () {
+                updatePromotion(vm.promotion.id);
+            })
+        }
+
+        function updatePromotion(id) {
+            vm.promotion = getPromotion(id);
+            getAll();
+        }
+
+
         // function getAffordable() {
         //     var url = "/promotions/affordable/" + 100;
         //     var promotionsPromise = $http.get(url);
@@ -89,11 +104,5 @@
         //     });
         // }
         //
-        // function deleteBooking(id) {
-        //     var url = "promotions/remove/" + id;
-        //     $http.post(url).then(function (response) {
-        //         vm.promotions = response.data;
-        //     })
-        // }
     }
 })();

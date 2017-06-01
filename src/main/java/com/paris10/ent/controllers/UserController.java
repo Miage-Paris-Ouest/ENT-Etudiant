@@ -16,11 +16,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 /**
  * Created by ranox on 04/05/17.
  */
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(value = "/users")
-public class UserController
-{
+@RequestMapping(value = "/user")
+public class UserController {
+
+    UserRepository userRepository;
+
     @Autowired
     UserRepository userRepository;
 
@@ -69,5 +72,11 @@ public class UserController
         userRepository.save(user);
         // return user because it now has an id
         return user;
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public void delete(@PathVariable long id) {
+        userRepository.delete(id);
     }
 }
