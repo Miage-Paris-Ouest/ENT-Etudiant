@@ -20,6 +20,8 @@
         vm.getPromotion = getPromotion;
         vm.saveStudent = saveStudent;
         vm.deleteStudent = deleteStudent;
+        vm.savePromotion = savePromotion;
+        vm.deletePromotion = deletePromotion;
         // vm.getAffordable = getAffordable;
         // vm.deleteBooking = deleteBooking;
         // vm.createHotel = createHotel;
@@ -57,6 +59,7 @@
                 "type": 'Etudiant'
             };
             var url = "/user/create";
+            console.log(vm.promotion);
             $http.post(url, user).then(function (response) {
                 vm.user = response.data;
                 var etudiant = {
@@ -70,7 +73,7 @@
                 $http.post(url, etudiant).then(function (response) {
                     vm.etudiants = response.data;
                     // mise à jour avec le nouvel étudiant
-                    updatePromotion(vm.promotion.id);
+                    updatePromotions(vm.promotion.id);
                 });
             });
         }
@@ -86,13 +89,33 @@
         function deleteStudent(id) {
             var url = "/user/delete/" + id;
             $http.post(url).then(function () {
-                updatePromotion(vm.promotion.id);
+                updatePromotions(vm.promotion.id);
             })
         }
 
-        function updatePromotion(id) {
+        function savePromotion(nomPromotion, annee) {
+            var promotion = {
+                "nom_promo": nomPromotion,
+                "annee": annee
+            };
+            var url = "/promotion/save";
+            $http.post(url, promotion).then(function (response) {
+                vm.promotion = response.data;
+                getAll();
+            });
+        }
+
+        function updatePromotions(id) {
             vm.promotion = getPromotion(id);
             getAll();
+        }
+
+        function deletePromotion() {
+            var url = "/promotion/delete/" + vm.promotion.id;
+            $http.post(url).then(function () {
+                vm.promotion = null;
+                getAll();
+            })
         }
 
 

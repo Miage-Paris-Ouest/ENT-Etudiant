@@ -5,6 +5,7 @@ import com.paris10.ent.repositories.PromotionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -37,11 +38,21 @@ public class PromotionController {
         Promotion p = promotionRepository.findOne(id);
         // sort the students by their name
         p.setLesEtudiants(p.getLes_etudiants()
-                           .stream()
-                           .sorted(Comparator.comparing(etudiant -> etudiant.getUser()
-                                                                            .getNom()
-                                                                            .toUpperCase()))
+                           .stream().sorted(Comparator.comparing(etudiant -> etudiant.getUser().getNom().toUpperCase()))
                            .collect(Collectors.toList()));
         return p;
+    }
+
+    @RequestMapping(value = "/save")
+    @ResponseBody
+    public Promotion save(@RequestBody Promotion promotion) {
+        promotionRepository.save(promotion);
+        return promotion;
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    @ResponseBody
+    public void delete(@PathVariable long id) {
+        promotionRepository.delete(id);
     }
 }

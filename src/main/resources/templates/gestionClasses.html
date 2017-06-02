@@ -69,12 +69,12 @@
                     <i>{{ pc.nbEtudiants }}</i></span>
                 </li>
                 <li ng-repeat="promotion in pc.promotions" ng-click="pc.getPromotion(promotion.id)"
-                    class="list-group-item nomPromotion" data-code="{{promotion.nom_promo}}">
-                    {{promotion.nom_promo}}<span class="date" style="float:right"><i>
-                        {{promotion.les_etudiants.length}}</i></span>
+                    class="list-group-item nomPromotion" data-code="{{ promotion.nom_promo }}">
+                    {{ promotion.nom_promo }}<span class="date" style="float:right"><i>
+                        {{ promotion.les_etudiants.length }}</i></span>
                 </li>
             </ul>
-            <a id="createClass" class="btn-floating" href="#modal1"
+            <a id="createClass" class="btn-floating" href="#addPromotion"
                style="float: right;background-color:#64b5f6 !important"><i class="material-icons">add</i></a>
 
         </div>
@@ -83,10 +83,13 @@
                 <small id="selectedClassLabel">Liste des étudiants</small>
             </h5>
             <hr/>
+            <a type="button" class="btn btn-default btn-small red" style="font-size: .8em;"
+               id="deletePromotion" ng-click="pc.deletePromotion()">Supprimer la promotion
+            </a>
             <button type="button" class="btn btn-default btn-small" style="font-size: .8em;float:right">Importer CSV
             </button>
             <a type="button" class="btn btn-default btn-small" style="font-size: .8em;float:right"
-               data-ng-disabled="pc.promotion == null" id="addStudentButton" href="#modal1">Ajouter un élève
+               data-ng-disabled="pc.promotion == null" id="addStudentButton" href="#addStudent">Ajouter un élève
             </a>
             <div id="tableContainer" class="table-responsive">
                 <table id="studentsTable" class="table table-condensed table-hover">
@@ -111,14 +114,13 @@
                         <td>{{ etudiant.credit }}</td>
                         <td>X</td>
                         <td>
-                            <a id="editStudent" href="#" class="btn-floating blue"
-                               ng-click="pc.deleteEtudiant(etudiant.user.id)">
+                            <a id="editStudent" href="#" class="btn-floating blue">
                                 <i class="material-icons">edit</i>
                             </a>
                         </td>
                         <td>
                             <a id="deleteStudent" href="#" class="btn-floating red"
-                               ng-click="pc.deleteEtudiant(etudiant.user.id)">
+                               ng-click="pc.deleteStudent(etudiant.user.id)">
                                 <i class="material-icons">remove</i>
                             </a>
                         </td>
@@ -126,50 +128,19 @@
                     </tbody>
                 </table>
             </div>
-            <!--<div id="actionButtons" class="fixed-action-btn horizontal click-to-toggle">-->
-            <!--<a class="btn-floating btn-large grey-gradient" style="">-->
-            <!--<i class="material-icons">menu</i>-->
-            <!--</a>-->
-            <!--<ul>-->
-            <!--&lt;!&ndash;<li><a id="deleteStudent" class="btn-floating red"><i class="material-icons">delete</i></a></li>&ndash;&gt;-->
-            <!--<li><a id="editStudent" href="#modal1" class="btn-floating blue"><i class="material-icons">edit</i></a>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
         </div>
     </div>
 </div>
 
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal modal-fixed-footer">
+<div id="addStudent" class="modal modal-fixed-footer">
     <div class="modal-content" style="text-align: center">
         <h4>
             <small id="modalActionLabel"></small>
             Ajouter un élève
         </h4>
         <hr/>
-
-        <!--<div id="classForm">-->
-        <!--<div class="row">-->
-        <!--<div class="input-field offset-s3 col s6">-->
-        <!--<input id="label" type="text" class="validate"/>-->
-        <!--<label for="label">Libellé de la classe</label>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="file-field input-field offset-s3 col s6">-->
-        <!--<div class="btn btn-small">-->
-        <!--<span style="font-size: .8em">Fichier csv</span>-->
-        <!--<input type="file"/>-->
-        <!--</div>-->
-        <!--<div class="file-path-wrapper">-->
-        <!--<input class="file-path validate" type="text"/>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
         <form id="addStudentForm">
             <div class="row">
                 <div class="input-field offset-s3 col s6">
@@ -218,6 +189,48 @@
     </div>
 </div>
 
+<div id="addPromotion" class="modal modal-fixed-footer">
+    <div class="modal-content" style="text-align: center">
+        <h4>
+            <!--<small id="modalActionLabel"></small>-->
+            Ajouter une promotion
+        </h4>
+        <hr/>
+        <form id="addPromotionForm">
+            <div class="row">
+                <div class="input-field offset-s3 col s6">
+                    <input id="nomPromotion" class="validate" placeholder="Nom de la promotion"
+                           ng-model="promotion.nom_promo"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field offset-s3 col s6">
+                    <input id="anneePromotion" class="validate"
+                           placeholder="Année de la promotion (au format 2016-2017)"
+                           ng-model="promotion.annee"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="file-field input-field offset-s3 col s6">
+                    <div class="btn btn-small">
+                        <span style="font-size: .8em">Fichier csv</span>
+                        <input type="file"/>
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Annuler</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"
+           ng-click="pc.savePromotion(promotion.nom_promo, promotion.annee)">
+            Valider
+        </a>
+    </div>
+</div>
 </body>
 
 <!-- SCRIPTS -->
