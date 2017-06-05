@@ -24,14 +24,16 @@ public class EtudiantController {
     private PromotionRepository promotionRepository;
     private UeRepository ueRepository;
     private MatiereRepository matiereRepository;
+    private FichierRepository fichierRepository;
 
     @Autowired
-    public EtudiantController(EtudiantRepository etudiantRepository, UserRepository userRepository, PromotionRepository promotionRepository, UeRepository ueRepository, MatiereRepository matiereRepository) {
+    public EtudiantController(EtudiantRepository etudiantRepository, UserRepository userRepository, PromotionRepository promotionRepository, UeRepository ueRepository, MatiereRepository matiereRepository, FichierRepository fichierRepository) {
         this.etudiantRepository = etudiantRepository;
         this.userRepository = userRepository;
         this.promotionRepository = promotionRepository;
         this.ueRepository = ueRepository;
         this.matiereRepository = matiereRepository;
+        this.fichierRepository = fichierRepository;
     }
 
     @RequestMapping(value = "/all")
@@ -58,6 +60,14 @@ public class EtudiantController {
         }
 
         return matieres;
+    }
+
+    @RequestMapping(value = "/getcours/{id_matiere}")
+    @ResponseBody
+    public List<Fichier> getCoursOfMatiere(@PathVariable Long id_matiere) {
+        List<Fichier> fichiers = fichierRepository.findByMatiereId(id_matiere);
+
+        return fichiers;
     }
 
     @RequestMapping(value = "/mescours")

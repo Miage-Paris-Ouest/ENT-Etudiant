@@ -10,8 +10,10 @@
     function CoursController($http) {
         var vm = this;
 
+        vm.matieres = [];
         vm.cours = [];
         vm.getAll = getAll;
+        vm.getAllCoursOfMatiere = getAllCoursOfMatiere;
         /*vm.getAffordable = getAffordable;
         vm.deleteBooking = deleteBooking;*/
 
@@ -25,8 +27,16 @@
             var url = "/etudiant/getmatieres";
             var coursPromise = $http.get(url);
             coursPromise.then(function(response){
-                vm.cours = response.data;
+                vm.matieres = response.data;
             });
+        }
+
+        function getAllCoursOfMatiere(id_matiere) {
+            var url = "/etudiant/getcours/" + id_matiere;
+            var coursPromise = $http.get(url);
+            coursPromise.then(function (response) {
+                vm.cours = response.data;
+            })
         }
 
         /*function getAffordable(){

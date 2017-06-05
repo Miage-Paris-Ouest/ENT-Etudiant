@@ -90,6 +90,10 @@ public class Matiere {
         return ue.getId();
     }
 
+    public long getId() {
+        return id;
+    }
+
     public Enseignant getEnseignant() {
         return enseignant;
     }
