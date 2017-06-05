@@ -1,5 +1,6 @@
 package com.paris10.ent.controllers;
 
+import com.paris10.ent.entities.Fichier;
 import com.paris10.ent.storage.StorageFileNotFoundException;
 import com.paris10.ent.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class FileUploadController {
         this.storageService = storageService;
     }
 
-    @GetMapping("/upload")
-    public String listUploadedFiles(Model model) throws IOException {
-
+    @GetMapping("/upload/{id_matiere}")
+    public String listUploadedFiles(Model model, @PathVariable Long id_matiere, @ModelAttribute Fichier fichier) throws IOException {
+        model.addAttribute(id_matiere);
         model.addAttribute("files", storageService
                 .loadAll()
                 .map(path ->
@@ -59,7 +60,7 @@ public class FileUploadController {
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
 
-        return "redirect:/upload";
+        return "redirect:/upload/2";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

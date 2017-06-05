@@ -1,5 +1,6 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -24,9 +25,8 @@ public class UE {
     @JoinColumn(name = "id_promotion")
     private Promotion promotion;
 
-    @OneToMany
-    @MapsId
-    @JoinColumn(name = "id_ue", referencedColumnName = "id_ue")
+    @OneToMany(mappedBy = "ue")
+    @JsonManagedReference
     private List<Matiere> matiere;
 
     public UE() {

@@ -2,10 +2,13 @@ package com.paris10.ent.controllers;
 
 import com.paris10.ent.entities.*;
 import com.paris10.ent.repositories.*;
+import com.paris10.ent.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,7 +26,12 @@ public class EtudiantController {
     private FichierRepository fichierRepository;
 
     @Autowired
-    public EtudiantController(EtudiantRepository etudiantRepository, UserRepository userRepository, PromotionRepository promotionRepository, UeRepository ueRepository, MatiereRepository matiereRepository, FichierRepository fichierRepository) {
+    public EtudiantController(EtudiantRepository etudiantRepository,
+                              UserRepository userRepository,
+                              PromotionRepository promotionRepository,
+                              UeRepository ueRepository,
+                              MatiereRepository matiereRepository,
+                              FichierRepository fichierRepository) {
         this.etudiantRepository = etudiantRepository;
         this.userRepository = userRepository;
         this.promotionRepository = promotionRepository;
@@ -66,6 +74,7 @@ public class EtudiantController {
 
     @RequestMapping(value = "/mescours")
     public String mesCours() {
+
         return "mesCours";
     }
 
@@ -74,6 +83,31 @@ public class EtudiantController {
         model.addAttribute("etudiants", etudiantRepository.findAll());
         model.addAttribute("promotions", promotionRepository.findAll());
         return "gestionClasses";
+    }
+
+    @RequestMapping(value = "/addFichier/{id_matiere}")
+    @ResponseBody
+    public List<Fichier> addFichierOfMatiere(@PathVariable Long id_matiere, @Validated Fichier fichier){
+        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOO nique bien ta mere");
+        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOO nique bien ta mere");
+        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOO nique bien ta mere");
+        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOO nique bien ta mere");
+        Fichier fichier2 = new Fichier("test",
+                "test.txt",
+                true,
+                matiereRepository.findById(new Long(2)),
+                userRepository.findById(new Long(1)));
+
+        fichierRepository.save(fichier2);
+
+
+        fichier.setVisible(true);
+        fichier.setUser(userRepository.findById(new Long(1))); //TODO récupérer l'id de l'étudiant connecté
+        fichier.setMatiere(matiereRepository.findById(id_matiere));
+
+        fichierRepository.save(fichier);
+
+        return fichierRepository.findByMatiereId(id_matiere);
     }
 
 //    private void saveStudent() {

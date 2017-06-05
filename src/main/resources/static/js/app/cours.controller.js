@@ -14,6 +14,7 @@
         vm.cours = [];
         vm.getAll = getAll;
         vm.getAllCoursOfMatiere = getAllCoursOfMatiere;
+        vm.addFichierOfMatiere = addFichierOfMatiere;
         /*vm.getAffordable = getAffordable;
         vm.deleteBooking = deleteBooking;*/
 
@@ -33,6 +34,14 @@
 
         function getAllCoursOfMatiere(id_matiere) {
             var url = "/etudiant/getcours/" + id_matiere;
+            var coursPromise = $http.get(url);
+            coursPromise.then(function (response) {
+                vm.cours = response.data;
+            })
+        }
+
+        function addFichierOfMatiere(id_matiere) {
+            var url = "/etudiant/addFichier/" + id_matiere;
             var coursPromise = $http.get(url);
             coursPromise.then(function (response) {
                 vm.cours = response.data;
