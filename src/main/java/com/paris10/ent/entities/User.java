@@ -14,14 +14,11 @@ public class User {
     @Column(name = "id_user")
     private long id;
 
-    @Column(name = "mdp")
-    private String mdp;
-
-    private String nom, prenom, email;
-
     @OneToMany(mappedBy = "user")
     @JsonManagedReference
     private List<Fichier> fichiers;
+
+    private String nom, prenom, email, mdp;
 
     @Enumerated(EnumType.STRING)
     private TypeUser type;

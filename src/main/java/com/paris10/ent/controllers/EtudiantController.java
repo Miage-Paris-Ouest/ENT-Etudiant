@@ -79,6 +79,7 @@ public class EtudiantController {
 
     @RequestMapping(value = "/mescours")
     public String mesCours() {
+
         return "mesCours";
     }
 
