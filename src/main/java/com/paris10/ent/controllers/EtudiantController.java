@@ -6,11 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +38,7 @@ public class EtudiantController {
     }
 
     public List<UE> getUes() {
-        Long idPromotion = new Long(3);
+        Long idPromotion = new Long(1);
         List<UE> ues = ueRepository.findByPromotionId(idPromotion);
 
         return ues;
@@ -65,9 +61,7 @@ public class EtudiantController {
     @RequestMapping(value = "/getcours/{id_matiere}")
     @ResponseBody
     public List<Fichier> getCoursOfMatiere(@PathVariable Long id_matiere) {
-        List<Fichier> fichiers = fichierRepository.findByMatiereId(id_matiere);
-
-        return fichiers;
+        return fichierRepository.findByMatiereId(id_matiere);
     }
 
     @RequestMapping(value = "/mescours")

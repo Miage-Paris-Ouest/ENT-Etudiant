@@ -7,21 +7,26 @@ import java.util.List;
 @Table(name = "enseignant")
 public class Enseignant {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_enseignant")
+    @Column(name = "enseignant_id_user")
     private long id;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "enseignant_id_user", referencedColumnName = "id_user")
+    private User user;
 
     private String nom_enseignant;
 
-    @OneToMany
+    /*@OneToMany
     @MapsId
-    @JoinColumn(name = "id_enseignant", referencedColumnName = "id_enseignant")
-    private List<Matiere> matiere;
+    @JoinColumn(name = "enseignant_id_user", referencedColumnName = "enseignant_id_user")
+    private List<Matiere> matiere;*/
 
     public Enseignant() {
     }
 
-    public Enseignant(String nom_enseignant) {
+    public Enseignant(User user, String nom_enseignant) {
+        this.user = user;
         this.nom_enseignant = nom_enseignant;
     }
 
@@ -39,5 +44,13 @@ public class Enseignant {
 
     public void setNom_enseignant(String nom_enseignant) {
         this.nom_enseignant = nom_enseignant;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
