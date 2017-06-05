@@ -49,7 +49,7 @@
 
         <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
             <li><a href="#">Gestion des classes</a></li>
-            <li><a href="#">Gestion des Cours</a></li>
+            <li><a th:href="@{'/etudiant/mescours'}">Gestion des Cours</a></li>
             <li><a href="#">Gestion calendriers</a></li>
             <li><a href="#">Gestion des fichiers</a></li>
         </ul>
@@ -68,12 +68,11 @@
                 <small>Liste des cours</small>
             </h5>
             <ul id="topContainerList" class="list-group">
-                <li class="list-group-item" ng-repeat="matiere in vm.matieres"><a
-                        ng-click="vm.getAllCoursOfMatiere(matiere.id)">{{matiere.nom_matiere}}</a></li>
+                <li class="list-group-item" ng-repeat="matiere in vm.matieres">
+                    <a ng-click="vm.getAllCoursOfMatiere(matiere.id)">{{matiere.nom_matiere}}</a>
+                    <a id="addCours" class="fa fa-plus-circle" href="/upload/{{matiere.id}}" style="float: right; !important"></a>
+                </li>
             </ul>
-            <button id="addCoursFile" class="btn-floating"
-                    style="float: right;background-color:#64b5f6 !important" data-toggle="modal" data-target="#myModal">
-                <i class="material-icons">add</i></button>
 
             <div id="myModal" class="modal modal-fixed-footer">
                 <div class="modal-content" style="text-align: center">
@@ -83,19 +82,10 @@
                     </h4>
                     <hr/>
 
-                    <form id="addCoursForm">
+                    <form id="addCoursForm" method="POST" action="/upload">
                         <div class="row">
                             <div class="input-field offset-s3 col s6">
                                 <input id="nom_fichier" class="validate" placeholder="Nom fichier" ng-model="file.nom"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="offset-s3 col s6">
-                                <select id="test" name="test">
-                                    <option value="jean">Jean</option>
-                                    <option value="marc">Marc</option>
-                                </select>
-                                <!--<select ng-model="matiere_fichier" ng-options="cour.nom_matiere for cour in vm.cours">-->
                             </div>
                         </div>
                     </form>
@@ -109,9 +99,19 @@
             </div>
         </div>
         <div id="centerContainer" class="col s5 z-depth-2">
-            <h4>Derniers cours ajoutés</h4>
+            <h5>
+                <small>Derniers cours ajoutés</small>
+            </h5>
             <ul id="middleContainerList" class="list-group">
-                <li class="list-group-item" ng-repeat="cour in vm.cours">{{cour.nom_fichier}}</li>
+                <li class="list-group-item" ng-repeat="cour in vm.cours">
+                    <a href="#">{{cour.nom_fichier}}</a>
+                    <button id="commentFile" class="fa fa-commenting"
+                            style="float: right; !important" data-toggle="modal" data-target=""></button>
+                    <button id="addUpVote" class="fa fa-thumbs-o-up"
+                            style="float: right; !important" data-toggle="modal" data-target=""></button>
+                    <button id="addDownVote" class="fa fa-thumbs-o-down"
+                            style="float: right; !important" data-toggle="modal" data-target=""></button>
+                </li>
             </ul>
         </div>
         <div id="topRightContainer" class="col s4 z-depth-2">
