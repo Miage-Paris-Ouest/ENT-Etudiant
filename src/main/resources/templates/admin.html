@@ -36,34 +36,23 @@
 <body ng-app="myApp">
 
 <nav class="blue-gradient">
+
     <div class="nav-wrapper row">
         <a href="#" class="brand-logo">Logo</a>
 
-        <ul class="nav nav-tabs tabs-4 indigo col s4 offset-s1 left hide-on-med-and-down" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="gestionClassesMenuTab" data-toggle="tab" href="#classesContainer" role="tab">Classes</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link active" id="gestionCoursMenuTab" data-toggle="tab" href="#coursContainer" role="tab">Cours</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link active" id="gestionFichiersMenuTab" data-toggle="tab" href="#fichiersContainer" role="tab">Fichiers</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link active" id="gestionCalendriersMenuTab" data-toggle="tab" href="#calendriersContainer" role="tab">Calendriers</a>
-            </li>
+        <ul id="nav-mobile" class="col s6 offset-s1 left hide-on-med-and-down">
+            <li id="gestionClassesMenuTab"><a href="#classesContainer">Classes</a></li>
+            <li id="gestionCoursMenuTab"><a href="#coursContainer">Cours</a></li>
+            <li id="gestionFichiersMenuTab"><a href="#">Fichiers</a></li>
+            <li id="gestionCalendriersMenuTab"><a href="#">Calendriers</a></li>
         </ul>
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#" id="messagerieButton"><i class="material-icons left">mail</i>Messagerie</a></li>
-            <li><a href="#" id="monCompteButton"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+            <li id="messagerieTab"><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li id="monCompteTab"><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
         </ul>
     </div>
-
-</nav>
+s</nav>
 
 
 <div class="ng-view"></div>

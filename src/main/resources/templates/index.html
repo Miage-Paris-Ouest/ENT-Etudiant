@@ -149,17 +149,51 @@
         MesCours
     </div>
     <div id="mesFichiersContainer">
-        MesFichiers
+        <div class="row">
+            <div id="filesContainer" class="col s9 m9 l9">
+
+                <h4>
+                    <small>Mes fichiers</small>
+                </h4>
+                <br/>
+                <div id="filesTableContainer" class="card z-depth-2">
+                    <div id="emptyFilesTable">
+                        <h4>Aucun fichier</h4>
+                        <h4><small>Cliquez sur le bouton pour ajouter des fichiers</small></h4>
+                        <i class="material-icons">note_add</i>
+                    </div>
+                    <div id="filesTable" >
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Matiere</th>
+                                <th>Taille</th>
+                                <th>Date</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                        <button id="addFile" class="btn waves-effect waves-light default-color-dark">Ajouter un fichier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="simulateurContainer">
+
+        <!--<p th:text="${session.user.nom}" th:unless="${session == null}"></p>-->
+
         <div id="topContainer">
             <div class="row">
                 <div id="topLeftContainer" class="col s3 z-depth-2">
                     <h5><small th:text="${promo.nom_promo}"></small></h5>
                     <hr/>
-                    <!--<ul id="topContainerTermsList" class="list-group">-->
-                        <!--<li class="list-group-item" th:each="term : ${terms}" th:id="${term.id}" th:text="|${term.nom_semestre}|"></li>-->
-                    <!--</ul>-->
+
+                    <ul id="topContainerTermsList" class="list-group">
+                        <li class="list-group-item" th:each="term : ${terms}" th:id="${term.id}" th:text="|${term.nom_semestre}|"></li>
+                    </ul>
                 </div>
                 <div id="topRightContainer" class="col s9" style="height: 800px;padding:10px;">
                     <h5><small id="selectedTerm"></small></h5>
@@ -172,26 +206,12 @@
                             <th>Note</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <!--<div th:each="ueContent : ${ues}" th:remove="tag">-->
-                            <!--<tr class="ue" th:attr="data-ue=${ueContent.ue.id}">-->
-                                <!--<td><b th:text="|${ueContent.ue.nom_ue}|"></b></td>-->
-                                <!--<td class="coefficientUE"><b></b></td>-->
-                                <!--<td class="moyenneUE"><b></b></td>-->
-                            <!--</tr>-->
-                            <!--<tr class="matiere" th:each="matiere : ${ueContent.matieres}" th:attr="data-matiere=${matiere.id}, data-ue=${ueContent.ue.id}">-->
-                                <!--<td><b th:text="|${matiere.nom_matiere}|"></b></td>-->
-                                <!--<td class="coefficientMatiere" th:text="|${matiere.coefficient}|"></td>-->
-                                <!--<td class="noteMatiere input-field">0</td>-->
-                            <!--</tr>-->
-                            <!--<tr class="total">-->
-                                <!--<td></td>-->
-                                <!--<td></td>-->
-                                <!--<td class="moyenneSemestre"><b></b></td>-->
-                            <!--</tr>-->
-                        <!--</div>-->
-                        </tbody>
+                        <tbody></tbody>
                     </table>
+                    <div id="emptyUeTable">
+                        <h4>Aucune UE</h4>
+                        <h4><small>Les UE n'ont pas été définies pour ce semestre</small></h4>
+                    </div>
                     <div id="actions">
                         <button id="calculerNotes" class="btn btn-small">Calculer</button>
                         <button id="saveNotes" class="btn btn-small">Enregistrer</button>
@@ -232,7 +252,7 @@
                     </table>
                 </div>
                 <div id="topRightContainer" class="col s9" style="height: 800px;padding:10px;">
-                    <div class="card" style="height:70%; padding: 6%;">
+                    <div class="card z-depth-2" style="height:70%; padding: 6%;">
                         <div id="formContainer" class="row">
                             <div id="leftFormContainer" class="row col s6" style="border-right: .8px solid #cecece;">
 				 		<span>
@@ -328,13 +348,10 @@
 <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>-->
 <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js"></script>-->
 
-
 <script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
 <script type="text/javascript" src="../static/js/components.js" th:src="@{/js/components.js}"></script>
 <script type="text/javascript" src="../static/js/monCompte.js" th:src="@{/js/monCompte.js}"></script>
-<script type="text/javascript" src="../static/js/simulateur.js" th:src="@{/js/simulation.js}"></script>
-
-<!--<script type="text/javascript" src="../static/js/routing.js" th:src="@{/js/routing.js}"></script>-->
+<script type="text/javascript" src="../static/js/simulation.js" th:src="@{/js/simulation.js}"></script>
 
 </body>
 

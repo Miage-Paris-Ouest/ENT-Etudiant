@@ -9,9 +9,8 @@ $(function()
 	setCoefficientsUe();
 	$("#calculerNotes").click(calculerMoyenne);
 
-	$(".matiere").click(function()
+	$("#marksTable").on("click",".matiere",function()
 	{
-
 		var isEditable = $(this).find("editable").length == 0;
 		if(isEditable)
 		{
@@ -24,6 +23,52 @@ $(function()
 		else
 			alert("mode edition deja activé");
 	});
+
+    $("#topContainerTermsList").on("click", ".list-group-item", function()
+    {
+        $("#marksTable, #emptyUeTable").hide();
+        var id = $(this).attr("id");
+        // alert($(this).text()+" => id : "+id);
+
+        $.ajax({
+            url: "/ent/simulateur/semestres/"+id,
+            type:"GET",
+            success: function (res) {
+
+            	if(res.length==0)
+				{
+                    $("#emptyUeTable").show();
+                    $("#actions").hide();
+                }
+            	else
+				{
+                    var table = "";
+
+                    for (var i = 0; i <= res.length - 1; i++) {
+                        var ue = res[i];
+                        table += "<tr class='ue' data-ue='" + ue.id + "'>" +
+                            "<td><b>" + ue.nom_ue + "</b></td>" +
+                            "<td class='coefficientUE'><b></b></td>" +
+                            "<td class='moyenneUE'><b></b></td></tr>";
+
+                        // getMatieres(table, ue.id);
+                    }
+
+                    table += "<tr class='total'>" +
+                        "<td></td><td></td>" +
+                        "<td class='moyenneSemestre'><b></b></td></tr>";
+
+                    $("#emptyUeTable").hide();
+                    $("#actions, #marksTable").show();
+                    $("#marksTable").find("tbody").html(table);
+                    peuplerTableauMatieres();
+                }
+            },
+            error: function (res) {
+                alert("Erreur : simulation.js::28");
+            }
+        });
+    });
 });
 
 //Supprimer la cellule editable et la remplace par une simple cellule
@@ -126,14 +171,12 @@ function calculerMoyenneSemestre()
 		var ueId = ue.attr("data-ue");
 		
 		totalCoef += parseFloat(ue.find(".coefficientUE").text());
-
 		// alert("totalCoef : "+totalCoef);
 
 		var moyenneUE = parseFloat($(this).find(".moyenneUE").text());
 		var coefUE = parseFloat($(this).find(".coefficientUE").text());
 
 		moyenneSemestre += moyenneUE*coefUE;
-		
 	});
 
 	console.log("moyenneSemestre : "+moyenneSemestre);
@@ -148,4 +191,44 @@ function calculerMoyenne()
 	console.log("calculerMoyenne");
 	calculerMoyenneUe();
 	calculerMoyenneSemestre();
+}
+
+function peuplerTableauMatieres()
+{
+	$(".ue").each(function()
+	{
+		var idUe = $(this).attr("data-ue");
+        getMatieres(idUe);
+	});
+}
+
+function getMatieres(idUe)
+{
+    $.ajax({
+        url: "/ent/simulateur/matieres/"+idUe,
+        type:"GET",
+        success: function (res) {
+
+        	var matieres = res;
+			var lignesTableau = "";
+			var totalEcts = 0;
+
+			for(var j =0;j <= matieres.length-1;j++)
+			{
+				var matiere = matieres[j];
+
+				totalEcts += matiere.nb_ects;
+                lignesTableau += "<tr class='matiere' data-matiere='"+matiere.id+"' data-ue='"+idUe+"'>" +
+					"<td>"+matiere.nom_matiere+"</td>" +
+					"<td class='coefficientMatiere'>"+matiere.nb_ects+"</td>" +
+					"<td class='noteMatiere input-field'>0</td></tr>";
+			}
+
+            $("#marksTable").find("tr[data-ue='" + idUe + "']").after(lignesTableau).show();
+            $("#marksTable").find("tr[data-ue='" + idUe + "']").find(".coefficientUE>b").text(totalEcts);
+        },
+        error: function (res) {
+            alert("Erreur : simulation.js::28");
+        }
+	});
 }

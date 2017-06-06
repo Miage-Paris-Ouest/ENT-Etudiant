@@ -1,9 +1,9 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -17,6 +17,7 @@ public class Semestre {
     @OneToMany
     @MapsId
     @JoinColumn(name = "id_semestre", referencedColumnName = "id_semestre")
+    @JsonBackReference
     private List<UE> ue;
 
     @NotBlank
@@ -43,5 +44,14 @@ public class Semestre {
 
     public void setNom_semestre(String nom_semestre) {
         this.nom_semestre = nom_semestre;
+    }
+
+    public List<UE> getUe() {
+        return ue;
+    }
+
+    public void addUe(UE ue)
+    {
+        this.getUe().add(ue);
     }
 }

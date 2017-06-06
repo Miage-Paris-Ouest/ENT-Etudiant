@@ -14,6 +14,6 @@ public class IndexController
     @RequestMapping("/")
     public String welcomePage()
     {
-        return "login";
+        return "index";
     }
 }

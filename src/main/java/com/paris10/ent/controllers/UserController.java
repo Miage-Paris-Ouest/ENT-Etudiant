@@ -7,11 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 /**
  * Created by ranox on 04/05/17.
@@ -24,11 +24,10 @@ public class UserController
     @Autowired
     UserRepository userRepository;
 
-    @RequestMapping("/{id}")
-    public String init(@PathVariable long id, Model model)
+    @RequestMapping("/")
+    public String init(@PathVariable long id, Model model, HttpSession session)
     {
-        User user = userRepository.findById(id);
-        model.addAttribute("user", user);
+        model.addAttribute("user", session.getAttribute("user"));
         return "monCompte";
     }
 

@@ -70,13 +70,13 @@
 				</tr>
 				</thead>
 				<tbody>
-				<div th:each="ueContent : ${ues}" th:remove="tag">
-					<tr class="ue" th:attr="data-ue=${ueContent.ue.id}">
-						<td><b th:text="|${ueContent.ue.nom_ue}|"></b></td>
+				<div th:each="ue : ${ues}" th:remove="tag">
+					<tr class="ue" th:attr="data-ue=${ue.id}">
+						<td><b th:text="|${ue.nom_ue}|"></b></td>
 						<td class="coefficientUE"><b></b></td>
 						<td class="moyenneUE"><b></b></td>
 					</tr>
-					<tr class="matiere" th:each="matiere : ${ueContent.matieres}" th:attr="data-matiere=${matiere.id}, data-ue=${ueContent.ue.id}">
+					<tr class="matiere" th:each="matiere : ${ue.matieres}" th:attr="data-matiere=${matiere.id}, data-ue=${ue.id}">
 						<td><b th:text="|${matiere.nom_matiere}|"></b></td>
 						<td class="coefficientMatiere" th:text="|${matiere.coefficient}|"></td>
 						<td class="noteMatiere input-field">0</td>

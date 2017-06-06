@@ -1,5 +1,6 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -23,7 +24,8 @@ public class Promotion {
     @OneToMany
     @MapsId
     @JoinColumn(name = "id_promotion",referencedColumnName = "id_promotion")
-    private List<UE> ue;
+    @JsonBackReference
+    public List<UE> ue;
 
     public Promotion() {
     }

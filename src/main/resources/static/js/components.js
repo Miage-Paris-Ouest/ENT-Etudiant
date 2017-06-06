@@ -39,6 +39,7 @@ $(function()
 
     $("#simulateurTab").click(function()
     {
+        $("#marksTable, #actions").show();
         $(".activeTab").removeClass("activeTab");
         $("#simulateurContainer").addClass("activeTab");
     });

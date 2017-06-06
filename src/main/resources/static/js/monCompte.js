@@ -47,7 +47,7 @@ function validerMdp()
                                 data: {
                                     newPassword : newPassword
                                 },
-                                type:"PUT",
+                                type:"POST",
                                 success: function (res) {
                                     $("#passwordSpan").text(res ? "Le changement a été enregistré" : "Echec lors de la mise à jour");
                                     $("#rightFormContainerLabel").find("input").val("");

@@ -1,5 +1,9 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,7 +18,8 @@ public class Enseignant {
     private String nom_enseignant;
 
     @OneToMany(mappedBy = "enseignant")
-    private List<Matiere> matiere;
+    @JsonManagedReference
+    private List<Matiere> matieres;
 
     public Enseignant() {
     }

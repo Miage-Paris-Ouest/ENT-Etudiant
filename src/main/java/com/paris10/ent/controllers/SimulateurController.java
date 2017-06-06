@@ -1,6 +1,7 @@
 package com.paris10.ent.controllers;
 
 import com.paris10.ent.entities.*;
+import com.paris10.ent.repositories.EtudiantRepository;
 import com.paris10.ent.repositories.MatiereRepository;
 import com.paris10.ent.repositories.SemestreRepository;
 import com.paris10.ent.repositories.UeRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,9 @@ public class SimulateurController
     @Autowired
     SemestreRepository semestreRepository;
 
+    @Autowired
+    EtudiantRepository etudiantRepository;
+
     @RequestMapping("/")
     public String init(Model model)
     {
@@ -36,11 +41,12 @@ public class SimulateurController
         return "simulateur";
     }
 
-    @RequestMapping(value = "/matieres")
-    public List<Matiere> getMatieresByUe(@PathVariable int ue, Model model)
+    @RequestMapping(value = "/matieres/{ue}")
+    @ResponseBody
+    public List<Matiere> getMatieresByUe(@PathVariable long ue, Model model)
     {
-        model.addAttribute("matieres",matiereRepository.findAll());
-        return matiereRepository.findAll();
+//        model.addAttribute("matieres",matiereRepository.findAll());
+        return matiereRepository.findByUeId(ue);
     }
 
     @RequestMapping(value = "/ue")
@@ -54,13 +60,7 @@ public class SimulateurController
     public String getUeById(@PathVariable int ue, Model model)
     {
         UE ueById = ueRepository.findById(ue);
-        List<Matiere> matieres = matiereRepository.findByUeId(ue);
-        UeContent ueContainer = new UeContent(ueById, matieres);
-
-        List<Semestre> semestres = semestreRepository.findAll();
-        model.addAttribute("terms", semestres);
-        model.addAttribute("ueContent",ueContainer);
-
+        model.addAttribute("ue",ue);
         return "simulateur";
     }
 
@@ -77,24 +77,15 @@ public class SimulateurController
     }
 
     @RequestMapping(value = "/semestres/{id}")
-    public String getSemestre(@PathVariable int id, Model model)
+    @ResponseBody
+    public List<UE> getSemestre(@PathVariable long id, HttpSession session)
     {
-        Semestre semestre = semestreRepository.findById(id);
-        List<UE> ues = ueRepository.findBySemestre(id);
+        User user = (User)session.getAttribute("student");
 
-//        SemestreContent semestreContent = new SemestreContent(semestre);
-//        for(UE ue : ues)
-//            semestreContent.addUe(new UeContent(ue, matiereRepository.findByUe((int) ue.getId())));
+        Etudiant etudiant = etudiantRepository.findById(user.getId());
 
-        List<UeContent> ueContents = new ArrayList<UeContent>();
-
-        for(UE ue : ues)
-            ueContents.add(new UeContent(ue, matiereRepository.findByUeId((int) ue.getId())));
-
-        List<Semestre> semestres = semestreRepository.findAll();
-        model.addAttribute("terms", semestres);
-        model.addAttribute("semestre",semestre);
-        model.addAttribute("ues",ueContents);
-        return "simulateur";
+        Promotion p = etudiant.getPromotion();
+        List<UE> ues = ueRepository.findByPromotionIdAndSemestreId(id, p.getId());
+        return ues;
     }
 }

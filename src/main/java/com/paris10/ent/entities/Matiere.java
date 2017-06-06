@@ -1,5 +1,8 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -19,10 +22,12 @@ public class Matiere {
 
     @ManyToOne
     @JoinColumn(name = "id_ue")
+    @JsonManagedReference
     private UE ue;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "id_enseignant")
+    @JsonBackReference
     private Enseignant enseignant;
 
     public Matiere() {
@@ -100,5 +105,9 @@ public class Matiere {
 
     public Long getEnseignantId() {
         return enseignant.getId();
+    }
+
+    public long getId() {
+        return id;
     }
 }

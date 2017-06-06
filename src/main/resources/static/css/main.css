@@ -86,3 +86,23 @@ nav a:hover {
 {
     display: none;
 }
+
+#filesTableContainer
+{
+    padding: 2%;
+}
+
+#emptyFilesTable, #emptyUeTable
+{
+    text-align: center;
+}
+
+#filesTable
+{
+    display:none;
+}
+
+#addFile
+{
+    cursor: pointer;
+}

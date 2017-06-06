@@ -54,12 +54,14 @@
 </nav>
 
 <!-- Gestion des cours -->
+
+
 <div id="topContainer">
 	<div class="row">
 		<div id="topLeftContainer" class="col s3 z-depth-2">
-		<h5><small>Mes informations</small></h5>
-		<hr/>
-			
+			<h5><small>Mes informations</small></h5>
+			<hr/>
+
 			<div id="imgContainer" class="row">
 				<img src="http://placehold.it/250x150" class="img-responsive img-circle col s8 offset-s2" alt="Cinque Terre"/>
 			</div>
@@ -67,15 +69,15 @@
 			<hr/>
 			<table id="userInfo" th:attr="data-iduser=${user.id}" class="table table-sm">
 				<tbody>
-					<tr>
-						<td id="myName" th:text="${user.prenom} +' '+ ${user.nom}"></td>
-					</tr>
-					<tr>
-						<td id="myClass">M1 MIAGE APP</td>
-					</tr>
-					<tr>
-						<td id="year">2016</td>
-					</tr>
+				<tr>
+					<td id="myName" th:text="${user.prenom} +' '+ ${user.nom}"></td>
+				</tr>
+				<tr>
+					<td id="myClass" th:text="${promo.nom_promo}"/>
+				</tr>
+				<tr>
+					<td id="year" th:text="${promo.annee}"/>
+				</tr>
 				</tbody>
 			</table>
 		</div>
@@ -86,31 +88,31 @@
 				 		<span>
 							<h5><small id="leftFormContainerLabel">Informations générales</small></h5>
 						</span>
-				 		<div class="row">
-					        <div class="input-field col s6">
-					          <input disabled="true" id="first_name" type="text" th:value="${user.prenom}"/>
-					          <label for="first_name">Prénom</label>
-					        </div>
-					        <div class="input-field col s6">
-					          	<input disabled="true" id="last_name" type="text" th:value="${user.nom}"/>
-					          	<label for="last_name">Nom</label>
-					        </div>
-				      	</div>
-				      	<div class="row">
-					        <div class="input-field col s12">
-					          	<input id="email" type="email" th:value="${user.email}"/>
-					          	<label for="email">Email</label>
-					        </div>
-			      		</div>
-				      	<div class="file-field input-field col s12">
-					      	<div class="btn">
-					        	<span>Fichier</span>
-					        	<input type="file" id="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*"/>
-					      	</div>
-					      	<div class="file-path-wrapper">
-					        	<input class="file-path" type="text"/>
-					      	</div>
-					    </div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input disabled="true" id="first_name" type="text" th:value="${user.prenom}"/>
+								<label for="first_name">Prénom</label>
+							</div>
+							<div class="input-field col s6">
+								<input disabled="true" id="last_name" type="text" th:value="${user.nom}"/>
+								<label for="last_name">Nom</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="email" type="email" th:value="${user.email}"/>
+								<label for="email">Email</label>
+							</div>
+						</div>
+						<div class="file-field input-field col s12">
+							<div class="btn">
+								<span>Fichier</span>
+								<input type="file" id="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*"/>
+							</div>
+							<div class="file-path-wrapper">
+								<input class="file-path" type="text"/>
+							</div>
+						</div>
 					</div>
 					<div id="rightFormContainer" class="row col s6">
 						<span>
@@ -118,23 +120,23 @@
 						</span>
 						<br/>
 						<div class="row">
-					        <div class="input-field col s6">
-					          <input id="password" type="password"/>
-					          <label for="password">Mot de passe</label>
-					        </div>
+							<div class="input-field col s6">
+								<input id="password" type="password"/>
+								<label for="password">Mot de passe</label>
+							</div>
 							<div class="input-field col s6">
 								<input id="confirmPassword" type="password"/>
 								<label for="confirmPassword">Confirmation</label>
 							</div>
-			      		</div>
-				      	<div class="row">
-					        <div class="input-field col s12">
-					          <input id="newPassword" type="password"/>
-					          <label for="newPassword">Nouveau mot de passe</label>
-					        </div>
-					    </div>
-					    <span id="passwordSpan"></span><br/>
-					    <button id="changerMdp" class="btn btn-pin waves-effect waves-light danger-color-dark">Changer</button>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="newPassword" type="password"/>
+								<label for="newPassword">Nouveau mot de passe</label>
+							</div>
+						</div>
+						<span id="passwordSpan"></span><br/>
+						<button id="changerMdp" class="btn btn-pin waves-effect waves-light danger-color-dark">Changer</button>
 					</div>
 				</div>
 				<div id="monCompteActionButton" class="row col 12">
@@ -145,6 +147,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- Gestion des cours -->
 
     <!-- SCRIPTS -->

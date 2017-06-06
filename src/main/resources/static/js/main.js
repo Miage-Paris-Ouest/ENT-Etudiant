@@ -92,6 +92,4 @@ $(function () {
     $('#addStudentButton').click(function () {
         $('#addStudentForm').show();
     });
-
-    /** fin page maclasse */
 });
