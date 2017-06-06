@@ -17,6 +17,7 @@ public class dtoMessages {
         this.u2=u2;
     }
 
+
     public  dtoMessages(){};
 
     public Messages getM() {

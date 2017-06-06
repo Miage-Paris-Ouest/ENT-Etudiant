@@ -77,6 +77,7 @@ public class MessagesController {
         return  usr;
     }
 
+
     @RequestMapping(value = "/messagerie")
     public String messagerie(ModelMap model) {
         if(this.getMessages().isEmpty()){

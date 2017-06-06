@@ -16,6 +16,7 @@ public class Messages {
 
     private int id_user1, id_user2, lu1,lu2;
 
+
     public Messages() {
     }
 
