@@ -17,10 +17,10 @@ public class Enseignant {
 
     private String nom_enseignant;
 
-    /*@OneToMany
+    @OneToMany
     @MapsId
-    @JoinColumn(name = "enseignant_id_user", referencedColumnName = "enseignant_id_user")
-    private List<Matiere> matiere;*/
+    @JoinColumn(name = "id_enseignant", referencedColumnName = "id_enseignant")
+    private List<Matiere> matiere;
 
     public Enseignant() {
     }

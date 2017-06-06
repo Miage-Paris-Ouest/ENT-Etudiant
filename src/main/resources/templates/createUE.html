@@ -1,15 +1,42 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Ajouter une matiere</title>
+    <title>Ajouter un UE</title>
 </head>
 <body>
-<h1>Ajouter une matiere</h1>
-<form action="@{/ue/createUE}" th:object="${ue}" method="post">
-    Nom UE:         <input type="text" th:field="*{nom_ue}" /><br/>
-    ID Semestre:    <input type="text" th:field="*{semestre}" /><br/>
-    ID Promotion:   <input type="number" th:field="*{promotion}" /><br/>
+<h1 ><a href="/semestre/creer">Ajouter un semestre</a></h1><br/>
+<h1><a  href="/ue/creer">Ajouter un ue</a></h1><br/>
+<h1 ><a href="/matiere/creer">Ajouter une matiere</a></h1><br/>
+<h1>Ajouter un UE</h1>
+<h2>Ajouter depuis un formulaire</h2>
+<form action="/ue/createUE" th:object="${ue}" method="post">
+    Nom UE:      <input type="text" th:field="*{nom_ue}" /><br/>
+    Semestre:    <select name="semestre" th:field="*{semestre}">
+                        <option value=""></option>
+                        <option th:each="semestre : ${semestre}" th:value="${semestre.id}" th:text="${semestre.nom_semestre}" ></option>
+                 </select><br/>
+    Promotion:   <select name="promotion" th:field="*{promotion}">
+                        <option value=""></option>
+                        <option th:each="promotion : ${promotion}" th:value="${promotion.id}" th:text="${promotion.nom_promo}" ></option>
+                 </select><br/>
     <input type="submit" />
+<h2>Ajouter des UE avec un CSV</h2>
+    <p>Pour voir le format du fichier csv cliquer
+        <a onclick="alert('UE DISCIPLINAIRE MATHS 1:Semestre 1 L1 MMIA:M1 MIAGE APP\nUE DISCIPLINAIRE INFORMATIQUE 1:Semestre 1 L1 MMIA:M1 MIAGE APP')">ici</a>
+    </p>
+</form>
+Fichier CSV UE:
+<form action="/ue/createUEWithCSV" method="post">
+    <input type="file" name="csv"/><br/>
+    <input type="hidden" name="codeFonction" value="2"/>
+    <input type="submit" />
+</form>
+<h2>Exporter la base en CSV</h2>
+<form action="/ue/exportTableUeToCSV" method="post">
+    Nom du fichier CSV à générer en sortie:
+    <input type="text" name="fileNameCSV"/>
+    <input type="hidden" name="codeFonction" value="2"/>
+    <input type="submit"/>
 </form>
 </body>
 </html>

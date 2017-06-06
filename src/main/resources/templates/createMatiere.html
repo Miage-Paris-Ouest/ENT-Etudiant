@@ -4,16 +4,38 @@
     <title>Ajouter une matiere</title>
 </head>
 <body>
+<h1 ><a href="/semestre/creer">Ajouter un semestre</a></h1><br/>
+<h1><a  href="/ue/creer">Ajouter un ue</a></h1><br/>
+<h1 ><a href="/matiere/creer">Ajouter une matiere</a></h1><br/>
 <h1>Ajouter une matiere</h1>
 <form action="/matiere/createMatiere" th:object="${matiere}" method="post">
-    Nom matiere:    <input type="text" th:field="*{nom_matiere}" /><br/>
-    Description:    <input type="text" th:field="*{description}" /><br/>
-    Nb ECTS:        <input type="number" th:field="*{nb_ects}" /><br/>
-    Id UE:          <input type="number" th:field="*{ue}" /><br/>
-    Id Enseignant:  <input type="number" th:field="*{enseignant}" /><br/>
-    Coefficient:    <input type="number" step="1.00" th:field="*{coefficient}" /><br/>
+    Nom de la matiere:    <input type="text" th:field="*{nom_matiere}" /><br/>
+    Description:          <input type="text" th:field="*{description}" /><br/>
+    Nb ECTS:              <input type="number" th:field="*{nb_ects}" /><br/>
+    UE:                   <select name="ue" th:field="*{ue}">
+                                <option value=""></option>
+                                <option th:each="ue : ${ue}" th:value="${ue.id}" th:text="${ue.nom_ue}" ></option>
+                          </select><br/>
+    Enseignant:           <select name="enseignant" th:field="*{enseignant}">
+                                <option value=""></option>
+                                <option th:each="enseignant : ${enseignant}" th:value="${enseignant.id}" th:text="${enseignant.nom_enseignant}" ></option>
+                          </select><br/>
     Nb Heures:      <input type="number" th:field="*{nb_heures}" />
     <input type="submit" />
+</form>
+<p>Pour voir le format du fichier csv cliquer <a onclick="alert('Algorithme:Language C:3:30:UE Informatique:Pascal Poizat\nPOO:Language C++:3:30:UE Informatique:LOM HILLAH')">ici</a></p>
+Fichier CSV Matiere:
+<form action="/matiere/createMatiereWithCSV" method="post">
+    <input type="file" name="csv"/><br/>
+    <input type="hidden" name="codeFonction" value="3"/>
+    <input type="submit" />
+</form>
+<h2>Exporter la base en CSV</h2>
+<form action="/matiere/exportTableMatiereToCSV" method="post">
+    Nom du fichier CSV à générer en sortie:
+    <input type="text" name="fileNameCSV"/>
+    <input type="hidden" name="codeFonction" value="3"/>
+    <input type="submit"/>
 </form>
 </body>
 </html>

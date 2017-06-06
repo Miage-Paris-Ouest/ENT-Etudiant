@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "ue")
 public class UE {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_ue")
@@ -24,10 +25,10 @@ public class UE {
     @JoinColumn(name = "id_promotion")
     private Promotion promotion;
 
-    @OneToMany
+    /*@OneToMany
     @MapsId
     @JoinColumn(name = "id_ue", referencedColumnName = "id_ue")
-    private List<Matiere> matiere;
+    private List<Matiere> matiere;*/
 
     public UE() {
     }

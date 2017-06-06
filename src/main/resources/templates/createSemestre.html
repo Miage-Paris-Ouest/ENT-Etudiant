@@ -5,10 +5,28 @@
     <title>Ajouter un semestre</title>
 </head>
 <body>
+<h1 ><a href="/semestre/creer">Ajouter un semestre</a></h1><br/>
+<h1><a  href="/ue/creer">Ajouter un ue</a></h1><br/>
+<h1 ><a href="/matiere/creer">Ajouter une matiere</a></h1><br/>
 <h1>Ajouter un semestre</h1>
-<form action="/createSemestre" th:object="${semestre}" method="post">
+<form action="/semestre/createSemestre" th:object="${semestre}" method="post">
     <input type="text" th:field="*{nom_semestre}" />
     <input type="submit" />
+</form>
+<h2>Ajouter des Semestre avec un CSV</h2>
+<p>Pour voir le format du fichier csv cliquer <a onclick="alert('Semestre 1\nSemestre 2\nSemestre 3')">ici</a></p>
+Fichier CSV Semestre:
+<form action="/semestre/createSemestreWithCSV" method="post">
+    <input type="file" name="csv"/><br/>
+    <input type="hidden" name="codeFonction" value="1"/>
+    <input type="submit" />
+</form>
+<h2>Exporter la base en CSV</h2>
+<form action="/semestre/exportTableSemestreToCSV" method="post">
+    Nom du fichier CSV à générer en sortie:
+    <input type="text" name="fileNameCSV"/>
+    <input type="hidden" name="codeFonction" value="1"/>
+    <input type="submit"/>
 </form>
 </body>
 </html>

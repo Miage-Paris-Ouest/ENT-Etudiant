@@ -17,7 +17,9 @@ public class Matiere {
 
     @Column(name = "description_matiere")
     private String description;
+
     private int nb_ects;
+
     private float nb_heures;
 
     @ManyToOne
@@ -31,7 +33,7 @@ public class Matiere {
     public Matiere() {
     }
 
-    public Matiere(String nom_matiere, String description, int nb_ects, float coefficient, float nb_heures, UE ue, Enseignant enseignant) {
+    public Matiere(String nom_matiere, String description, int nb_ects, float nb_heures, UE ue, Enseignant enseignant) {
         this.nom_matiere = nom_matiere;
         this.description = description;
         this.nb_ects = nb_ects;

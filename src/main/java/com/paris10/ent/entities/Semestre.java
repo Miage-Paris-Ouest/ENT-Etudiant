@@ -14,10 +14,10 @@ public class Semestre {
     @Column(name = "id_semestre")
     private long id;
 
-    @OneToMany
+    /*@OneToMany
     @MapsId
     @JoinColumn(name = "id_semestre", referencedColumnName = "id_semestre")
-    private List<UE> ue;
+    private List<UE> ue;*/
 
     @NotBlank
     private String nom_semestre;
