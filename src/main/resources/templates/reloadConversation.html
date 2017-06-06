@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+</head>
+
+<body>
+<div th:fragment="convReload" id="results-block">
+    <div class="row" th:each="msg : ${conversation}">
+        <div class="col-md-6" style="font-size: 20px;">
+            <div th:if="${msg.u1.id==1 and msg.u2.id==2}">
+                        <span th:if="${msg.u1.id==1 and msg.u2.id==2} " class="label label-info"
+                              th:text="${msg.u1.prenom}+${' '}+${msg.u1.nom}+${' : '}+${msg.m.message}"></span>
+            </div>
+        </div>
+        <div class="col-md-6" style="font-size: 20px;">
+            <div th:if="${msg.u1.id==2 and msg.u2.id==1}">
+                        <span th:if="${msg.u1.id==2 and msg.u2.id==1}" class="label label-success"
+                              th:text="${msg.u1.prenom}+${' '}+${msg.u1.nom}+${' : '}+${msg.m.message}"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

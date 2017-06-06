@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+
+    <title>Ma Classe</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css"/>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
+
+    <link rel="stylesheet" href="gestionCours.css"/>
+    <script src="https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<nav class="blue-gradient">
+    <div class="nav-wrapper row">
+        <a href="#" class="brand-logo">Logo</a>
+
+        <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
+            <li><a href="etudiant/gestionClasses">Gestion des classes</a></li>
+            <li><a href="etudiant/gestionCours">Gestion des Cours</a></li>
+            <li><a href="#">Gestion calendriers</a></li>
+            <li><a href="#">Gestion des fichiers</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <h4>
+                <b>
+                    <small>Ma messagerie - Conversation</small>
+                </b>
+            </h4>
+            <div id="results-block">
+            <div class="row" th:each="msg : ${conversation}">
+                <div class="col-md-6" style="font-size: 20px;">
+                    <div th:if="${msg.u1.id==1 and msg.u2.id==2}">
+                        <span th:if="${msg.u1.id==1 and msg.u2.id==2} " class="label label-info"
+                              th:text="${msg.u1.prenom}+${' '}+${msg.u1.nom}+${' : '}+${msg.m.message}"></span>
+                    </div>
+                </div>
+                <div class="col-md-6" style="font-size: 20px;">
+                    <div th:if="${msg.u1.id==2 and msg.u2.id==1}">
+                        <span th:if="${msg.u1.id==2 and msg.u2.id==1}" class="label label-success"
+                              th:text="${msg.u1.prenom}+${' '}+${msg.u1.nom}+${' : '}+${msg.m.message}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Affichage de la redaction du message -->
+                    <div class="card">
+                        <div class="card-block">
+                            <!--Title-->
+                            <h5 class="card-title">Rédaction </h5>
+                            <!--Text-->
+                            <p class="card-text"></p>
+                            <form id="customerForm">
+                                <input type="hidden" id="id_user1" value="1"/>
+                                <input type="hidden" id="id_user2" value="2"/>
+                                <textarea name="message"></textarea>
+                                <script>
+                                    CKEDITOR.replace('message');
+                                </script>
+                                <button type="submit" id="postBtn" class="btn btn-info" style="background-color : #2b2b2b;"> Envoyer </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        function reloadConv() {
+            var url = '/messagerie/conversationReload';
+
+            $("#results-block").load(url);
+        }
+
+        var url = window.location;
+
+        // SUBMIT FORM
+        $("#customerForm").submit(function (event) {
+            // Prevent the form from submitting via the browser.
+            event.preventDefault();
+            ajaxPost();
+        });
+
+        function ajaxPost() {
+            // PREPARE FORM DATA
+            var data = CKEDITOR.instances.message.getData();
+            var formData = {
+                id_user1:  $("#id_user1").val(),
+                id_user2:  $("#id_user2").val(),
+                message: data
+            }
+            // DO POST
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/messagerie/postcustomer",
+                data: JSON.stringify(formData),
+                success: function (result) {
+                    if (result == "Done") {
+                        //$("#postResultDiv").html("OK");
+                        reloadConv();
+                    } else {
+                        $("#postResultDiv").html("<strong>Error</strong>");
+                    }
+                    console.log(result);
+                },
+                error: function (e) {
+                    alert("Error!")
+                    console.log("ERROR: ", e);
+                }
+            })
+            // Reset FormData after Posting
+            resetData();
+        }
+
+        function resetData() {
+            $("#firstname").val("");
+            $("#lastname").val("");
+        }
+    })
+</script>
+</html>
