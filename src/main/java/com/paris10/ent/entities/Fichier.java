@@ -13,17 +13,22 @@ public class Fichier {
     private String nom_fichier, chemin;
     private boolean visible;
     // TODO Relation ManyToOne pour les ids
-    private int id_etudiant, id_matiere;
+    private long id_etudiant;
+
+    @ManyToOne
+    @JoinColumn(name = "id_matiere")
+    private Matiere matiere;
+
 
     public Fichier() {
     }
 
-    public Fichier(String nom_fichier, String chemin, boolean visible, int id_etudiant, int id_matiere) {
+    public Fichier(String nom_fichier, String chemin, boolean visible, long id_etudiant, Matiere matiere) {
         this.nom_fichier = nom_fichier;
         this.chemin = chemin;
         this.visible = visible;
         this.id_etudiant = id_etudiant;
-        this.id_matiere = id_matiere;
+        this.matiere = matiere;
     }
 
     public long getId() {
@@ -58,19 +63,19 @@ public class Fichier {
         this.visible = visible;
     }
 
-    public int getId_etudiant() {
+    public long getId_etudiant() {
         return id_etudiant;
     }
 
-    public void setId_etudiant(int id_etudiant) {
+    public void setId_etudiant(long id_etudiant) {
         this.id_etudiant = id_etudiant;
     }
 
-    public int getId_matiere() {
-        return id_matiere;
+    public Matiere getMatiere() {
+        return matiere;
     }
 
-    public void setId_matiere(int id_matiere) {
-        this.id_matiere = id_matiere;
+    public Long getMatiereId() {
+        return matiere.getId();
     }
 }

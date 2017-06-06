@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +20,16 @@ public class EtudiantController {
     private PromotionRepository promotionRepository;
     private UeRepository ueRepository;
     private MatiereRepository matiereRepository;
+    private FichierRepository fichierRepository;
 
     @Autowired
-    public EtudiantController(EtudiantRepository etudiantRepository, UserRepository userRepository, PromotionRepository promotionRepository, UeRepository ueRepository, MatiereRepository matiereRepository) {
+    public EtudiantController(EtudiantRepository etudiantRepository, UserRepository userRepository, PromotionRepository promotionRepository, UeRepository ueRepository, MatiereRepository matiereRepository, FichierRepository fichierRepository) {
         this.etudiantRepository = etudiantRepository;
         this.userRepository = userRepository;
         this.promotionRepository = promotionRepository;
         this.ueRepository = ueRepository;
         this.matiereRepository = matiereRepository;
+        this.fichierRepository = fichierRepository;
     }
 
     @RequestMapping(value = "/all")
@@ -38,12 +38,14 @@ public class EtudiantController {
     }
 
     public List<UE> getUes() {
-        Long idPromotion = new Long(3);
+        Long idPromotion = new Long(1);
         List<UE> ues = ueRepository.findByPromotionId(idPromotion);
 
         return ues;
     }
 
+    @RequestMapping(value = "/getmatieres")
+    @ResponseBody
     public List<Matiere> getMatieres() {
         List<UE> ues = this.getUes();
         List<Matiere> matieres = new ArrayList<Matiere>();
@@ -56,9 +58,14 @@ public class EtudiantController {
         return matieres;
     }
 
+    @RequestMapping(value = "/getcours/{id_matiere}")
+    @ResponseBody
+    public List<Fichier> getCoursOfMatiere(@PathVariable Long id_matiere) {
+        return fichierRepository.findByMatiereId(id_matiere);
+    }
+
     @RequestMapping(value = "/mescours")
-    public String mesCours(ModelMap model) {
-        model.put("cours", this.getMatieres());
+    public String mesCours() {
         return "mesCours";
     }
 
