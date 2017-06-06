@@ -7,22 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 /**
  * Created by ranox on 04/05/17.
  */
-import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
-
-    UserRepository userRepository;
 
     @Autowired
     UserRepository userRepository;

@@ -1,22 +1,18 @@
 package com.paris10.ent.controllers;
 
-import com.paris10.ent.entities.*;
-import com.paris10.ent.repositories.EnseignantRepository;
+import com.paris10.ent.entities.Etudiant;
+import com.paris10.ent.entities.TypeUser;
+import com.paris10.ent.entities.User;
 import com.paris10.ent.repositories.EtudiantRepository;
 import com.paris10.ent.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.websocket.server.PathParam;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ranox on 04/05/17.
@@ -67,8 +63,9 @@ public class ValidationController {
 
             List<User> camarades = new ArrayList<>();
 
-            for (Etudiant e : listeEtudiants)
-                camarades.add(userRepository.findById(e.getUserId()));
+            for (Etudiant e : listeEtudiants) {
+                camarades.add(userRepository.findById(e.getUser().getId()));
+            }
 
             model.addAttribute("user", user);
             model.addAttribute("classe", camarades);

@@ -5,8 +5,10 @@ import com.paris10.ent.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +53,9 @@ public class EtudiantController {
         List<Matiere> matieres = new ArrayList<Matiere>();
 
         for (UE ue:ues) {
-            if(matiereRepository.findByUeId(ue.getId()) != null)
+            if (matiereRepository.findByUeId(ue.getId()) != null) {
                 matieres.addAll(matiereRepository.findByUeId(ue.getId()));
+            }
         }
 
         return matieres;

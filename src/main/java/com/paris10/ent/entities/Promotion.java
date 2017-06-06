@@ -20,10 +20,10 @@ public class Promotion {
     @JsonManagedReference
     private List<Etudiant> les_etudiants;
 
-    @OneToMany
-    @MapsId
-    @JoinColumn(name = "id_promotion",referencedColumnName = "id_promotion")
-    private List<UE> ue;
+//    @OneToMany
+//    @MapsId
+//    @JoinColumn(name = "id_promotion",referencedColumnName = "id_promotion")
+//    private List<UE> ue;
 
     public Promotion() {
     }

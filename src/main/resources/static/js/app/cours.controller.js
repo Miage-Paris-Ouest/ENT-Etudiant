@@ -19,14 +19,14 @@
 
         init();
 
-        function init(){
+        function init() {
             getAll();
         }
 
-        function getAll(){
+        function getAll() {
             var url = "/etudiant/getmatieres";
             var coursPromise = $http.get(url);
-            coursPromise.then(function(response){
+            coursPromise.then(function (response) {
                 vm.matieres = response.data;
             });
         }

@@ -30,7 +30,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
 
-    <link rel="stylesheet" href="/css/app/gestionClasses.css"/>
+    <link rel="stylesheet" href="/css/gestionClasses.css"/>
 
 
 </head>
@@ -61,12 +61,13 @@
         <div id="topLeftContainer" class="col s3 z-depth-2">
             <h5>
                 <small>Liste des classes</small>
+                <hr/>
+                <small>{{ pc.nbEtudiants }} étudiants répartis dans {{ pc.promotions.length }} promotions</small>
             </h5>
             <hr/>
             <ul id="topContainerList" class="list-group">
                 <li class="list-group-item" data-code="Tous les étudiants">Tous les étudiants <span class="date"
-                                                                                                    style="float:right">
-                    <i>{{ pc.nbEtudiants }}</i></span>
+                                                                                                    style="float:right"/>
                 </li>
                 <li ng-repeat="promotion in pc.promotions" ng-click="pc.getPromotion(promotion.id)"
                     class="list-group-item nomPromotion" data-code="{{ promotion.nom_promo }}">
@@ -84,7 +85,8 @@
             </h5>
             <hr/>
             <a type="button" class="btn btn-default btn-small red" style="font-size: .8em;"
-               id="deletePromotion" ng-click="pc.deletePromotion()">Supprimer la promotion
+               data-ng-disabled="pc.promotion == null" id="deletePromotion" ng-click="pc.deletePromotion()">
+                Supprimer la promotion
             </a>
             <button type="button" class="btn btn-default btn-small" style="font-size: .8em;float:right">Importer CSV
             </button>
@@ -192,7 +194,6 @@
 <div id="addPromotion" class="modal modal-fixed-footer">
     <div class="modal-content" style="text-align: center">
         <h4>
-            <!--<small id="modalActionLabel"></small>-->
             Ajouter une promotion
         </h4>
         <hr/>
@@ -264,6 +265,6 @@
 
 <!-- Our scripts -->
 
-<script type="text/javascript" src="/static/js/app/main.js" th:src="@{/js/app/main.js}"></script>
+<script type="text/javascript" src="/static/js/main.js" th:src="@{/js/main.js}"></script>
 
 </html>

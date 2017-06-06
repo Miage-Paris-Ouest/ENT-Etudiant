@@ -1,11 +1,11 @@
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "enseignant")
 public class Enseignant {
+
     @Id
     @Column(name = "enseignant_id_user")
     private long id;

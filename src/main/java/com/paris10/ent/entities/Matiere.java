@@ -13,16 +13,19 @@ public class Matiere {
     private long id;
 
     @NotBlank
-    private String nom_matiere, description;
+    private String nom_matiere;
+
+    @Column(name = "description_matiere")
+    private String description;
     private int nb_ects;
-    private float coefficient, nb_heures;
+    private float nb_heures;
 
     @ManyToOne
     @JoinColumn(name = "id_ue")
     private UE ue;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "id_enseignant")
     private Enseignant enseignant;
 
     public Matiere() {
@@ -32,7 +35,6 @@ public class Matiere {
         this.nom_matiere = nom_matiere;
         this.description = description;
         this.nb_ects = nb_ects;
-        this.coefficient = coefficient;
         this.nb_heures = nb_heures;
         this.ue = ue;
         this.enseignant = enseignant;
@@ -60,14 +62,6 @@ public class Matiere {
 
     public void setNb_ects(int nb_ects) {
         this.nb_ects = nb_ects;
-    }
-
-    public float getCoefficient() {
-        return coefficient;
-    }
-
-    public void setCoefficient(float coefficient) {
-        this.coefficient = coefficient;
     }
 
     public float getNb_heures() {

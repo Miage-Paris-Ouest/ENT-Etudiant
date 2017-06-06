@@ -32,12 +32,13 @@
 
     <link th:href="@{/css/app/gestionCours.css}" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    >
     <script type="text/javascript" src="/static/js/app/main.js" th:src="@{/js/app/main.js}"></script>
-    <script type="text/javascript" src="/static/js/lib/angular.min.js" th:src="@{/js/lib/angular.min.js}" />
-    <script type="text/javascript" src="/static/js/app/app.module.js" th:src="@{/js/app/app.module.js}" />
-    <script type="text/javascript" src="/static/js/app/cours.controller.js" th:src="@{/js/app/cours.controller.js}" />
-    <script type="text/javascript" src="/static/js/lib/materialize.min.js" th:src="@{/js/lib/materialize.min.js}" />
+    <script type="text/javascript" src="/static/js/lib/angular.min.js" th:src="@{/js/lib/angular.min.js}"/>
+    <script type="text/javascript" src="/static/js/app/app.module.js" th:src="@{/js/app/app.module.js}"/>
+    <script type="text/javascript" src="/static/js/app/cours.controller.js" th:src="@{/js/app/cours.controller.js}"/>
+    <script type="text/javascript" src="/static/js/lib/materialize.min.js" th:src="@{/js/lib/materialize.min.js}"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
@@ -67,7 +68,8 @@
                 <small>Liste des cours</small>
             </h5>
             <ul id="topContainerList" class="list-group">
-                <li class="list-group-item" ng-repeat="matiere in vm.matieres"><a ng-click="vm.getAllCoursOfMatiere(matiere.id)">{{matiere.nom_matiere}}</a></li>
+                <li class="list-group-item" ng-repeat="matiere in vm.matieres"><a
+                        ng-click="vm.getAllCoursOfMatiere(matiere.id)">{{matiere.nom_matiere}}</a></li>
             </ul>
             <button id="addCoursFile" class="btn-floating"
                     style="float: right;background-color:#64b5f6 !important" data-toggle="modal" data-target="#myModal">
