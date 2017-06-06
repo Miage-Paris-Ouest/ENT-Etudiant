@@ -1,0 +1,18 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Ajouter une matiere</title>
+</head>
+<body>
+<h1>Ajouter une matiere</h1>
+<form action="@{/ue/createUE}" th:object="${ue}" method="post">
+    Nom UE:         <input type="text" th:field="*{nom_ue}" /><br/>
+    ID Semestre:    <input type="text" th:field="*{semestre}" /><br/>
+    ID Promotion:   <input type="number" th:field="*{promotion}" /><br/>
+    <input type="submit" />
+</form>
+</body>
+</html>
+
+
+

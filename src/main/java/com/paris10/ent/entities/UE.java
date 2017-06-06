@@ -1,6 +1,9 @@
 package com.paris10.ent.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ue")
@@ -10,6 +13,7 @@ public class UE {
     @Column(name = "id_ue")
     private long id;
 
+    @NotBlank
     private String nom_ue;
 
     @ManyToOne
@@ -19,6 +23,11 @@ public class UE {
     @ManyToOne
     @JoinColumn(name = "id_promotion")
     private Promotion promotion;
+
+    @OneToMany
+    @MapsId
+    @JoinColumn(name = "id_ue", referencedColumnName = "id_ue")
+    private List<Matiere> matiere;
 
     public UE() {
     }
@@ -63,13 +72,5 @@ public class UE {
 
     public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
-    }
-
-    public long getPromotionId() {
-        return promotion.getId();
-    }
-
-    public long getSemestreId() {
-        return semestre.getId();
     }
 }

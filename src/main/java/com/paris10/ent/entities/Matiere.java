@@ -1,5 +1,7 @@
 package com.paris10.ent.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,24 +12,30 @@ public class Matiere {
     @Column(name = "id_matiere")
     private long id;
 
+    @NotBlank
     private String nom_matiere, description;
-    private int nb_etcs;
+    private int nb_ects;
     private float coefficient, nb_heures;
 
     @ManyToOne
     @JoinColumn(name = "id_ue")
     private UE ue;
 
+    @ManyToOne
+    @JoinColumn(name = "id_enseignant")
+    private Enseignant enseignant;
+
     public Matiere() {
     }
 
-    public Matiere(String nom_matiere, String description, int nb_etcs, float coefficient, float nb_heures, UE ue) {
+    public Matiere(String nom_matiere, String description, int nb_ects, float coefficient, float nb_heures, UE ue, Enseignant enseignant) {
         this.nom_matiere = nom_matiere;
         this.description = description;
-        this.nb_etcs = nb_etcs;
+        this.nb_ects = nb_ects;
         this.coefficient = coefficient;
         this.nb_heures = nb_heures;
         this.ue = ue;
+        this.enseignant = enseignant;
     }
 
     public String getNom_matiere() {
@@ -46,12 +54,12 @@ public class Matiere {
         this.description = description;
     }
 
-    public int getNb_etcs() {
-        return nb_etcs;
+    public int getNb_ects() {
+        return nb_ects;
     }
 
-    public void setNb_etcs(int nb_ects) {
-        this.nb_etcs = nb_ects;
+    public void setNb_ects(int nb_ects) {
+        this.nb_ects = nb_ects;
     }
 
     public float getCoefficient() {
@@ -80,5 +88,21 @@ public class Matiere {
 
     public Long getUeId() {
         return ue.getId();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Enseignant getEnseignant() {
+        return enseignant;
+    }
+
+    public void setEnseignant(Enseignant enseignant) {
+        this.enseignant = enseignant;
+    }
+
+    public Long getEnseignantId() {
+        return enseignant.getId();
     }
 }
