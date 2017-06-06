@@ -61,7 +61,7 @@ public class SemestreController {
     }
 
     @PostMapping("/exportTableSemestreToCSV")
-    public String processFormCreateCSVWithSemestreTable(HttpServletRequest request,HttpServletResponse response){
+    public String processFormCreateCSVWithSemestreTable(HttpServletRequest request){
         String csvFile= "src/main/resources/csv/" + request.getParameter("fileNameCSV");
         String codeFonction = request.getParameter("codeFonction");
         System.out.println("chemin : "+csvFile);
