@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="gestionCours.css"/>
     <script src="https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js"></script>
 
+
 </head>
 <nav class="blue-gradient">
     <div class="nav-wrapper row">
@@ -55,46 +56,34 @@
 <div id="topContainer" class="container-fluid">
     <div class="row">
         <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
             <h4>
-                <small>Contacts</small>
+                <b><small>Ma messagerie - Nouveau message</small></b>
             </h4>
+
             <div class="card">
-                <ul id="topContainerList" class="list-group" th:each="usr : ${users}">
+                <!--Card image-->
+                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap" style="margin-left:1%;border-radius: 4%" width="100"></img>
+                <!--/.Card image-->
+                <!--Card content-->
                 <div class="card-block">
                     <!--Title-->
-                    <h5 class="card-text"> <b th:utext="${usr.prenom}+${' '}+${usr.nom}"></b> <i class="fa fa-envelope-o pull-right" aria-hidden="true"></i></h5>
+                    <h5 class="card-title">Rédaction </h5>
                     <!--Text-->
-                </div>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-10">
-            <h4>
-                <b><small>Ma messagerie - Conversations</small></b>
-            </h4>
-            <ul id="topContainerList" class="list-group" th:each="msg : ${message}">
-                <!--Card-->
-                <div class="card">
-                    <!--Card image-->
-                    <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap" style="margin-left:1%;border-radius: 4%" width="100"></img>
-                    <!--/.Card image-->
-                    <!--Card content-->
-                    <div class="card-block">
-                        <!--Title-->
-                        <h5 class="card-title">Conversation :  <b th:utext="${msg.m.titre}"></b></h5>
-                        <!--Text-->
-                        <p class="card-text" >Dernier message reçu le :  <b th:utext="${msg.m.date_message}"></b></p>
-                        <p class="card-text" th:utext="${'Utilisateurs : '}+${msg.u1.prenom}+${' '}+${msg.u1.nom}+${' '}+${msg.u2.prenom}+${' '}+${msg.u2.nom}">
-                        </p>
-                        <button type="button" class="btn btn-info"  style="background-color : #2b2b2b;"><a  th:href="@{/messagerie/nouveaumessage(id=${msg.m.id})}"  >Accéder</a> </button>
+                    <p class="card-text" ></p>
+                    <textarea name="editor1"></textarea>
+                    <script>
+                        CKEDITOR.replace( 'editor1' );
+                    </script>
 
-                    </div>
-                    <!--/.Card content-->
+                    <button type="button" class="btn btn-info"  style="background-color : #2b2b2b;">Envoyer </button>
                 </div>
-            </ul>
+                <!--/.Card content-->
             </div>
-            <a id="createClass" class="btn-floating" href="#modal1"
-               style="float: right;background-color:#64b5f6 !important"><i class="material-icons">add</i></a>
+            </div>
+        <div class="col-md-2">
+        </div>
         </div>
     </div>
 </html>
