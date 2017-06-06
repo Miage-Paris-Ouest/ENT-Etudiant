@@ -27,38 +27,7 @@ public class MessagesController {
         this.messageRepository = messageRepository;
 
     }
-
-    /*public List<Messages> getMessages() {
-        List<Messages> msg = messageRepository.findAll();
-        if(msg.isEmpty()){
-            Messages vide = new Messages("Vous n'avez aucun message");
-            msg.add(vide);
-        }
-        return  msg;
-    }*/
-
-    /*public List<User> getUsersFromMessages() {
-        List<Messages> msg = messageRepository.findAll();
-        List<User>users = new ArrayList<User>();
-        long id1,id2=0;
-        User u1,u2 = new User();
-        for(Messages m : msg){
-            //recuperer pour chaque message les utilisateurs associés
-            id1 = m.getId_user1();
-            id2 = m.getId_user2();
-            u1=userRepository.findById(id1);
-            u2=userRepository.findById(id2);
-            users.add(u1);
-            users.add(u2);
-        }
-        if(msg.isEmpty()){
-            User noUser = new User();
-            noUser.setNom("Aucun message");
-            users.add(noUser);
-        }
-        return  users;
-    }*/
-
+    /*
     public List<User> getUsersFromMessages(Messages e) {
         List<Messages> msg = messageRepository.findById(e.getId());
         List<User>users = new ArrayList<User>();
@@ -76,16 +45,16 @@ public class MessagesController {
             users.add(noUser);
         }
         return  users;
-    }
+    }*/
 
     public List<dtoMessages> getMessages() {
         List<Messages> msg = messageRepository.findAll();
         List<dtoMessages> dtoList=new ArrayList<dtoMessages>();
-
-        long id1,id2=0;
-        User u1,u2 = new User();
-        dtoMessages temp = new dtoMessages();
         for(Messages e : msg){
+            long id1,id2=0;
+            User u1,u2 = new User();
+            dtoMessages temp = new dtoMessages();
+            System.out.println("-----------------------DEBUG : "+e.getTitre());
             id1 = e.getId_user1();
             id2 = e.getId_user2();
             u1=userRepository.findById(id1);
@@ -108,6 +77,7 @@ public class MessagesController {
         return  usr;
     }
 
+
     @RequestMapping(value = "/messagerie")
     public String messagerie(ModelMap model) {
         if(this.getMessages().isEmpty()){
@@ -115,10 +85,16 @@ public class MessagesController {
             messageVide.add("Vous n'avez aucun message");
             model.put("message", messageVide);
         }else{
-            model.put("message", this.getMessages());
+            List<dtoMessages> dtolist = this.getMessages();
+            model.put("message", dtolist);
         }
         model.put("users",this.getUsers());
         return "messagerie";
+    }
+
+    @RequestMapping(value = "/nouveaumessage")
+    public String nouveauMessage(ModelMap model) {
+        return "nouveaumessage";
     }
 
 }

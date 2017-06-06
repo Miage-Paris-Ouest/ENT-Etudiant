@@ -11,14 +11,12 @@ public class dtoMessages {
     public  Messages m;
     public User u1,u2;
 
-    //public Date date_message;
-    //public String nom,prenom, titre,message;
-
     public  dtoMessages(Messages m, User u1, User u2){
         this.m =m;
         this.u1=u1;
         this.u2=u2;
     }
+
 
     public  dtoMessages(){};
 
@@ -44,5 +42,11 @@ public class dtoMessages {
 
     public void setU2(User u2) {
         this.u2 = u2;
+    }
+
+    public void clearObject(){
+        this.m=null;
+        this.u1=null;
+        this.u2=null;
     }
 }
