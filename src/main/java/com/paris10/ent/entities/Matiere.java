@@ -1,5 +1,6 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Matiere {
 
     @ManyToOne
     @JoinColumn(name = "id_ue")
+    @JsonBackReference
     private UE ue;
 
     @ManyToOne

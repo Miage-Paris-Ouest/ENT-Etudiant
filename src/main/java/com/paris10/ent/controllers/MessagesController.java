@@ -1,8 +1,11 @@
 package com.paris10.ent.controllers;
 
 import com.paris10.ent.designPatterns.dtoMessages;
-import com.paris10.ent.entities.*;
-import com.paris10.ent.repositories.*;
+import com.paris10.ent.entities.Messages;
+import com.paris10.ent.entities.User;
+import com.paris10.ent.repositories.EtudiantRepository;
+import com.paris10.ent.repositories.MessageRepository;
+import com.paris10.ent.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -50,11 +53,11 @@ public class MessagesController {
     public List<dtoMessages> getMessages() {
         List<Messages> msg = messageRepository.findAll();
         List<dtoMessages> dtoList=new ArrayList<dtoMessages>();
-        for(Messages e : msg){
-            long id1,id2=0;
-            User u1,u2 = new User();
+        for (Messages e : msg) {
+            long id1, id2 = 0;
+            User u1, u2 = new User();
             dtoMessages temp = new dtoMessages();
-            System.out.println("-----------------------DEBUG : "+e.getTitre());
+            System.out.println("-----------------------DEBUG : " + e.getTitre());
             id1 = e.getId_user1();
             id2 = e.getId_user2();
             u1=userRepository.findById(id1);

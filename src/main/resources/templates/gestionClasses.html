@@ -2,59 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 
 <head>
-
-    <meta charset="utf-8"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
-    <meta http-equiv="x-ua-compatible" content="ie=edge"></meta>
-
-    <title>ENT</title>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
-
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css"/>
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
-
+    <thymeleaf th:replace="fragments/header :: header"/>
     <link rel="stylesheet" href="/css/gestionClasses.css"/>
-
-
 </head>
 
 <body ng-app="app" ng-controller="PromotionsController as pc">
 
-<nav class="blue-gradient">
-    <div class="nav-wrapper row">
-        <a href="#" class="brand-logo">Logo</a>
-
-        <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
-            <li><a href="#">Gestion des classes</a></li>
-            <li><a href="#">Gestion des Cours</a></li>
-            <li><a href="#">Gestion calendriers</a></li>
-            <li><a href="#">Gestion des fichiers</a></li>
-        </ul>
-
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
-            <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
-        </ul>
-    </div>
-
-</nav>
+<div th:replace="fragments/menu :: menu"></div>
 
 <div id="topContainer">
     <div class="row">
@@ -66,9 +20,6 @@
             </h5>
             <hr/>
             <ul id="topContainerList" class="list-group">
-                <li class="list-group-item" data-code="Tous les étudiants">Tous les étudiants <span class="date"
-                                                                                                    style="float:right"/>
-                </li>
                 <li ng-repeat="promotion in pc.promotions" ng-click="pc.getPromotion(promotion.id)"
                     class="list-group-item nomPromotion" data-code="{{ promotion.nom_promo }}">
                     {{ promotion.nom_promo }}<span class="date" style="float:right"><i>
@@ -234,37 +185,11 @@
 </div>
 </body>
 
-<!-- SCRIPTS -->
+<footer>
 
-<!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <thymeleaf th:replace="fragments/footer :: footer"/>
+    <script type="text/javascript" src="/static/js/app/promotion.controller.js"
+            th:src="@{/js/app/promotion.controller.js}"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
-
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.js"></script>
-
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/js/mdb.min.js"></script>
-
-<!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
-<!--Angular-->
-
-<script type="text/javascript" src="/static/js/lib/angular.min.js" th:src="@{/js/lib/angular.min.js}"></script>
-<script type="text/javascript" src="/static/js/app/app.module.js" th:src="@{/js/app/app.module.js}"></script>
-<script type="text/javascript" src="/static/js/app/promotion.controller.js"
-        th:src="@{/js/app/promotion.controller.js}"></script>
-
-<!-- Our scripts -->
-
-<script type="text/javascript" src="/static/js/main.js" th:src="@{/js/main.js}"></script>
-
+</footer>
 </html>

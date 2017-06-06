@@ -18,7 +18,8 @@ public class dtoMessages {
     }
 
 
-    public  dtoMessages(){};
+    public dtoMessages() {
+    }
 
     public Messages getM() {
         return m;
@@ -44,9 +45,9 @@ public class dtoMessages {
         this.u2 = u2;
     }
 
-    public void clearObject(){
-        this.m=null;
-        this.u1=null;
-        this.u2=null;
+    public void clearObject() {
+        this.m = null;
+        this.u1 = null;
+        this.u2 = null;
     }
 }
