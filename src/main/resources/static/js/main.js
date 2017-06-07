@@ -92,4 +92,5 @@ $(function () {
     $('#addStudentButton').click(function () {
         $('#addStudentForm').show();
     });
+
 });

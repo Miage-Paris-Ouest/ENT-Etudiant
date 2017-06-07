@@ -3,10 +3,10 @@
  */
 $(function()
 {
-    $("#gestionClassesMenuTab").click(loadGestionClassesContainer());
-    $("#gestionCoursMenuTab").click(loadGestionCoursContainer());
-    $("#gestionFichiersMenuTab").click(loadGestionFichiersContainer());
-    $("#gestionCalendriersMenuTab").click(loadGestionCalendriersContainer());
+    // $("#gestionClassesMenuTab").click(loadGestionClassesContainer());
+    // $("#gestionCoursMenuTab").click(loadGestionCoursContainer());
+    // $("#gestionFichiersMenuTab").click(loadGestionFichiersContainer());
+    // $("#gestionCalendriersMenuTab").click(loadGestionCalendriersContainer());
 });
 
 function loadGestionClassesContainer()

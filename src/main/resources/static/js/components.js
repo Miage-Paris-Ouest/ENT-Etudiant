@@ -7,6 +7,12 @@ $(function()
     //     theme: "dark"
     // });
 
+    $("#accueilTab").click(function()
+    {
+        $(".activeTab").removeClass("activeTab");
+        $("#calendrierContainer").addClass("activeTab");
+    });
+
     $("#maClasseTab").click(function()
     {
         $(".activeTab").removeClass("activeTab");

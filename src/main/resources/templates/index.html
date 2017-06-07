@@ -40,13 +40,14 @@
         <a href="#" class="brand-logo">Logo</a>
 
         <ul id="nav-mobile" class="col s6 offset-s1 left hide-on-med-and-down">
+            <li id="accueilTab"><a href="#">Accueil</a></li>
             <li id="maClasseTab"><a href="#">Ma Classe</a></li>
             <li id="mesCoursTab"><a href="#">Mes Cours</a></li>
             <li id="mesFichiersTab"><a href="#">Mes Fichiers</a></li>
             <li id="simulateurTab"><a href="#">Simulateur Notes</a></li>
         </ul>
 
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <ul class="right hide-on-med-and-down">
             <li id="messagerieTab"><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
             <li id="monCompteTab"><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
         </ul>
@@ -57,7 +58,32 @@
 <div class="ng-view"></div>
 
 <div id="mainContainer">
-    <div id="maClasseContainer" class="activeTab">
+
+    <div id="calendrierContainer" class="activeTab">
+        <div style="margin-top:25px">
+            <div>
+                <h4>Calendrier</h4>
+                <div style="width:100%;height:540px">
+                    <div>
+                        <div> </div>
+                        <div> </div>
+                        <div></div>
+                        <div></div>
+                        <div> </div>
+                        <div name="day_tab" style="right:204px"></div>
+                        <div name="week_tab" style="right:140px"></div>
+                        <div name="month_tab" style="right:76px"></div>
+                    </div>
+                    <div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="maClasseContainer">
 
         <div class="row">
             <div id="newsContainer" class="col s9 m9 l9">
@@ -106,7 +132,7 @@
                 </div>
             </div>
             <div id="rightPanel" class="col s3 m3 l3 z-depth-2">
-                <div id="classInfo">
+                <div id="classInfo" th:attr="data-id=${promo.id}">
                     <h5>
                         <small>Informations</small>
                     </h5>
@@ -198,7 +224,7 @@
                 <div id="topRightContainer" class="col s9" style="height: 800px;padding:10px;">
                     <h5><small id="selectedTerm"></small></h5>
                     <hr/>
-                    <table id="marksTable" class="table table-sm table-hover">
+                    <table id="marksTable" class="table table-sm table-hover" style="display:none">
                         <thead>
                         <tr>
                             <th>Matière</th>
@@ -352,6 +378,7 @@
 <script type="text/javascript" src="../static/js/components.js" th:src="@{/js/components.js}"></script>
 <script type="text/javascript" src="../static/js/monCompte.js" th:src="@{/js/monCompte.js}"></script>
 <script type="text/javascript" src="../static/js/simulation.js" th:src="@{/js/simulation.js}"></script>
+<script type="text/javascript" src="../static/js/maClasse.js" th:src="@{/js/maClasse.js}"></script>
 
 </body>
 

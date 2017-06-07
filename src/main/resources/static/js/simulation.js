@@ -26,6 +26,9 @@ $(function()
 
     $("#topContainerTermsList").on("click", ".list-group-item", function()
     {
+    	$(".active").removeClass("active");
+    	$(this).addClass("active");
+
         $("#marksTable, #emptyUeTable").hide();
         var id = $(this).attr("id");
         // alert($(this).text()+" => id : "+id);

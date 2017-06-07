@@ -10,7 +10,9 @@ public class Fichier {
     @Column(name = "id_fichier")
     private long id;
 
-    private String nom_fichier, chemin;
+    @Column(name = "nom_fichier")
+    private String nom;
+    private String chemin;
     private boolean visible;
     // TODO Relation ManyToOne pour les ids
     private int id_etudiant, id_matiere;
@@ -19,7 +21,7 @@ public class Fichier {
     }
 
     public Fichier(String nom_fichier, String chemin, boolean visible, int id_etudiant, int id_matiere) {
-        this.nom_fichier = nom_fichier;
+        this.nom = nom_fichier;
         this.chemin = chemin;
         this.visible = visible;
         this.id_etudiant = id_etudiant;
@@ -35,11 +37,11 @@ public class Fichier {
     }
 
     public String getNom_fichier() {
-        return nom_fichier;
+        return nom;
     }
 
     public void setNom_fichier(String nom_fichier) {
-        this.nom_fichier = nom_fichier;
+        this.nom = nom_fichier;
     }
 
     public String getChemin() {

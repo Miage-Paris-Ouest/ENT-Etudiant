@@ -1,5 +1,6 @@
 package com.paris10.ent.controllers;
 
+import com.paris10.ent.designPatterns.Validation;
 import com.paris10.ent.entities.User;
 import com.paris10.ent.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -24,11 +26,14 @@ public class UserController
     @Autowired
     UserRepository userRepository;
 
+    Validation validation = new Validation();
+
     @RequestMapping("/")
     public String init(@PathVariable long id, Model model, HttpSession session)
     {
         model.addAttribute("user", session.getAttribute("user"));
-        return "monCompte";
+
+        return validation.userType(session) =="na" ? "login" : "monCompte";
     }
 
     @RequestMapping(path = "/{id}/password", method = POST)
