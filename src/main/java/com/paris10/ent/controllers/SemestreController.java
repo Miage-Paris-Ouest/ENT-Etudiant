@@ -6,6 +6,7 @@ import com.paris10.ent.repositories.MatiereRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Youssef on 04/05/2017.
@@ -34,7 +36,10 @@ public class SemestreController {
     }
 
     @GetMapping("/creer")
-    public String createSemestre(@ModelAttribute Semestre semestre){
+    public String createSemestre(ModelMap model){
+        model.put("semestre",new Semestre());
+        List<Semestre> s=semestreRepository.findAll();
+        model.addAttribute("semestres",s);
         return "createSemestre";
     }
 
