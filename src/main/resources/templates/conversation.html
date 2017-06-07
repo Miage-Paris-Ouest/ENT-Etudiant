@@ -47,7 +47,7 @@
         </ul>
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li><a href="/messagerie/messagerie"><i class="material-icons left">mail</i>Messagerie</a></li>
             <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
         </ul>
     </div>
@@ -62,12 +62,12 @@
                     <small>Ma messagerie - Conversation</small>
                 </b>
             </h4>
-            <div id="results-block">
+            <div id="results-block" style="height: 300px;overflow: auto;">
             <div class="row" th:each="msg : ${conversation}">
                 <div class="col-md-6" style="font-size: 20px;">
                     <div th:if="${msg.u1.id==1 and msg.u2.id==2}">
                         <span th:if="${msg.u1.id==1 and msg.u2.id==2} " class="label label-info"
-                              th:text="${msg.u1.prenom}+${' '}+${msg.u1.nom}+${' : '}+${msg.m.message}"></span>
+                              th:utext="${msg.u1.prenom}+${' '}+${msg.u1.nom}+${' : '}+${msg.m.message}"></span>
                     </div>
                 </div>
                 <div class="col-md-6" style="font-size: 20px;">
@@ -88,8 +88,8 @@
                             <!--Text-->
                             <p class="card-text"></p>
                             <form id="customerForm">
-                                <input type="hidden" id="id_user1" value="1"/>
-                                <input type="hidden" id="id_user2" value="2"/>
+                                <input type="hidden" id="id_user1" value="2"/>
+                                <input type="hidden" id="id_user2" value="1"/>
                                 <textarea name="message"></textarea>
                                 <script>
                                     CKEDITOR.replace('message');
@@ -112,6 +112,12 @@
 
             $("#results-block").load(url);
         }
+        function scrollSmoothToBottom (id) {
+            var div = document.getElementById(id);
+            $('#' + id).animate({
+                scrollTop: div.scrollHeight - div.clientHeight
+            }, 500);
+        }
 
         var url = window.location;
 
@@ -121,6 +127,8 @@
             event.preventDefault();
             ajaxPost();
         });
+
+
 
         function ajaxPost() {
             // PREPARE FORM DATA
@@ -140,6 +148,7 @@
                     if (result == "Done") {
                         //$("#postResultDiv").html("OK");
                         reloadConv();
+                        scrollSmoothToBottom('results-block');
                     } else {
                         $("#postResultDiv").html("<strong>Error</strong>");
                     }

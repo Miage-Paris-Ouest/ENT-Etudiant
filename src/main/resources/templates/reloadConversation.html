@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<div th:fragment="convReload" id="results-block">
+<div th:fragment="convReload" id="results-block" style="height: 300px;overflow: auto;">
     <div class="row" th:each="msg : ${conversation}">
         <div class="col-md-6" style="font-size: 20px;">
             <div th:if="${msg.u1.id==1 and msg.u2.id==2}">

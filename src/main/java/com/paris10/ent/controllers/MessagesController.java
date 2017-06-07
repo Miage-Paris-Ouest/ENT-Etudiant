@@ -18,10 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/messagerie")
@@ -79,6 +76,34 @@ public class MessagesController {
         return  dtoList;
     }
 
+    public List<dtoMessages> getConversation() {
+        //find all distinct titre
+        //pour chaque titre, récuperer un message, mettre le message dans la liste msg
+        List<Messages> msg = new ArrayList<Messages>();
+        List<String> titres = messageRepository.findConvTitre();
+
+        for (String titre : titres) {
+            if(!titre.equals("")) msg.add(messageRepository.findByTitre(titre));
+        }
+
+
+        List<dtoMessages> dtoList=new ArrayList<dtoMessages>();
+        for (Messages e : msg) {
+            long id1, id2 = 0;
+            User u1, u2 = new User();
+            dtoMessages temp = new dtoMessages();
+            id1 = e.getId_user1();
+            id2 = e.getId_user2();
+            u1=userRepository.findById(id1);
+            u2=userRepository.findById(id2);
+            temp.setM(e);
+            temp.setU1(u1);
+            temp.setU2(u2);
+            dtoList.add(temp);
+        }
+        return  dtoList;
+    }
+
     public List<User> getUsers() {
         List<User> usr = userRepository.findAll();
         if(usr.isEmpty()){
@@ -95,12 +120,12 @@ public class MessagesController {
 
     @RequestMapping(value = "/messagerie")
     public String messagerie(ModelMap model) {
-        if(this.getMessages().isEmpty()){
+        if(this.getConversation().isEmpty()){
             List<String> messageVide = new ArrayList<String>();
             messageVide.add("Vous n'avez aucun message");
             model.put("message", messageVide);
         }else{
-            List<dtoMessages> dtolist = this.getMessages();
+            List<dtoMessages> dtolist = this.getConversation();
             model.put("message", dtolist);
         }
 
@@ -136,18 +161,6 @@ public class MessagesController {
         return "reloadConversation :: convReload";
     }
 
-    /*@RequestMapping(value = "/postcustomer", method = RequestMethod.POST)
-    public ResponseMapper envoi(@RequestParam("message") String message, @RequestParam("u1") String user1Id, @RequestParam("u2") String user2Id,  @RequestParam("titre") String titre) {
-        System.out.println("Message : "+message+" utilisateur : "+user1Id + " utilisateur 2 : "+user2Id);
-        Messages msg = new Messages();
-        msg.setMessage(message);
-        msg.setId_user1(Integer.parseInt(user1Id));
-        msg.setId_user2(Integer.parseInt(user2Id));
-
-        ResponseMapper response = new ResponseMapper("Done", msg);
-        return response;
-    }*/
-
     @RequestMapping(value = "/postcustomer", method = RequestMethod.POST)
     @ResponseBody
     public String postCustomer(@RequestBody ChatMessage chatMessage) {
@@ -166,11 +179,9 @@ public class MessagesController {
         msg.setDate_message(date);
         msg.setLu1(1);
         msg.setLu2(0);
-        msg.setTitre("TEST AJOUT");
         System.out.println("\t Date now : "+date);
         messageRepository.save(msg);
         ResponseMapper responseMapper = new ResponseMapper("Done", chatMessage);
-        
         return "Done";
     }
     /*@RequestMapping(value = "/postcustomer", method = RequestMethod.POST)
