@@ -1,38 +1,59 @@
-/*
 package com.paris10.ent.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "note_fichier")
-public class NoteFichier {
-    private int id_etudiant, id_fichier;
+@IdClass(NoteFichierId.class)
+public class NoteFichier implements Serializable {
+
+    @Id
+    @Column(name = "id_user")
+    private long id_etudiant;
+
+    @Id
+    @Column(name = "id_fichier")
+    private long id_fichier;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user", insertable = false, updatable = false)
+    @JsonBackReference(value = "etudiant-notes-fichier")
+    private Etudiant etudiant;
+
+    @ManyToOne
+    @JoinColumn(name = "id_fichier", insertable = false, updatable = false)
+    @JsonBackReference(value = "fichier-notes")
+    private Fichier fichier;
+
     private float evaluation_fichier;
 
     public NoteFichier() {
     }
 
-    public NoteFichier(int id_etudiant, int id_fichier, float evaluation_fichier) {
-        this.id_etudiant = id_etudiant;
-        this.id_fichier = id_fichier;
+
+    public NoteFichier(Etudiant etudiant, Fichier fichier, float evaluation_fichier) {
+        this.etudiant = etudiant;
+        this.fichier = fichier;
         this.evaluation_fichier = evaluation_fichier;
     }
 
-    public int getId_etudiant() {
-        return id_etudiant;
+    public Etudiant getEtudiant() {
+        return etudiant;
     }
 
-    public void setId_etudiant(int id_etudiant) {
-        this.id_etudiant = id_etudiant;
+    public void setEtudiant(Etudiant etudiant) {
+        this.etudiant = etudiant;
     }
 
-    public int getId_fichier() {
-        return id_fichier;
+    public Fichier getFichier() {
+        return fichier;
     }
 
-    public void setId_fichier(int id_fichier) {
-        this.id_fichier = id_fichier;
+    public void setFichier(Fichier fichier) {
+        this.fichier = fichier;
     }
 
     public float getEvaluation_fichier() {
@@ -42,5 +63,20 @@ public class NoteFichier {
     public void setEvaluation_fichier(float evaluation_fichier) {
         this.evaluation_fichier = evaluation_fichier;
     }
+
+    public long getId_etudiant() {
+        return id_etudiant;
+    }
+
+    public void setId_etudiant(long id_etudiant) {
+        this.id_etudiant = id_etudiant;
+    }
+
+    public long getId_fichier() {
+        return id_fichier;
+    }
+
+    public void setId_fichier(long id_fichier) {
+        this.id_fichier = id_fichier;
+    }
 }
-*/

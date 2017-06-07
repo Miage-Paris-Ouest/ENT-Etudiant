@@ -53,3 +53,8 @@ nav a:hover {
     padding: 15px;
     border-right: .8px solid #efefef;
 }
+
+#commentaires_fichiers {
+    display: none;
+    margin-top: 20px;
+}

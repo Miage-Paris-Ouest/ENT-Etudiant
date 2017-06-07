@@ -1,8 +1,10 @@
 package com.paris10.ent.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "fichier")
@@ -14,16 +16,24 @@ public class Fichier {
 
     private String nom_fichier, chemin;
     private boolean visible;
-    // TODO Relation ManyToOne pour les ids
 
     @ManyToOne
     @JoinColumn(name = "id_matiere")
+    @JsonBackReference(value = "matiere-fichier")
     private Matiere matiere;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    @JsonBackReference
+    @JsonBackReference(value = "user-fichier")
     private User user;
+
+    @OneToMany(mappedBy = "fichier")
+    @JsonManagedReference(value = "fichier-notes")
+    private List<NoteFichier> notes;
+
+    @OneToMany(mappedBy = "fichier")
+    @JsonManagedReference(value = "commentaire-fichier")
+    private List<Commentaire> commentaires;
 
     public Fichier() {
     }
@@ -86,5 +96,21 @@ public class Fichier {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<NoteFichier> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<NoteFichier> notes) {
+        this.notes = notes;
+    }
+
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
     }
 }

@@ -108,11 +108,29 @@
                 <li class="list-group-item" ng-repeat="cour in vm.cours">
                     <a href="#">{{cour.nom_fichier}}</a>
                     <button id="commentFile" class="fa fa-commenting"
-                            style="float: right; !important" data-toggle="modal" data-target=""></button>
-                    <button id="addUpVote" class="fa fa-thumbs-o-up"
-                            style="float: right; !important" data-toggle="modal" data-target=""></button>
+                            style="float: right; !important" data-toggle="modal" data-target=""
+                            ng-click="vm.getComment(cour.id)"></button>
                     <button id="addDownVote" class="fa fa-thumbs-o-down"
-                            style="float: right; !important" data-toggle="modal" data-target=""></button>
+                            style="float: right; !important" data-toggle="modal" data-target=""
+                            ng-click="vm.voteForFile(cour.id, 1, -1)"> {{cour.negativeNote}}
+                    </button>
+                    <button id="addUpVote" class="fa fa-thumbs-o-up"
+                            style="float: right; !important" data-toggle="modal" data-target=""
+                            ng-click="vm.voteForFile(cour.id, 1, 1)"> {{cour.positiveNote}}
+                    </button>
+                    <div id="commentaires_fichiers">
+                        <div ng-repeat="commentaire in vm.commentaires">
+                            <hr/>
+                            <i>{{commentaire.commentaire}}</i>
+                        </div>
+                        <hr/>
+                        <input id="commentaireInput" placeholder="Votre commentaire"
+                               ng-model="commentaire.commentaire"/>
+                        <button class="btn btn-default btn-small"
+                                ng-click="vm.ajouterCommentaire(cour.id, 1, commentaire.commentaire)">
+                            Ajouter commentaire
+                        </button>
+                    </div>
                 </li>
             </ul>
         </div>

@@ -15,8 +15,12 @@ public class User {
     private long id;
 
     @OneToMany(mappedBy = "user")
-    @JsonManagedReference
+    @JsonManagedReference(value = "user-fichier")
     private List<Fichier> fichiers;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "commentaire-user")
+    private List<Commentaire> commentaires;
 
     private String nom, prenom, email, mdp;
 
@@ -92,5 +96,13 @@ public class User {
 
     public void setFichiers(List<Fichier> fichiers) {
         this.fichiers = fichiers;
+    }
+
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
     }
 }

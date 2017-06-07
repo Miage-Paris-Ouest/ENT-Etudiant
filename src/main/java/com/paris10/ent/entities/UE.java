@@ -27,7 +27,7 @@ public class UE {
     private Promotion promotion;
 
     @OneToMany(mappedBy = "ue")
-    @JsonManagedReference
+    @JsonManagedReference(value = "ue-matiere")
     private List<Matiere> matiere;
 
     public UE() {

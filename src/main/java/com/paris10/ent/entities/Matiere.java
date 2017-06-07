@@ -1,9 +1,11 @@
 package com.paris10.ent.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "matiere")
@@ -25,12 +27,18 @@ public class Matiere {
 
     @ManyToOne
     @JoinColumn(name = "id_ue")
-    @JsonBackReference
+    @JsonBackReference(value = "ue-matiere")
     private UE ue;
 
     @ManyToOne
     @JoinColumn(name = "id_enseignant")
+    @JsonBackReference(value = "enseignant-matiere")
     private Enseignant enseignant;
+
+    @OneToMany(mappedBy = "matiere")
+    @JsonManagedReference(value = "matiere-fichier")
+    private List<Fichier> fichiers;
+
 
     public Matiere() {
     }
@@ -102,5 +110,13 @@ public class Matiere {
 
     public Long getEnseignantId() {
         return enseignant.getId();
+    }
+
+    public List<Fichier> getFichiers() {
+        return fichiers;
+    }
+
+    public void setFichiers(List<Fichier> fichiers) {
+        this.fichiers = fichiers;
     }
 }
