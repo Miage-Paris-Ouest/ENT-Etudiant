@@ -1,5 +1,7 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,17 +16,24 @@ public class Commentaire {
     private String commentaire;
     private Date date_commentaire;
 
-    // TODO Relation ManyToOne à creer pour les deux ids
-    private int id_etudiant, id_fichier;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    @JsonBackReference(value = "commentaire-user")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_fichier")
+    @JsonBackReference(value = "commentaire-fichier")
+    private Fichier fichier;
 
     public Commentaire() {
     }
 
-    public Commentaire(String commentaire, Date date_commentaire, int id_etudiant, int id_fichier) {
+    public Commentaire(String commentaire, Date date_commentaire, User user, Fichier fichier) {
         this.commentaire = commentaire;
         this.date_commentaire = date_commentaire;
-        this.id_etudiant = id_etudiant;
-        this.id_fichier = id_fichier;
+        this.user = user;
+        this.fichier = fichier;
     }
 
     public long getId() {
@@ -51,19 +60,19 @@ public class Commentaire {
         this.date_commentaire = date_commentaire;
     }
 
-    public int getId_etudiant() {
-        return id_etudiant;
+    public User getUser() {
+        return user;
     }
 
-    public void setId_etudiant(int id_etudiant) {
-        this.id_etudiant = id_etudiant;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getId_fichier() {
-        return id_fichier;
+    public Fichier getFichier() {
+        return fichier;
     }
 
-    public void setId_fichier(int id_fichier) {
-        this.id_fichier = id_fichier;
+    public void setFichier(Fichier fichier) {
+        this.fichier = fichier;
     }
 }

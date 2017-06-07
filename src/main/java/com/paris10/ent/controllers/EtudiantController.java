@@ -5,10 +5,8 @@ import com.paris10.ent.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +23,12 @@ public class EtudiantController {
     private FichierRepository fichierRepository;
 
     @Autowired
-    public EtudiantController(EtudiantRepository etudiantRepository, UserRepository userRepository, PromotionRepository promotionRepository, UeRepository ueRepository, MatiereRepository matiereRepository, FichierRepository fichierRepository) {
+    public EtudiantController(EtudiantRepository etudiantRepository,
+                              UserRepository userRepository,
+                              PromotionRepository promotionRepository,
+                              UeRepository ueRepository,
+                              MatiereRepository matiereRepository,
+                              FichierRepository fichierRepository) {
         this.etudiantRepository = etudiantRepository;
         this.userRepository = userRepository;
         this.promotionRepository = promotionRepository;
@@ -69,6 +72,7 @@ public class EtudiantController {
 
     @RequestMapping(value = "/mescours")
     public String mesCours() {
+
         return "mesCours";
     }
 
@@ -77,6 +81,21 @@ public class EtudiantController {
         model.addAttribute("etudiants", etudiantRepository.findAll());
         model.addAttribute("promotions", promotionRepository.findAll());
         return "gestionClasses";
+    }
+
+    @GetMapping("/addFichier/{id_matiere}/{chemin}/{nom_fichier}")
+    public String addFichierOfMatiere(@PathVariable Long id_matiere, @PathVariable String nom_fichier, @PathVariable String chemin){
+        Fichier fichier = new Fichier(
+                nom_fichier,
+                chemin,
+                true,
+                matiereRepository.findById(id_matiere),
+                userRepository.findById(new Long(1))
+        );
+
+        fichierRepository.save(fichier);
+
+        return "redirect:/etudiant/mescours";
     }
 
 //    private void saveStudent() {

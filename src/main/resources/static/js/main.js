@@ -6,7 +6,7 @@ $(function () {
 
     $('select').material_select();
 
-    $(".modal").modal();
+    // $(".modal").modal();
 
     $("#allCoursesList, #currentCoursesList").sortable({
         connectWith: ".connectedSortable",

@@ -1,5 +1,6 @@
 package com.paris10.ent.controllers;
 
+import com.paris10.ent.entities.Fichier;
 import com.paris10.ent.storage.StorageFileNotFoundException;
 import com.paris10.ent.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -26,8 +28,9 @@ public class FileUploadController {
         this.storageService = storageService;
     }
 
-    @GetMapping("/upload")
-    public String listUploadedFiles(Model model) throws IOException {
+    @GetMapping("/upload/{id_matiere}")
+    public String listUploadedFiles(Model model, @PathVariable Long id_matiere, @ModelAttribute Fichier fichier) throws IOException {
+        model.addAttribute("id_matiere", id_matiere);
 
         model.addAttribute("files", storageService
                 .loadAll()
@@ -51,15 +54,20 @@ public class FileUploadController {
                 .body(file);
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/file/{id_matiere}")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
+                                   RedirectAttributes redirectAttributes,
+                                   @Validated Fichier fichier,
+                                   @PathVariable Long id_matiere) {
 
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
 
-        return "redirect:/upload";
+        String nom_fichier = fichier.getNom_fichier();
+        String chemin = fichier.getChemin();
+
+        return "redirect:/etudiant/addFichier/" + id_matiere + "/" + chemin+ "/" + nom_fichier;
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

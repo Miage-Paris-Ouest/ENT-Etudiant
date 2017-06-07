@@ -1,26 +1,106 @@
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+
+    <title>Ajouter un cours</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS
+    <link th:href="@{/bootstrap.css}" rel="stylesheet"/>-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css"/>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
+
+</head>
 <body>
+<nav class="blue-gradient">
+    <div class="nav-wrapper row">
+        <a href="#" class="brand-logo">Logo</a>
 
-	<div th:if="${message}">
-		<h2 th:text="${message}"/>
-	</div>
+        <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
+            <li><a href="#">Gestion des classes</a></li>
+            <li><a th:href="@{'/etudiant/mescours'}">Gestion des Cours</a></li>
+            <li><a href="#">Gestion calendriers</a></li>
+            <li><a href="#">Gestion des fichiers</a></li>
+        </ul>
 
-	<div>
-		<form method="POST" enctype="multipart/form-data" action="/">
-			<table>
-				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
-				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
-			</table>
-		</form>
-	</div>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+        </ul>
+    </div>
+</nav>
+<div style="height: 20%"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="formAjout" class="row" ng-app="app" ng-controller="CoursController as vm">
+                <div class="col-md-3">
+                </div>
+                <form method="POST" enctype="multipart/form-data" th:object="${fichier}" th:action="@{/file/__${id_matiere}__}">
+                    <div class="col-md-6 card">
+                        <div class="row card-block">
+                            <div class="form-header blue-gradient">
+                                <h3><i class="fa fa-user"></i> Ajouter cours</h3>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="md-form">
+                                    <input type="text" id="nom" class="form-control" th:field="*{nom_fichier}"/>
+                                    <label for="nom">Nom du document</label>
+                                </div>
 
-	<div>
-		<ul>
-			<li th:each="file : ${files}">
-				<a th:href="${file}" th:text="${file}" />
-			</li>
-		</ul>
-	</div>
+                                <div class="file-field">
+                                    <div class="btn btn-primary btn-sm">
+                                        <span>Choose file</span>
+                                        <input type="file" name="file"/>
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text" placeholder="Upload your file" th:field="*{chemin}"/>
+                                    </div>
+                                </div>
+
+                                <button value="Upload" class="btn btn-indigo">Upload</button>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
+<footer>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="/static/js/main.js" th:src="@{/js/main.js}"></script>
+    <script type="text/javascript" src="/static/js/lib/angular.min.js" th:src="@{/js/lib/angular.min.js}" />
+    <script type="text/javascript" src="/static/js/app/app.module.js" th:src="@{/js/app/app.module.js}" />
+    <script type="text/javascript" src="/static/js/lib/materialize.min.js" th:src="@{/js/lib/materialize.min.js}" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</footer>
 </html>

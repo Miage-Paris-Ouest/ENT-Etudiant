@@ -1,6 +1,10 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "fichier")
@@ -12,23 +16,34 @@ public class Fichier {
 
     private String nom_fichier, chemin;
     private boolean visible;
-    // TODO Relation ManyToOne pour les ids
-    private long id_etudiant;
 
     @ManyToOne
     @JoinColumn(name = "id_matiere")
+    @JsonBackReference(value = "matiere-fichier")
     private Matiere matiere;
 
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    @JsonBackReference(value = "user-fichier")
+    private User user;
+
+    @OneToMany(mappedBy = "fichier")
+    @JsonManagedReference(value = "fichier-notes")
+    private List<NoteFichier> notes;
+
+    @OneToMany(mappedBy = "fichier")
+    @JsonManagedReference(value = "commentaire-fichier")
+    private List<Commentaire> commentaires;
 
     public Fichier() {
     }
 
-    public Fichier(String nom_fichier, String chemin, boolean visible, long id_etudiant, Matiere matiere) {
+    public Fichier(String nom_fichier, String chemin, boolean visible, Matiere matiere, User user) {
         this.nom_fichier = nom_fichier;
         this.chemin = chemin;
         this.visible = visible;
-        this.id_etudiant = id_etudiant;
         this.matiere = matiere;
+        this.user = user;
     }
 
     public long getId() {
@@ -63,19 +78,39 @@ public class Fichier {
         this.visible = visible;
     }
 
-    public long getId_etudiant() {
-        return id_etudiant;
-    }
-
-    public void setId_etudiant(long id_etudiant) {
-        this.id_etudiant = id_etudiant;
-    }
-
     public Matiere getMatiere() {
         return matiere;
     }
 
     public Long getMatiereId() {
         return matiere.getId();
+    }
+
+    public void setMatiere(Matiere matiere) {
+        this.matiere = matiere;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<NoteFichier> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<NoteFichier> notes) {
+        this.notes = notes;
+    }
+
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
     }
 }

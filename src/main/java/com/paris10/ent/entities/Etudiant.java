@@ -1,8 +1,10 @@
 package com.paris10.ent.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "etudiant")
@@ -19,8 +21,12 @@ public class Etudiant {
 
     @ManyToOne
     @JoinColumn(name = "id_promotion")
-    @JsonBackReference
+    @JsonBackReference(value = "etudiant-promotion")
     private Promotion promotion;
+
+    @OneToMany(mappedBy = "etudiant")
+    @JsonManagedReference(value = "etudiant-notes-fichier")
+    private List<NoteFichier> notes;
 
     @Enumerated(EnumType.STRING)
     private RoleEtudiant role_etudiant;
@@ -76,5 +82,13 @@ public class Etudiant {
 
     public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
+    }
+
+    public List<NoteFichier> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<NoteFichier> notes) {
+        this.notes = notes;
     }
 }

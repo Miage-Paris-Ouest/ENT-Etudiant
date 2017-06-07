@@ -15,8 +15,11 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
-    <!-- Bootstrap core CSS -->
-    <link th:href="@{/bootstrap.css}" rel="stylesheet"/>
+    <!-- Bootstrap core CSS
+    <link th:href="@{/bootstrap.min.css}" rel="stylesheet"/>-->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
@@ -30,11 +33,10 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
 
-    <link th:href="@{/css/app/gestionCours.css}" rel="stylesheet"/>
+    <link th:href="@{/css/gestionCours.css}" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    >
-    <script type="text/javascript" src="/static/js/app/main.js" th:src="@{/js/app/main.js}"></script>
+    <script type="text/javascript" src="/static/js/main.js" th:src="@{/js/main.js}"></script>
     <script type="text/javascript" src="/static/js/lib/angular.min.js" th:src="@{/js/lib/angular.min.js}"/>
     <script type="text/javascript" src="/static/js/app/app.module.js" th:src="@{/js/app/app.module.js}"/>
     <script type="text/javascript" src="/static/js/app/cours.controller.js" th:src="@{/js/app/cours.controller.js}"/>
@@ -49,7 +51,7 @@
 
         <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
             <li><a href="#">Gestion des classes</a></li>
-            <li><a href="#">Gestion des Cours</a></li>
+            <li><a th:href="@{'/etudiant/mescours'}">Gestion des Cours</a></li>
             <li><a href="#">Gestion calendriers</a></li>
             <li><a href="#">Gestion des fichiers</a></li>
         </ul>
@@ -68,12 +70,11 @@
                 <small>Liste des cours</small>
             </h5>
             <ul id="topContainerList" class="list-group">
-                <li class="list-group-item" ng-repeat="matiere in vm.matieres"><a
-                        ng-click="vm.getAllCoursOfMatiere(matiere.id)">{{matiere.nom_matiere}}</a></li>
+                <li class="list-group-item" ng-repeat="matiere in vm.matieres">
+                    <a ng-click="vm.getAllCoursOfMatiere(matiere.id)">{{matiere.nom_matiere}}</a>
+                    <a id="addCours" class="fa fa-plus-circle" href="/upload/{{matiere.id}}" style="float: right; !important"></a>
+                </li>
             </ul>
-            <button id="addCoursFile" class="btn-floating"
-                    style="float: right;background-color:#64b5f6 !important" data-toggle="modal" data-target="#myModal">
-                <i class="material-icons">add</i></button>
 
             <div id="myModal" class="modal modal-fixed-footer">
                 <div class="modal-content" style="text-align: center">
@@ -83,19 +84,10 @@
                     </h4>
                     <hr/>
 
-                    <form id="addCoursForm">
+                    <form id="addCoursForm" method="POST" action="/upload">
                         <div class="row">
                             <div class="input-field offset-s3 col s6">
                                 <input id="nom_fichier" class="validate" placeholder="Nom fichier" ng-model="file.nom"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="offset-s3 col s6">
-                                <select id="test" name="test">
-                                    <option value="jean">Jean</option>
-                                    <option value="marc">Marc</option>
-                                </select>
-                                <!--<select ng-model="matiere_fichier" ng-options="cour.nom_matiere for cour in vm.cours">-->
                             </div>
                         </div>
                     </form>
@@ -109,9 +101,37 @@
             </div>
         </div>
         <div id="centerContainer" class="col s5 z-depth-2">
-            <h4>Derniers cours ajoutés</h4>
+            <h5>
+                <small>Derniers cours ajoutés</small>
+            </h5>
             <ul id="middleContainerList" class="list-group">
-                <li class="list-group-item" ng-repeat="cour in vm.cours">{{cour.nom_fichier}}</li>
+                <li class="list-group-item" ng-repeat="cour in vm.cours">
+                    <a href="#">{{cour.nom_fichier}}</a>
+                    <button id="commentFile" class="fa fa-commenting"
+                            style="float: right; !important" data-toggle="modal" data-target=""
+                            ng-click="vm.getComment(cour.id)"></button>
+                    <button id="addDownVote" class="fa fa-thumbs-o-down"
+                            style="float: right; !important" data-toggle="modal" data-target=""
+                            ng-click="vm.voteForFile(cour.id, 1, -1)"> {{cour.negativeNote}}
+                    </button>
+                    <button id="addUpVote" class="fa fa-thumbs-o-up"
+                            style="float: right; !important" data-toggle="modal" data-target=""
+                            ng-click="vm.voteForFile(cour.id, 1, 1)"> {{cour.positiveNote}}
+                    </button>
+                    <div id="commentaires_fichiers">
+                        <div ng-repeat="commentaire in vm.commentaires">
+                            <hr/>
+                            <i>{{commentaire.commentaire}}</i>
+                        </div>
+                        <hr/>
+                        <input id="commentaireInput" placeholder="Votre commentaire"
+                               ng-model="commentaire.commentaire"/>
+                        <button class="btn btn-default btn-small"
+                                ng-click="vm.ajouterCommentaire(cour.id, 1, commentaire.commentaire)">
+                            Ajouter commentaire
+                        </button>
+                    </div>
+                </li>
             </ul>
         </div>
         <div id="topRightContainer" class="col s4 z-depth-2">

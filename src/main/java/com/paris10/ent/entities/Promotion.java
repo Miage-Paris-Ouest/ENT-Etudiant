@@ -17,7 +17,7 @@ public class Promotion {
     private String nom_promo, annee;
 
     @OneToMany(mappedBy = "promotion")
-    @JsonManagedReference
+    @JsonManagedReference(value = "etudiant-promotion")
     private List<Etudiant> les_etudiants;
 
 //    @OneToMany

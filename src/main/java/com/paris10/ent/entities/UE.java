@@ -1,7 +1,7 @@
 package com.paris10.ent.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -10,7 +10,6 @@ import java.util.List;
 @Entity
 @Table(name = "ue")
 public class UE {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_ue")
@@ -28,7 +27,7 @@ public class UE {
     private Promotion promotion;
 
     @OneToMany(mappedBy = "ue")
-    @JsonManagedReference
+    @JsonManagedReference(value = "ue-matiere")
     private List<Matiere> matiere;
 
     public UE() {

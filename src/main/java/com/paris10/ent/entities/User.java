@@ -1,6 +1,9 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -11,10 +14,15 @@ public class User {
     @Column(name = "id_user")
     private long id;
 
-    @Column(name = "mdp")
-    private String mdp;
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "user-fichier")
+    private List<Fichier> fichiers;
 
-    private String nom, prenom, email;
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "commentaire-user")
+    private List<Commentaire> commentaires;
+
+    private String nom, prenom, email, mdp;
 
     @Enumerated(EnumType.STRING)
     private TypeUser type;
@@ -80,5 +88,21 @@ public class User {
 
     public void setType(TypeUser type) {
         this.type = type;
+    }
+
+    public List<Fichier> getFichiers() {
+        return fichiers;
+    }
+
+    public void setFichiers(List<Fichier> fichiers) {
+        this.fichiers = fichiers;
+    }
+
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
     }
 }

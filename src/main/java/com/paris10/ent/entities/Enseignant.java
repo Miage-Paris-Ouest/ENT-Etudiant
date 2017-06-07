@@ -1,5 +1,7 @@
 package com.paris10.ent.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,10 +20,9 @@ public class Enseignant {
 
     private String nom_enseignant;
 
-    /*@OneToMany
-    @MapsId
-    @JoinColumn(name = "id_enseignant", referencedColumnName = "id_enseignant")
-    private List<Matiere> matiere;*/
+    @OneToMany(mappedBy = "enseignant")
+    @JsonManagedReference(value = "enseignant-matiere")
+    private List<Matiere> matiere;
 
     public Enseignant() {
     }
@@ -53,5 +54,13 @@ public class Enseignant {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Matiere> getMatiere() {
+        return matiere;
+    }
+
+    public void setMatiere(List<Matiere> matiere) {
+        this.matiere = matiere;
     }
 }
