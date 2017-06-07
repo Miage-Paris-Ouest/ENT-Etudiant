@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+
+    <title>Gestion des calendriers</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" type="text/javascript" charset="utf-8"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" />
+    <!-- Gestion des toasts CSS -->
+    <link rel="stylesheet" href="/css/app/jquery.toast.min.css" type="text/css" charset="utf-8" />
+    <script src="/js/app/jquery.toast.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').material_select();
+            $('.caret').html("");
+            $("#lienCalendrier").hide();
+            $('button[type=submit]').hide();
+
+            $('select').on('change', function(){
+                var idPromo = $('select').val();
+                $.ajax({
+                    type: "POST",
+                    url: "Calendrier/AjaxRequest",
+                    data: "idPromotion=" + idPromo
+                }).done(function(data) {
+                    if(idPromo != 0){
+                        $("#calendrierIcal").val(data);
+                        $("label[for='calendrierIcal']").addClass('active');
+                        $("#lienCalendrier").show('slow');
+                        $('button[type=submit]').show('slow');
+                    }
+                    else {
+                        $("#lienCalendrier").hide('slow');
+                        $('button[type=submit]').hide();
+                    }//test
+
+                });
+            });
+            $('form').submit(function(e){
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "Calendrier/UpdatePromotion",
+                    data: $(this).serialize()
+                }).done(function(data) {
+                    if(data == true){
+                        $.toast({
+                            heading: 'Information',
+                            text: 'Le calendrier a été modifié avec succès!',
+                            icon: 'success',
+                            position: 'top-right',
+                            loader: true,        // Change it to false to disable loader
+                            loaderBg: '#9EC600'  // To change the background
+                        })
+                    }
+                    else{
+                        $.toast({
+                            heading: 'Information',
+                            text: 'Veuillez écrire une adresse URL correcte.',
+                            icon: 'warning',
+                            position: 'top-right',
+                            loader: true,        // Change it to false to disable loader
+                            loaderBg: '#9EC600'  // To change the background
+                        })
+
+                    }
+                });
+
+            });
+        });
+
+    </script>
+
+
+</head>
+<body>
+<nav class="blue-gradient">
+    <div class="nav-wrapper row">
+        <a href="#" class="brand-logo">Logo</a>
+
+        <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
+            <li><a href="#">Gestion des classes</a></li>
+            <li><a href="#">Gestion des Cours</a></li>
+            <li><a href="#">Gestion calendriers</a></li>
+            <li><a href="#">Gestion des fichiers</a></li>
+        </ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+        </ul>
+    </div>
+
+</nav>
+<div id="topContainer" class="container-fluid">
+
+    <div class="row" style="margin-top:30px">
+        <div class="col s10 z-depth-2">
+            <h5>
+                <small>Gestion des calendriers</small>
+            </h5>
+            <form action="/Admin/Calendrier/UpdatePromotion" method="POST">
+            <div class="input-field col s12">
+                <select id="selectPromo" name="selectPromo">
+                    <option value="0">Choisir la promotion</option>
+                    <option th:each="promo : ${promotion}"
+                            th:text="${promo.nom_promo}"
+                            th:value="${promo.id}" >Promotion</option>
+                </select>
+                <label>Choix promotion</label>
+            </div>
+
+            <div id="lienCalendrier" class="input-field col s12">
+                <input id="calendrierIcal" type="text" name="calendrierIcal" class="validate" />
+                <label for="calendrierIcal">Calendrier (ICAL)</label>
+            </div>
+
+            <button class="btn waves-effect waves-light" type="submit" name="action" style="float: right">Modifier
+                <i class="material-icons right">send</i>
+            </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

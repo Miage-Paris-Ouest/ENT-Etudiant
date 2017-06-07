@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="../static/css/monCompte.css" th:href="@{../css/monCompte.css}"/>
     <link rel="stylesheet" href="../static/css/simulateur.css" th:href="@{../css/simulateur.css}"/>
 
+    <link rel="stylesheet" href="../static/codebase/dhtmlxscheduler.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="../static/css/jquery.toast.min.css" type="text/css" charset="utf-8" th:href="@{../css/jquery.toast.min.css}"/>
+
 </head>
 
 <body ng-app="myApp">
@@ -343,7 +346,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <!-- SCRIPTS -->
@@ -374,11 +376,16 @@
 <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>-->
 <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js"></script>-->
 
+<script src="/static/codebase/dhtmlxscheduler.js" type="text/javascript" charset="utf-8" th:src="@{/codebase/dhtmlxscheduler.js}"></script>
+<script src="/static/codebase/ext/dhtmlxscheduler_minical.js" type="text/javascript" charset="utf-8" th:src="@{/codebase/dhtmlxscheduler_minical.js}"></script>
+<script src="/static/codebase/sources/locale/locale_fr.js" type="text/javascript" charset="utf-8" th:src="@{/codebase/locale_fr.js}"></script>
+<script type="text/javascript" src="../static/js/jquery.toast.min.js" th:src="@{/js/jquery.toast.min.js}"></script>
 <script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
 <script type="text/javascript" src="../static/js/components.js" th:src="@{/js/components.js}"></script>
 <script type="text/javascript" src="../static/js/monCompte.js" th:src="@{/js/monCompte.js}"></script>
 <script type="text/javascript" src="../static/js/simulation.js" th:src="@{/js/simulation.js}"></script>
 <script type="text/javascript" src="../static/js/maClasse.js" th:src="@{/js/maClasse.js}"></script>
+<script type="text/javascript" src="../static/js/calendar.js" th:src="@{/js/calendar.js}"></script>
 
 </body>
 

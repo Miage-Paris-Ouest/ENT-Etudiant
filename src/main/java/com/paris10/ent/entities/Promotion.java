@@ -15,7 +15,7 @@ public class Promotion {
     @Column(name = "id_promotion")
     private long id;
 
-    private String nom_promo, annee;
+    private String nom_promo, annee, calendrier;
 
     @OneToMany(mappedBy = "promotion")
     @JsonManagedReference
@@ -33,6 +33,12 @@ public class Promotion {
     public Promotion(String nom_promo, String annee) {
         this.nom_promo = nom_promo;
         this.annee = annee;
+    }
+
+    public Promotion(String nom_promo, String annee, String calendrier) {
+        this.nom_promo = nom_promo;
+        this.annee = annee;
+        this.calendrier = calendrier;
     }
 
     public long getId() {
@@ -65,5 +71,20 @@ public class Promotion {
 
     public void setLesEtudiants(List<Etudiant> les_etudiants) {
         this.les_etudiants = les_etudiants;
+    }
+
+    public String getCalendrier() {
+        return calendrier;
+    }
+
+    public void setCalendrier(String calendrier) {
+        this.calendrier = calendrier;
+    }
+
+    public String getPromotionNameForCalendrier(){
+        String name = new String(this.nom_promo);
+        name = name.replace(" ","_");
+        name += annee + ".ical";
+        return name;
     }
 }
