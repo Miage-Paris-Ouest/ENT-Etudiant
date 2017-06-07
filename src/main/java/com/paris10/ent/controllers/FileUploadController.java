@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -29,7 +30,8 @@ public class FileUploadController {
 
     @GetMapping("/upload/{id_matiere}")
     public String listUploadedFiles(Model model, @PathVariable Long id_matiere, @ModelAttribute Fichier fichier) throws IOException {
-        model.addAttribute(id_matiere);
+        model.addAttribute("id_matiere", id_matiere);
+
         model.addAttribute("files", storageService
                 .loadAll()
                 .map(path ->
@@ -52,15 +54,20 @@ public class FileUploadController {
                 .body(file);
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/file/{id_matiere}")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
+                                   RedirectAttributes redirectAttributes,
+                                   @Validated Fichier fichier,
+                                   @PathVariable Long id_matiere) {
 
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
 
-        return "redirect:/upload/2";
+        String nom_fichier = fichier.getNom_fichier();
+        String chemin = fichier.getChemin();
+
+        return "redirect:/etudiant/addFichier/" + id_matiere + "/" + chemin+ "/" + nom_fichier;
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

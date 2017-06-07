@@ -89,29 +89,19 @@ public class EtudiantController {
         return "gestionClasses";
     }
 
-    @RequestMapping(value = "/addFichier/{id_matiere}")
-    @ResponseBody
-    public List<Fichier> addFichierOfMatiere(@PathVariable Long id_matiere, @Validated Fichier fichier){
-        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOO nique bien ta mere");
-        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOO nique bien ta mere");
-        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOO nique bien ta mere");
-        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOO nique bien ta mere");
-        Fichier fichier2 = new Fichier("test",
-                "test.txt",
+    @GetMapping("/addFichier/{id_matiere}/{chemin}/{nom_fichier}")
+    public String addFichierOfMatiere(@PathVariable Long id_matiere, @PathVariable String nom_fichier, @PathVariable String chemin){
+        Fichier fichier = new Fichier(
+                nom_fichier,
+                chemin,
                 true,
-                matiereRepository.findById(new Long(2)),
-                userRepository.findById(new Long(1)));
-
-        fichierRepository.save(fichier2);
-
-
-        fichier.setVisible(true);
-        fichier.setUser(userRepository.findById(new Long(1))); //TODO récupérer l'id de l'étudiant connecté
-        fichier.setMatiere(matiereRepository.findById(id_matiere));
+                matiereRepository.findById(id_matiere),
+                userRepository.findById(new Long(1))
+        );
 
         fichierRepository.save(fichier);
 
-        return fichierRepository.findByMatiereId(id_matiere);
+        return "redirect:/etudiant/mescours";
     }
 
 //    private void saveStudent() {

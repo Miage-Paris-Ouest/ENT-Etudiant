@@ -14,7 +14,7 @@
         vm.cours = [];
         vm.getAll = getAll;
         vm.getAllCoursOfMatiere = getAllCoursOfMatiere;
-        vm.addFichierOfMatiere = addFichierOfMatiere;
+        // vm.addFichierOfMatiere = addFichierOfMatiere;
         /*vm.getAffordable = getAffordable;
         vm.deleteBooking = deleteBooking;*/
 
@@ -40,13 +40,13 @@
             })
         }
 
-        function addFichierOfMatiere(id_matiere) {
+        /*function addFichierOfMatiere(id_matiere) {
             var url = "/etudiant/addFichier/" + id_matiere;
             var coursPromise = $http.get(url);
             coursPromise.then(function (response) {
                 vm.cours = response.data;
             })
-        }
+        }*/
 
         /*function getAffordable(){
             var url = "/bookings/affordable/" + 100;

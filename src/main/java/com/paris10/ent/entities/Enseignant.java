@@ -1,6 +1,7 @@
 package com.paris10.ent.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "enseignant")
@@ -17,10 +18,10 @@ public class Enseignant {
 
     private String nom_enseignant;
 
-    @OneToMany
+   /* @OneToMany
     @MapsId
     @JoinColumn(name = "id_enseignant", referencedColumnName = "id_enseignant")
-    private List<Matiere> matiere;
+    private List<Matiere> matiere;*/
 
     public Enseignant() {
     }
