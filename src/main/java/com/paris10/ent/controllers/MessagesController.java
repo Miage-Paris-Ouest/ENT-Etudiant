@@ -160,6 +160,7 @@ public class MessagesController {
         System.out.println("----------Trace controleur message Reload triggered");
         return "reloadConversation :: convReload";
     }
+    
 
     @RequestMapping(value = "/postcustomer", method = RequestMethod.POST)
     @ResponseBody
