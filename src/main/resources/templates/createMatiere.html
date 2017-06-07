@@ -1,44 +1,184 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
 <head>
-    <meta charset="UTF-8"/>
-    <title>Ajouter une matiere</title>
+
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"></meta>
+
+    <title>ENT</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css"/>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
+
+    <link rel="stylesheet" href="/css/gestionClasses.css"/>
+
+
 </head>
-<body>
-<h1 ><a href="/semestre/creer">Ajouter un semestre</a></h1><br/>
-<h1><a  href="/ue/creer">Ajouter un ue</a></h1><br/>
-<h1 ><a href="/matiere/creer">Ajouter une matiere</a></h1><br/>
-<h1>Ajouter une matiere</h1>
-<form action="/matiere/createMatiere" th:object="${matiere}" method="post">
-    Nom de la matiere:    <input type="text" th:field="*{nom_matiere}" /><br/>
-    Description:          <input type="text" th:field="*{description}" /><br/>
-    Nb ECTS:              <input type="number" th:field="*{nb_ects}" /><br/>
-    UE:                   <select name="ue" th:field="*{ue}">
-                                <option value=""></option>
-                                <option th:each="ue : ${ue}" th:value="${ue.id}" th:text="${ue.nom_ue}" ></option>
-                          </select><br/>
-    Enseignant:           <select name="enseignant" th:field="*{enseignant}">
-                                <option value=""></option>
-                                <option th:each="enseignant : ${enseignant}" th:value="${enseignant.id}" th:text="${enseignant.nom_enseignant}" ></option>
-                          </select><br/>
-    Nb Heures:      <input type="number" th:field="*{nb_heures}" />
-    <input type="submit" />
-</form>
-<p>Pour voir le format du fichier csv cliquer <a onclick="alert('Algorithme:Language C:3:30:UE Informatique:Pascal Poizat\nPOO:Language C++:3:30:UE Informatique:LOM HILLAH')">ici</a></p>
-Fichier CSV Matiere:
-<form action="/matiere/createMatiereWithCSV" method="post">
-    <input type="file" name="csv"/><br/>
-    <input type="hidden" name="codeFonction" value="3"/>
-    <input type="submit" />
-</form>
-<h2>Exporter la base en CSV</h2>
-<form action="/matiere/exportTableMatiereToCSV" method="post">
-    Nom du fichier CSV à générer en sortie:
-    <input type="text" name="fileNameCSV"/>
-    <input type="hidden" name="codeFonction" value="3"/>
-    <input type="submit"/>
-</form>
+
+<body ng-app="app" ng-controller="SemestreController as sc">
+
+<nav class="blue-gradient">
+    <div class="nav-wrapper row">
+        <a href="#" class="brand-logo">Logo</a>
+
+        <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
+            <li><a href="#">Gestion des classes</a></li>
+            <li><a href="#">Gestion des Cours</a></li>
+            <li><a href="#">Gestion calendriers</a></li>
+            <li><a href="#">Gestion des fichiers</a></li>
+        </ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+        </ul>
+    </div>
+
+</nav>
+<div class="row">
+    <div class="row col-md-3 col-lg-3 z-depth-2" style="background-color: rgba(66, 133, 244, 0.12);height: 800px;padding: 15px;border-right: .8px solid #efefef;" >
+        <ul class="list-group">
+            <li class="list-group-item"><a href="/semestre/creer">Ajouter un semestre</a></li>
+            <li class="list-group-item"><a href="/ue/creer">Ajouter un ue</a></li>
+            <li class="list-group-item"><a href="/matiere/creer">Ajouter une matière</a></li>
+        </ul>
+    </div>
+    <div class="row col-md-3 col-lg-3">
+        <div class="row">
+            <h3 id="afficherForm" style="cursor: pointer"><small align="center" >Ajouter une matière</small><span class="glyphicon glyphicon-menu-down" aria-hidden="true" style="font-size:.2"></span></h3>
+            <form id="formMatiere" class="col-md-10 col-lg-10" action="/matiere/createMatiere" th:object="${matiere}" method="post" style="display:none;padding: 3%" >
+                <div class="input-field">
+                    <label for="nomMatiere">Matière</label>
+                    <input type="text" th:field="*{nom_matiere}" id="nomMatiere"/>
+                </div>
+                <div class="input-field">
+                    <label for="description">Description</label>
+                    <input type="text" th:field="*{description}" id="description" />
+                </div>
+                <div class="input-field">
+                    <label for="nb_ects">ECTS</label>
+                    <input type="text" th:field="*{nb_ects}" id="nb_ects" />
+                </div>
+                <div class="input-field">
+                    <label for="nb_heures">Nombre d'heures</label>
+                    <input type="text" th:field="*{nb_heures}" id="nb_heures" />
+                </div>
+
+                <select name="ue" th:field="*{ue}">
+                    <option value="-1">Sélectionnez un UE</option>
+                    <option th:each="ue : ${ue}" th:value="${ue.id}" th:text="${ue.nom_ue}" ></option>
+                </select><br/>
+                <select name="enseignant" th:field="*{enseignant}">
+                    <option value="-1">Enseignant</option>
+                    <option th:each="enseignant : ${enseignant}" th:value="${enseignant.id}" th:text="${enseignant.nom_enseignant}" ></option>
+                </select><br/>
+                <button class="btn btn-default" type="submit" >Enregistrer</button>
+            </form>
+        </div>
+        <div class="row">
+            <h3><small align="center">Ajouter des matières à partir d'un CSV</small></h3>
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Format du fichier CSV:</strong><br/>
+                <strong>#Matière:Description:ECTS:Nombre d'heures:Nom de l'ue:Enseignant</strong><br/>
+                Algorithme:Language C:3:30:UE Informatique:Pascal Poizat<br/>
+                UE DISCIPLINAIRE INFORMATIQUE 1:Semestre 1 L1 MMIA:M1 MIAGE APP
+            </div>
+            Fichier CSV Matiere:
+            <form action="/matiere/createMatiereWithCSV" method="post">
+                <input type="file" name="csv"/><br/>
+                <input type="hidden" name="codeFonction" value="3"/>
+                <input type="submit" />
+            </form>
+        </div>
+    </div>
+    <div class="row col-md-6 col-lg-6" style="overflow-y:scroll ;max-height:800px">
+        <div class="col-md-offset-8">
+            <br/>
+            <form action="/matiere/exportTableMatiereToCSV" method="post">
+                <input type="hidden" name="fileNameCSV" value="matiereCSV"/>
+                <input type="hidden" name="codeFonction" value="3"/>
+                <button class="btn btn-default" type="submit" >Export to CSV</button>
+            </form>
+        </div>
+        <h3><small>Liste des matières</small></h3>
+        <table class="table table-condensed table-sm table-hover">
+            <thead>
+            <tr>
+                <th>Matière</th>
+                <th>Description</th>
+                <th>ECTS</th>
+                <th>Heures</th>
+                <th>UE</th>
+                <th>Enseignant</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="matiere :${matieres}">
+                <td th:text="*{matiere.nom_matiere}"></td>
+                <td th:text="*{matiere.description}"></td>
+                <td th:text="*{matiere.nb_ects}"></td>
+                <td th:text="*{matiere.nb_heures}"></td>
+                <td th:text="*{matiere.ue.nom_ue}"></td>
+                <td th:text="*{matiere.enseignant.nom_enseignant}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
+
+<!-- SCRIPTS -->
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.js"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/js/mdb.min.js"></script>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!--Angular-->
+
+<script type="text/javascript" src="/static/js/lib/angular.min.js" th:src="@{/js/lib/angular.min.js}"></script>
+<script type="text/javascript" src="/static/js/app/app.module.js" th:src="@{/js/app/app.module.js}"></script>
+<script type="text/javascript" src="/static/js/app/promotion.controller.js"
+        th:src="@{/js/app/promotion.controller.js}"></script>
+
+<!-- Our scripts -->
+
+<script type="text/javascript" src="/static/js/main.js" th:src="@{/js/main.js}"></script>
+
 </html>
-
-
-

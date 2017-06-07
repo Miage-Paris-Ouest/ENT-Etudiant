@@ -51,6 +51,8 @@ public class UeController {
         model.addAttribute("ue",new UE());
         model.put("semestre",this.getSemestres());
         model.put("promotion",this.getPromotions());
+        List<UE> ues=ueRepository.findAll();
+        model.addAttribute("ues",ues);
         return "createUE";
     }
 

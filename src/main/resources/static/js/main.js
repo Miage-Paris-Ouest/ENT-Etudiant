@@ -87,7 +87,12 @@ $(function () {
         alert("Enregistrer les changements");
     });
 
+    $("#afficherForm").click(function () {
+        $("#formMatiere").toggle();
+    })
+
     /** page maclasse */
+
 
     $('#addStudentButton').click(function () {
         $('#addStudentForm').show();

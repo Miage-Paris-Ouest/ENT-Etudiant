@@ -1,45 +1,165 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
 <head>
-    <meta charset="UTF-8"/>
-    <title>Ajouter un UE</title>
+
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"></meta>
+
+    <title>ENT</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css"/>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
+
+    <link rel="stylesheet" href="/css/gestionClasses.css"/>
+
+
 </head>
-<body>
-<h1 ><a href="/semestre/creer">Ajouter un semestre</a></h1><br/>
-<h1><a  href="/ue/creer">Ajouter un ue</a></h1><br/>
-<h1 ><a href="/matiere/creer">Ajouter une matiere</a></h1><br/>
-<h1>Ajouter un UE</h1>
-<h2>Ajouter depuis un formulaire</h2>
-<form action="/ue/createUE" th:object="${ue}" method="post">
-    Nom UE:      <input type="text" th:field="*{nom_ue}" /><br/>
-    Semestre:    <select name="semestre" th:field="*{semestre}">
-                        <option value=""></option>
-                        <option th:each="semestre : ${semestre}" th:value="${semestre.id}" th:text="${semestre.nom_semestre}" ></option>
-                 </select><br/>
-    Promotion:   <select name="promotion" th:field="*{promotion}">
-                        <option value=""></option>
-                        <option th:each="promotion : ${promotion}" th:value="${promotion.id}" th:text="${promotion.nom_promo}" ></option>
-                 </select><br/>
-    <input type="submit" />
-<h2>Ajouter des UE avec un CSV</h2>
-    <p>Pour voir le format du fichier csv cliquer
-        <a onclick="alert('UE DISCIPLINAIRE MATHS 1:Semestre 1 L1 MMIA:M1 MIAGE APP\nUE DISCIPLINAIRE INFORMATIQUE 1:Semestre 1 L1 MMIA:M1 MIAGE APP')">ici</a>
-    </p>
-</form>
-Fichier CSV UE:
-<form action="/ue/createUEWithCSV" method="post">
-    <input type="file" name="csv"/><br/>
-    <input type="hidden" name="codeFonction" value="2"/>
-    <input type="submit" />
-</form>
-<h2>Exporter la base en CSV</h2>
-<form action="/ue/exportTableUeToCSV" method="post">
-    Nom du fichier CSV à générer en sortie:
-    <input type="text" name="fileNameCSV"/>
-    <input type="hidden" name="codeFonction" value="2"/>
-    <input type="submit"/>
-</form>
+
+<body ng-app="app" ng-controller="SemestreController as sc">
+
+<nav class="blue-gradient">
+    <div class="nav-wrapper row">
+        <a href="#" class="brand-logo">Logo</a>
+
+        <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
+            <li><a href="#">Gestion des classes</a></li>
+            <li><a href="#">Gestion des Cours</a></li>
+            <li><a href="#">Gestion calendriers</a></li>
+            <li><a href="#">Gestion des fichiers</a></li>
+        </ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+        </ul>
+    </div>
+
+</nav>
+<div class="row">
+    <div class="row col-md-3 col-lg-3 z-depth-2" style="background-color: rgba(66, 133, 244, 0.12);height: 800px;padding: 15px;border-right: .8px solid #efefef;" >
+        <ul class="list-group">
+            <li class="list-group-item"><a href="/semestre/creer">Ajouter un semestre</a></li>
+            <li class="list-group-item"><a href="/ue/creer">Ajouter un ue</a></li>
+            <li class="list-group-item"><a href="/matiere/creer">Ajouter une matière</a></li>
+        </ul>
+    </div>
+    <div class="row col-md-4 col-lg-4">
+        <div class="row" style="padding-left: 8%;padding-right:8%">
+            <h3><small align="center">Ajouter un ue</small></h3>
+            <form action="/ue/createUE" th:object="${ue}" method="post">
+                <div class="input-field">
+                    <label for="nomUe">Nom</label>
+                    <input type="text" th:field="*{nom_ue}" id="nomUe" /><br/>
+                </div>
+                <select name="semestre" th:field="*{semestre}">
+                <option value="-1" >Sélectionnez un semestre</option>
+                <option th:each="semestre : ${semestre}" th:value="${semestre.id}" th:text="${semestre.nom_semestre}" ></option>
+                </select><br/>
+                       <select name="promotion" th:field="*{promotion}">
+                    <option value="-1">Sélectionnez un ue</option>
+                    <option th:each="promotion : ${promotion}" th:value="${promotion.id}" th:text="${promotion.nom_promo}" ></option>
+                </select><br/>
+                <button class="btn btn-default" type="submit" >Enregistrer</button>
+            </form>
+        </div>
+        <div class="row" style="padding-left: 8%; padding-right: 8%">
+            <h3><small align="center">Ajouter des ues à partir d'un CSV</small></h3>
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Format du fichier CSV:</strong><br/>
+                <strong>#Nom de l'UE:Nom du semestre:Promotion</strong><br/>
+                UE DISCIPLINAIRE MATHS 1:Semestre 1 L1 MMIA:M1 MIAGE APP<br/>
+                UE DISCIPLINAIRE INFORMATIQUE 1:Semestre 1 L1 MMIA:M1 MIAGE APP
+            </div>
+            Fichier CSV UE:
+            <form action="/ue/createUEWithCSV" method="post">
+                <input type="file" name="csv"/><br/>
+                <input type="hidden" name="codeFonction" value="2"/>
+                <input type="submit" />
+            </form>
+        </div>
+    </div>
+    <div class="row col-md-5 col-lg-5" style="overflow-y:scroll ;max-height:800px">
+        <div class="col-md-offset-8">
+            <br/>
+            <form action="/ue/exportTableUeToCSV" method="post">
+                <input type="hidden" name="fileNameCSV"  value="ueCSV"/>
+                <input type="hidden" name="codeFonction" value="2"/>
+                <button class="btn btn-default" type="submit">Export to CSV</button>
+            </form>
+        </div>
+        <h3><small>Liste des ues</small></h3>
+        <table class="table table-condensed table-sm table-hover">
+            <thead>
+            <tr>
+                <th>Nom de l'ue</th>
+                <th>Nom du semestre</th>
+                <th>Promotion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ue :${ues}">
+                <td th:text="*{ue.nom_ue}"></td>
+                <td th:text="*{ue.semestre.nom_semestre}"></td>
+                <td th:text="*{ue.promotion.nom_promo}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
+
+<!-- SCRIPTS -->
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.js"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/js/mdb.min.js"></script>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!--Angular-->
+
+<script type="text/javascript" src="/static/js/lib/angular.min.js" th:src="@{/js/lib/angular.min.js}"></script>
+<script type="text/javascript" src="/static/js/app/app.module.js" th:src="@{/js/app/app.module.js}"></script>
+<script type="text/javascript" src="/static/js/app/promotion.controller.js"
+        th:src="@{/js/app/promotion.controller.js}"></script>
+
+<!-- Our scripts -->
+
+<script type="text/javascript" src="/static/js/main.js" th:src="@{/js/main.js}"></script>
+
 </html>
-
-
-

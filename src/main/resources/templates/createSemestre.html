@@ -1,35 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Ajouter un semestre</title>
+
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"></meta>
+
+    <title>ENT</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.min.css" rel="stylesheet"/>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.print.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css"/>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css"/>
+
+    <link rel="stylesheet" href="/css/gestionClasses.css"/>
+
+
 </head>
-<body>
-<h1 ><a href="/semestre/creer">Ajouter un semestre</a></h1><br/>
-<h1><a  href="/ue/creer">Ajouter un ue</a></h1><br/>
-<h1 ><a href="/matiere/creer">Ajouter une matiere</a></h1><br/>
-<h1>Ajouter un semestre</h1>
-<form action="/semestre/createSemestre" th:object="${semestre}" method="post">
-    <input type="text" th:field="*{nom_semestre}" />
-    <input type="submit" />
-</form>
-<h2>Ajouter des Semestre avec un CSV</h2>
-<p>Pour voir le format du fichier csv cliquer <a onclick="alert('Semestre 1\nSemestre 2\nSemestre 3')">ici</a></p>
-Fichier CSV Semestre:
-<form action="/semestre/createSemestreWithCSV" method="post">
-    <input type="file" name="csv"/><br/>
-    <input type="hidden" name="codeFonction" value="1"/>
-    <input type="submit" />
-</form>
-<h2>Exporter la base en CSV</h2>
-<form action="/semestre/exportTableSemestreToCSV" method="post">
-    Nom du fichier CSV à générer en sortie:
-    <input type="text" name="fileNameCSV"/>
-    <input type="hidden" name="codeFonction" value="1">
-    <input type="submit"/>
-</form>
+
+<body ng-app="app" ng-controller="SemestreController as sc">
+
+<nav class="blue-gradient">
+    <div class="nav-wrapper row">
+        <a href="#" class="brand-logo">Logo</a>
+
+        <ul id="nav-mobile" class="col s8 offset-s1 left hide-on-med-and-down">
+            <li><a href="#">Gestion des classes</a></li>
+            <li><a href="#">Gestion des Cours</a></li>
+            <li><a href="#">Gestion calendriers</a></li>
+            <li><a href="#">Gestion des fichiers</a></li>
+        </ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#"><i class="material-icons left">mail</i>Messagerie</a></li>
+            <li><a href="#"><i class="material-icons left">account_circle</i>Mon Compte</a></li>
+        </ul>
+    </div>
+
+</nav>
+<div class="row">
+    <div class="row col-md-3 col-lg-3" style="background-color: rgba(66, 133, 244, 0.12);height: 800px;padding: 15px;border-right: .8px solid #efefef;">
+        <ul class="list-group">
+            <li class="list-group-item"><a href="/semestre/creer">Ajouter un semestre</a></li>
+            <li class="list-group-item"><a href="/ue/creer">Ajouter un ue</a></li>
+            <li class="list-group-item"><a href="/matiere/creer">Ajouter une matière</a></li>
+        </ul>
+    </div>
+    <div class="row col-md-5 col-lg-5" style="padding-left: 8%;padding-right: 8%">
+        <div class="row">
+            <h3><small align="center">Ajouter un semestre</small></h3>
+
+            <form action="/semestre/createSemestre" th:object="${semestre}" method="post" >
+                Nom du Semestre :
+                <input class="form-control" type="text" th:field="*{nom_semestre}" />
+                <button class="btn btn-default" type="submit" >Enregistrer</button>
+            </form>
+        </div>
+        <hr/>
+        <div class="row">
+            <h3><small align="center">Ajouter des semestres avec un CSV</small></h3>
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Format du fichier CSV:</strong><br/>
+                <strong>#Nom du semestre</strong><br/>
+                Semestre 1<br/>
+                Semestre 2<br/>
+                Semestre 3<br/>
+            </div>
+            Fichier CSV Semestre:
+            <form action="/semestre/createSemestreWithCSV" method="post">
+                <input type="file" name="csv"/><br/>
+                <input type="hidden" name="codeFonction" value="1"/>
+                <input type="submit" />
+            </form>
+        </div>
+    </div>
+    <div class="row col-md-4 col-lg-4" style="overflow-y:scroll ;max-height:800px">
+        <div class="col-md-offset-6 col-lg-offset-6">
+            <form action="/semestre/exportTableSemestreToCSV" method="post">
+                <input type="hidden" name="fileNameCSV" value="semestreCSV"/>
+                <input type="hidden" name="codeFonction" value="1"/>
+                <button class="btn btn-default" type="submit">Export to CSV</button>
+            </form>
+        </div>
+        <h3><small>Liste des semestres</small></h3>
+        <table class="table table-condensed table-sm table-hover">
+            <thead>
+            <tr>
+                <th>Nom</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="semestre :${semestres}">
+                <td th:text="*{semestre.nom_semestre}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
+
+<!-- SCRIPTS -->
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.js"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/js/mdb.min.js"></script>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!--Angular-->
+
+<script type="text/javascript" src="/static/js/lib/angular.min.js" th:src="@{/js/lib/angular.min.js}"></script>
+<script type="text/javascript" src="/static/js/app/app.module.js" th:src="@{/js/app/app.module.js}"></script>
+<script type="text/javascript" src="/static/js/app/promotion.controller.js"
+        th:src="@{/js/app/promotion.controller.js}"></script>
+
+<!-- Our scripts -->
+
+<script type="text/javascript" src="/static/js/main.js" th:src="@{/js/main.js}"></script>
+
 </html>
-
-
-

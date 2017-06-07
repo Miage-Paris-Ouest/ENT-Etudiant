@@ -44,6 +44,8 @@ public class MatiereController {
         model.addAttribute("matiere",new Matiere());
         model.put("ue",this.getUes());
         model.put("enseignant",this.getEnseignants());
+        List<Matiere> matieres=matiereRepository.findAll();
+        model.addAttribute("matieres",matieres);
         return "createMatiere";
     }
 
